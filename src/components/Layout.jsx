@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar.jsx";
+import Hero from "./hero/Hero.jsx";
 
 function Layout() {
     return (
         <div>
             <NavBar />
             <Outlet />
-        <footer>by Kaycee Lawrence</footer>
+            <footer>hi</footer>
         </div>
     );
 }

@@ -1,13 +1,13 @@
-import { allFundraisers } from "../data";
+import Hero from "../components/hero/Hero.jsx";
+
+
 
 function HomePage() {
     return (
-       <div>
-           {allFundraisers.map((fundraiserData, key) => {
-               return <div key={key}>{fundraiserData.title}</div>;
-           })}
-       </div>
-   );
+    <div>
+    <Hero />
+    </div>
+    );
 }
 
 export default HomePage;
