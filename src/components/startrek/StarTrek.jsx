@@ -1,7 +1,7 @@
 // src/components/hero/Hero.jsx
 import { useEffect, useRef } from "react";
-import { Renderer, PointerHandler } from "./HeroRenderer";
-import "./Hero.css"; // optional, for styling
+import { Renderer, PointerHandler } from "./StarTrekRenderer";
+import "./StarTrek.css"; // optional, for styling
 
 function Hero() {
   const canvasRef = useRef(null);
