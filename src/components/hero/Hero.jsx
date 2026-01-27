@@ -53,11 +53,22 @@ function Hero() {
   }, []);
 
   return (
+  <div className="hero-container">
     <canvas
       ref={canvasRef}
-      style={{ display: "block", width: "100vw", height: "100vh" }}
+      style={{
+        display: "block",
+        width: "100%",
+        height: "100%",
+      }}
     />
-  );
+    <div className="hero-content">
+      <h1>Welcome to DreamJar</h1>
+      <p>Your dream-like home page starts here</p>
+    </div>
+  </div>
+);
+
 }
 
 export default Hero;
