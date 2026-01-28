@@ -7,6 +7,7 @@ import AccountPage from './pages/AccountPage'
 import BrowseCampaigns from './pages/BrowseCampaigns'
 import CampaignPage from './pages/CampaignPage'
 import LoginPage from './pages/LoginPage'
+import "./main.css"
 
 const myRouter = createBrowserRouter([{
     path: "/",
