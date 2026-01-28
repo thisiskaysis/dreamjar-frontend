@@ -1,11 +1,12 @@
-import Hero from "../components/hero/Hero.jsx";
+import ProgressBar from "../components/ProgressBar/ProgressBar.jsx";
+
 
 
 
 function HomePage() {
     return (
     <div>
-    <Hero />
+     <ProgressBar />
     </div>
     );
 }

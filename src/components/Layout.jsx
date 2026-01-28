@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar.jsx";
-import Hero from "./hero/Hero.jsx";
 
 function Layout() {
     return (
