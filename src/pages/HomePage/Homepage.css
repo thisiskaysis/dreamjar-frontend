@@ -1,0 +1,75 @@
+.hero, .how-it-works, .featured-campaigns, .parents-section, .cta-section {
+  padding: 4rem 8%;
+  text-align: center;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #e0c3fc, #8ec5fc, #fbc2eb);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.primary-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  border: none;
+  background: #6c63ff;
+  color: white;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  border: 2px solid #6c63ff;
+  background: transparent;
+  color: #6c63ff;
+  cursor: pointer;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.step {
+  max-width: 200px;
+}
+
+.campaign-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.campaign-card {
+  width: 200px;
+  padding: 1rem;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+  height: 8px;
+  background: #eee;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+.progress {
+  height: 100%;
+  background: #6c63ff;
+  border-radius: 4px;
+}

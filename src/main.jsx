@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import HomePage from "./pages/HomePage/HomePage.jsx";
+import HomePage from "./pages/HomePage/Homepage.jsx";
 import CampaignBrowse from "./pages/CampaignBrowse/CampaignBrowse.jsx";
 import CampaignPage from "./pages/CampaignPage/CampaignPage.jsx";
 
