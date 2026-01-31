@@ -3,6 +3,7 @@ import getCampaign from "../api/get-campaign";
 
 export default function useCampaign(campaignId) {
     const [campaign, setCampaign] = useState();
+    
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
 
