@@ -1,15 +1,24 @@
-.hero, .how-it-works, .featured-campaigns, .parents-section, .cta-section {
+.how-it-works, .featured-campaigns, .parents-section, .cta-section {
   padding: 4rem 8%;
   text-align: center;
 }
 
 .hero {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
   min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
   background: linear-gradient(135deg, #e0c3fc, #8ec5fc, #fbc2eb);
 }
+
+/* .hero-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+} */
 
 .hero-buttons {
   display: flex;
