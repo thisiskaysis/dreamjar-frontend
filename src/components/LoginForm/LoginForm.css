@@ -11,9 +11,9 @@
 
   background: linear-gradient(
     135deg,
-    #f6d5ff 0%,
-    #c9f0ff 50%,
-    #ffe8c7 100%
+    #6ec1e4 0%,
+    #b39ddb 50%,
+    #f7a8c9 100%
   );
 }
 
@@ -118,7 +118,7 @@
    Button
 ================================= */
 
-.login-button, .google-button {
+.login-button {
   margin-top: 10px;
   padding: 14px;
 
@@ -148,6 +148,31 @@
 .login-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.google-button {
+  margin-top: 10px;
+  padding: 14px;
+
+  border: none;
+  border-radius: 18px;
+
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-evenly;
+
+  background: linear-gradient(
+    135deg,
+    #a78bfa,
+    #7dd3fc
+  );
+
+  color: white;
+
+  transition: all 0.2s ease;
 }
 
 .google-button:hover:not(:disabled) {
