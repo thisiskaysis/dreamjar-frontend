@@ -1,5 +1,5 @@
 async function getCampaign(campaignId) {
-    const url = `${import.meta.env.VITE_API_URL}/campaigns/${campaignId}`;
+    const url = `${import.meta.env.VITE_API_URL}/campaigns/${campaignId}/`;
     const response = await fetch(url, { method: "GET" });
 
     if (!response.ok) {

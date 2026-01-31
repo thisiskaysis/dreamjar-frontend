@@ -3,7 +3,7 @@ import "./CampaignCard.css"
 
 function CampaignCard(props) {
     const { campaignData } = props;
-    const campaignLink = `dreamjars/${campaignData.id}`;
+    const campaignLink = `/dreamjars/${campaignData.id}`;
 
     return (
         <div className="campaign-card">

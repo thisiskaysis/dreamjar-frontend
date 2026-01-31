@@ -15,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/dreamjars", element: <CampaignBrowse /> },
+      { path: "/dreamjars/:id", element: <CampaignPage /> },
     ],
   },
 ]);
