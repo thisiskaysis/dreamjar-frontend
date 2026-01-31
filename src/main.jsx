@@ -7,6 +7,7 @@ import CampaignBrowse from "./pages/CampaignBrowse/CampaignBrowse.jsx";
 import CampaignPage from "./pages/CampaignPage/CampaignPage.jsx";
 
 import NavBar from "./components/NavBar/NavBar.jsx";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/dreamjars", element: <CampaignBrowse /> },
       { path: "/dreamjars/:id", element: <CampaignPage /> },
+      { path: "/login", element: <LoginPage />}
     ],
   },
 ]);
