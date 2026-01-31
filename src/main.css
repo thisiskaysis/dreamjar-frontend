@@ -1,0 +1,30 @@
+:root {
+  /* Primary / Magical Pastel Colors */
+  --sky-blue: #a0d4f1;     /* pastel sky blue */
+  --wisteria: #c9b3e0;     /* pastel purple */
+  --mustard: #ffe7a1;      /* pastel yellow */
+  --baby-pink: #fbcdd7;    /* pastel pink */
+  --celadon: #a7e1cd;      /* pastel mint */
+  
+  /* Neutral / text */
+  --white: #ffffff;
+  --gray-dark: #333333;
+
+  /* Spacing, border radius, shadows (for later) */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --radius-md: 8px;
+  --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--gray-dark);
+  background-color: var(--sky-blue);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
