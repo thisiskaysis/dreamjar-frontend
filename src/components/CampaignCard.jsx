@@ -3,10 +3,11 @@ import "./CampaignCard.css"
 
 function CampaignCard(props) {
     const { campaignData } = props;
+    const campaignLink = `campaign/${campaignData.id}`;
 
     return (
         <div className="campaign-card">
-            <Link to="/campaigns/">
+            <Link to={campaignLink}>
             {/* <img src={image} /> */}
             <h3>{campaignData.title}</h3>
             </Link>

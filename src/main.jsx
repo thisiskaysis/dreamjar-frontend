@@ -16,7 +16,7 @@ const myRouter = createBrowserRouter([{
       {path: "/", element: <HomePage />},
       {path: "/account", element: <AccountPage />},
       {path: "/browse", element: <BrowseCampaigns />},
-      {path: "/campaign", element: <CampaignPage />},
+      {path: "/campaign/:id", element: <CampaignPage />},
       {path: "/login", element: <LoginPage />}
     ]
   }])

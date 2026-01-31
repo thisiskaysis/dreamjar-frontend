@@ -1,4 +1,4 @@
-export const allFundraisers = [
+export const allCampaigns = [
   {
     id: 1,
     title: "Fundraiser One",
@@ -71,7 +71,7 @@ export const allFundraisers = [
   },
 ];
 
-export const oneFundraiser = {
+export const oneCampaign = {
   id: 1,
   title: "Fundraiser One",
   description: "The first fundraiser.",

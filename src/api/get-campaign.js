@@ -1,11 +1,9 @@
-async function getCampaigns() {
-    const url = `${import.meta.env.VITE_API_URL}/campaigns/`;
-
+async function getCampaign(campaignId) {
+    const url = `${import.meta.env.VITE_API_URL}/campaigns/${campaignId}`;
     const response = await fetch(url, { method: "GET" });
 
     if (!response.ok) {
-        const fallbackError = "Error fetching campaigns";
-
+        const fallbackError = `Error fetching campaign with id ${campaignId}`;
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);
         });
@@ -13,7 +11,8 @@ async function getCampaigns() {
         const errorMessage = data?.detail ?? fallbackError;
         throw new Error(errorMessage);
     }
+
     return await response.json();
 }
 
-export default getCampaigns;
+export default getCampaign;
