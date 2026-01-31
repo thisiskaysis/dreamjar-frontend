@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Primary / Magical Pastel Colors */
   --sky-blue: #a0d4f1;     /* pastel sky blue */

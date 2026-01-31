@@ -7,6 +7,7 @@ import CampaignBrowse from "./pages/CampaignBrowse/CampaignBrowse.jsx";
 import CampaignPage from "./pages/CampaignPage/CampaignPage.jsx";
 
 import NavBar from "./components/NavBar/NavBar.jsx";
+import "./main.css"
 
 const router = createBrowserRouter([
   {
