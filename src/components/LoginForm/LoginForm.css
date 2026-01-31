@@ -150,6 +150,16 @@
   cursor: not-allowed;
 }
 
+.google-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(125, 211, 252, 0.3);
+}
+
+.google-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 
 /* ===============================
    Subtle Floating Animation
