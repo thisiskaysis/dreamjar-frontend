@@ -1,4 +1,4 @@
-import CampaignCard from "../components/CampaignCard";
+import CampaignCard from "../components/CampaignCard/CampaignCard";
 import useCampaigns from "../hooks/use-campaigns";
 import "./HomePage.css"
 
