@@ -19,5 +19,5 @@ export default function useCampaigns() {
         });
     }, []);
 
-    return { fundraisers, isLoading, error };
+    return { campaigns, isLoading, error };
 }
