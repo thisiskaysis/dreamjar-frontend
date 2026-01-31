@@ -20,6 +20,10 @@ function LoginForm() {
         }));
     };
 
+    const handleGoogleLogin = () => {
+        window.location.href = `${import.meta.env.VITE_API_URL}/auth/google/login/`;
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (credentials.email && credentials.password) {
@@ -64,6 +68,15 @@ function LoginForm() {
             type="submit"
             className="login-button"
             onClick={handleSubmit}>Login</button>
+
+            <div className="divider"></div>
+
+            <button
+            type="button"
+            className="google-button"
+            onClick={handleGoogleLogin}>Sign up/Log in with Google</button>
+
+        
         </form>
         </div>
     );
