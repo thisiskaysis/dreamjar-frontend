@@ -31,7 +31,7 @@ body {
   padding: 0;
 }
 
-button {
+/* button {
   border-radius: 9999px;
   width: 75%;
   height: 56px;
@@ -41,18 +41,18 @@ button {
   box-shadow: 4px 4px 0 #8B7BA8;
 
   color: #8B7BA8;
-  font-size: 1.25rem; /* text-xl */
-  font-weight: 700;   /* font-bold */
+  font-size: 1.25rem;
+  font-weight: 700;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem; /* gap-3 = 12px */
+  gap: 0.75rem;
 
   transition: all 0.3s ease;
 }
 
 button:hover {
   background-color: #a7e1cd;
-  transform: scale(1.05);
-}
+  transform: scale(105%);
+} */
