@@ -7,7 +7,7 @@ function HomePage() {
         <main>
             <section className="hero">
             <Hero>
-            <TitleAnimation text="DreamJar" layers={5} />
+            <TitleAnimation />
             </Hero>
             </section>
             <HowItWorks />

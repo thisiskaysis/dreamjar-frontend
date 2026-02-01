@@ -15,31 +15,6 @@ export function LoginJar({ swallow = false, spit = false, onAnimationDone }) {
     return () => clearInterval(blinkInterval);
   }, []);
 
-  // Handle swallow animation
-  useEffect(() => {
-    if (swallow) {
-      setMouthOpen(true);
-      setTimeout(() => {
-        setMouthOpen(false);
-        if (onAnimationDone) {
-          setTimeout(() => onAnimationDone(), 300);
-        }
-      }, 1500);
-    }
-  }, [swallow, onAnimationDone]);
-
-  // Handle spit animation
-  useEffect(() => {
-    if (spit) {
-      setMouthOpen(true);
-      setTimeout(() => {
-        setMouthOpen(false);
-        if (onAnimationDone) {
-          setTimeout(() => onAnimationDone(), 300);
-        }
-      }, 1000);
-    }
-  }, [spit, onAnimationDone]);
 
   return (
     <motion.div

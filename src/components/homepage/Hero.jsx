@@ -1,5 +1,5 @@
 import React from "react";
-import { JarCharacter } from "../JarCharacter/JarCharacter";
+import { JarCharacter } from "./JarCharacter.jsx";
 
 
 function Hero({children}) {
