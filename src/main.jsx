@@ -11,17 +11,23 @@ import NavBar from "./components/NavBar/NavBar.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
 import "./main.css"
+import OAuthListener from "./components/OAuthListener.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <NavBar />,
+    element: (
+    <>
+    <NavBar />
+    <OAuthListener />
+    </>
+    ),
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/dreamjars", element: <CampaignBrowse /> },
       { path: "/dreamjars/:id", element: <CampaignPage /> },
       { path: "/login", element: <LoginPage />},
-      { path: "/signup", element: <SignUpPage />}
+      { path: "/signup", element: <SignUpPage />},
     ],
   },
 ]);

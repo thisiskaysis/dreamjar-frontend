@@ -1,11 +1,21 @@
+import React from "react";
 import { motion } from "framer-motion";
 
 function GoogleLogin() {
-    const url = `${import.meta.env.VITE_API_URL}/auth/google/login/`;
+    const url = `${import.meta.env.VITE_API_URL}/auth/google/login/?process=login`;
 
     const handleGoogleLogin = () => {
-        window.location.href = url;
-    }
+      const width = 500;
+      const height = 600;
+      const left = window.screen.width / 2 - width / 2;
+      const top = window.screen.height / 2 - height / 2;
+
+      window.open(
+        url,
+        "Google Login",
+        `width=${width},height=${height},top=${top},left=${left}`
+      );
+    };
 
     return (
         <motion.button
