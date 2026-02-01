@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage/Homepage.jsx";
 import CampaignBrowse from "./pages/CampaignBrowse/CampaignBrowse.jsx";
 import CampaignPage from "./pages/CampaignPage/CampaignPage.jsx";
+import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
 
 import NavBar from "./components/NavBar/NavBar.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/dreamjars", element: <CampaignBrowse /> },
       { path: "/dreamjars/:id", element: <CampaignPage /> },
-      { path: "/login", element: <LoginPage />}
+      { path: "/login", element: <LoginPage />},
+      { path: "/signup", element: <SignUpPage />}
     ],
   },
 ]);

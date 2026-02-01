@@ -9,6 +9,7 @@ function NavBar() {
                 <Link to="/dreamjars">Browse</Link>
                 <Link to="/account">Account</Link>
                 <Link to="/login">Log In</Link>
+                <Link to="/signup">Sign Up</Link>
             </nav>
             <Outlet />
         </div>

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 export function LoginJar({ swallow = false, spit = false, onAnimationDone }) {
   const [isBlinking, setIsBlinking] = useState(false);
-  const [mouthOpen, setMouthOpen] = useState(false);
 
   // Random blinking effect
   useEffect(() => {
@@ -372,30 +371,6 @@ export function LoginJar({ swallow = false, spit = false, onAnimationDone }) {
         </motion.g>
 
         {/* Mouth - changes based on animation state */}
-        {mouthOpen ? (
-          <motion.g
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ellipse
-              cx="200"
-              cy="295"
-              rx={swallow ? "25" : "20"}
-              ry={swallow ? "30" : "25"}
-              fill="#8B7BA8"
-            />
-            {!spit && (
-              <ellipse
-                cx="200"
-                cy="290"
-                rx="18"
-                ry="20"
-                fill="#E89B9B"
-              />
-            )}
-          </motion.g>
-        ) : (
           <motion.path
             d="M 185 285 Q 200 295 215 285"
             stroke="#8B7BA8"
@@ -415,7 +390,7 @@ export function LoginJar({ swallow = false, spit = false, onAnimationDone }) {
               ease: "easeInOut",
             }}
           />
-        )}
+        )
 
         {/* Feet */}
         <ellipse
