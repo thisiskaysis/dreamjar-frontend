@@ -9,6 +9,8 @@ import CampaignPage from "./pages/CampaignPage/CampaignPage.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
+import "./main.css"
+
 const router = createBrowserRouter([
   {
     path: "/",

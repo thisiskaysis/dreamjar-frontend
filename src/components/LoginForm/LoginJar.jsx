@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-export function AnimatedJar({ swallow = false, spit = false, onAnimationDone }) {
+export function LoginJar({ swallow = false, spit = false, onAnimationDone }) {
   const [isBlinking, setIsBlinking] = useState(false);
   const [mouthOpen, setMouthOpen] = useState(false);
 
