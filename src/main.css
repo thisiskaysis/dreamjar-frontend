@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+
+  font-family: 'Fredoka One', sans-serif;
   /* Primary / Magical Pastel Colors */
   --sky-blue: #a0d4f1;     /* pastel sky blue */
   --wisteria: #c9b3e0;     /* pastel purple */
@@ -27,4 +29,30 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
+}
+
+button {
+  border-radius: 9999px;
+  width: 75%;
+  height: 56px;
+  background-color: #ffffff;
+
+  border: 4px solid #8B7BA8;
+  box-shadow: 4px 4px 0 #8B7BA8;
+
+  color: #8B7BA8;
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700;   /* font-bold */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem; /* gap-3 = 12px */
+
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #a7e1cd;
+  transform: scale(1.05);
 }

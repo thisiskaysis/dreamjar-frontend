@@ -11,30 +11,17 @@ export function LoginForm() {
   const [isNotValid, setIsNotValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const validateEmail = (email) => {
-    const emailRegex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(email);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (email && password) {
-      const emailIsValid = validateEmail(email);
-      setIsValid(emailIsValid);
-      setIsNotValid(!emailIsValid);
-
-      setEmailText(email.length > 15 ? email.slice(0, 15) + "..." : email);
-      setEmail("");
-      setPassword("");
-      setIsDisabled(true);
-    }
   };
 
   const handleGoogleLogin = () => {
     console.log("Google login clicked");
     // Add Google login logic here
+  };
+
+  const handleSignUp = () => {
+    console.log("Sign up")
   };
 
   const reset = () => {
@@ -46,7 +33,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#c9b3e0] via-[#fbcdd7] to-[#ffe7a1] relative overflow-hidden">
+    <div className="flex items-center justify-center min-h-screen">
       {/* Background floating stars */}
       <motion.div
         className="absolute top-[10%] left-[15%]"
@@ -162,53 +149,6 @@ export function LoginForm() {
             />
           </svg>
 
-          {/* Animated email text */}
-          <AnimatePresence>
-            {emailText && (
-              <motion.div
-                className="absolute z-10 text-2xl font-bold text-[#8B7BA8] flex gap-1"
-                style={{
-                  left: "1rem",
-                  top: "2rem",
-                  fontFamily: "'Fredoka One', sans-serif",
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                {emailText.split("").map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    className="inline-block"
-                    animate={{
-                      y: [0, -6, 4, -6, 4, 0],
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      delay: index * 0.03,
-                    }}
-                    style={{
-                      transformOrigin: "center bottom",
-                    }}
-                    onAnimationComplete={() => {
-                      if (index === emailText.length - 1) {
-                        setTimeout(() => {
-                          const letters = document.querySelectorAll(".input-text-letter");
-                          letters.forEach((letter, i) => {
-                            setTimeout(() => {
-                              HTMLElement.style.transform = `translateX(${300 + i * 20}px)`;
-                              HTMLElement.style.transition = "transform 0.5s ease-in";
-                            }, (emailText.length - 1 - i) * 50);
-                          });
-                        }, 200);
-                      }
-                    }}
-                  >
-                    <span className="input-text-letter">{letter}</span>
-                  </motion.span>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -273,61 +213,12 @@ export function LoginForm() {
                 placeholder="••••••••"
                 required
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-[#8B7BA8] hover:text-[#fbcdd7] transition-colors"
-                disabled={isDisabled}
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  {showPassword ? (
-                    <>
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-                      <line x1="1" y1="1" x2="23" y2="23" />
-                    </>
-                  ) : (
-                    <>
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </>
-                  )}
-                </svg>
-              </button>
             </div>
 
-            {/* Error message */}
-            <AnimatePresence>
-              {isNotValid && (
-                <motion.p
-                  className="text-sm font-bold text-[#fbcdd7] text-center"
-                  style={{ fontFamily: "'Fredoka One', sans-serif" }}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  Please enter a valid email address!
-                </motion.p>
-              )}
-            </AnimatePresence>
 
             {/* Submit Button */}
             <motion.button
               type="submit"
-              className="w-full h-14 rounded-full bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
-              style={{
-                fontFamily: "'Fredoka One', sans-serif",
-                boxShadow: "4px 4px 0 #8B7BA8",
-              }}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
               disabled={isDisabled}
@@ -340,7 +231,6 @@ export function LoginForm() {
               <div className="flex-1 h-1 bg-[#8B7BA8] rounded-full opacity-20" />
               <span
                 className="text-sm font-bold text-[#8B7BA8]"
-                style={{ fontFamily: "'Fredoka One', sans-serif" }}
               >
                 OR
               </span>
@@ -351,14 +241,10 @@ export function LoginForm() {
             <motion.button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full h-14 rounded-full bg-white border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#a7e1cd] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
-              style={{
-                fontFamily: "'Fredoka One', sans-serif",
-                boxShadow: "4px 4px 0 #8B7BA8",
-              }}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
             >
+              {/* Google Icon */}
               <svg width="24" height="24" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
@@ -378,6 +264,16 @@ export function LoginForm() {
                 />
               </svg>
               Continue with Google
+            </motion.button>
+
+            {/* Sign Up Button */}
+            <motion.button
+              type="button"
+              onClick={handleSignUp}
+              whileHover={{ y: -2,}}
+              whileTap={{ y: 0 }}
+            >
+              Sign Up
             </motion.button>
           </form>
         </div>
