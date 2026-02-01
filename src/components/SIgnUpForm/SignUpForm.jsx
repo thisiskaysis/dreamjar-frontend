@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoginJar } from "../LoginForm/LoginJar.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 import postSignUp from "../../api/post-signup"
 
 export function SignUpForm() {
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [credentials, setCredentials] = useState({
@@ -27,14 +28,16 @@ export function SignUpForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (credentials) {
-      postSignUp(
-        credentials
-      ).then((response) => {
-        window.localStorage.setItem("access", response.access);
-        navigate("/")
+    setErrors({}); // clear previous errors
+
+    postSignUp(credentials)
+    .then((response) => {
+      window.localStorage.setItem("access", response.access);
+      navigate("/");
+    }) 
+    .catch ((error) => {
+          setErrors(error);
       });
-    }
   };
 
   const handleGoogleSignUp = () => {
@@ -195,6 +198,9 @@ export function SignUpForm() {
                 required
                 onChange={handleChange}
               />
+              {errors.first_name && (
+                <p className="text-red-500 text-sm mt-1 ml-10">{errors.first_name.join(" ")}</p>
+                )}
             </div>
 
             <div className="relative">
@@ -216,6 +222,9 @@ export function SignUpForm() {
                 required
                 onChange={handleChange}
               />
+              {errors.last_name && (
+                <p className="text-red-500 text-sm mt-1 ml-10">{errors.last_name.join(" ")}</p>
+                )}
             </div>
 
             <div className="relative">
@@ -237,6 +246,9 @@ export function SignUpForm() {
                 required
                 onChange={handleChange}
               />
+              {errors.username && (
+                <p className="text-red-500 text-sm mt-1 ml-10">{errors.username.join(" ")}</p>
+                )}
             </div>
 
             <div className="relative">
@@ -258,6 +270,9 @@ export function SignUpForm() {
                 required
                 onChange={handleChange}
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1 ml-10">{errors.email.join(" ")}</p>
+                )}
             </div>
 
             {/* Password Input */}
@@ -282,6 +297,9 @@ export function SignUpForm() {
                 required
                 onChange={handleChange}
               />
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1 ml-10">{errors.password.join(" ")}</p>
+                )}
 
 
 
@@ -316,6 +334,12 @@ export function SignUpForm() {
                 </svg>
               </button>
             </div>
+
+            {errors.non_field_errors && (
+              <p className="text-red-500 text-sm mb-4 text-center">{errors.non_field_errors.join(" ")}
+              </p>
+            )}
+
 
             {/* Submit Button */}
             <motion.button

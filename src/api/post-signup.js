@@ -11,27 +11,20 @@ async function postSignUp(credentials) {
     });
 
     if (!response.ok) {
-    const fallbackError = "Error trying to sign up";
+  let data;
+  try {
+    data = await response.json(); // get the JSON error object
+  } catch {
+    throw { non_field_errors: ["Error trying to sign up"] }; // fallback
+  }
 
-    let data = null;
+  // If backend sends field errors, throw the object
+  if (data) {
+    throw data; // this will be caught in your form
+  }
 
-    try {
-        data = await response.json();
-    } catch {
-        throw new Error(fallbackError);
-    }
-
-    let errorMessage = fallbackError;
-
-    if (data?.detail) {
-        errorMessage = data.detail;
-    } else if (data && typeof data === "object") {
-        errorMessage = Object.values(data).flat().join(" ");
-    }
-
-    throw new Error(errorMessage);
+  throw { non_field_errors: ["Error trying to sign up"] };
 }
-
 
     return await response.json();
 }
