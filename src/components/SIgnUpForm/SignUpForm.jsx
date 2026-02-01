@@ -45,8 +45,8 @@ export function SignUpForm() {
     // Add Google login logic here
   };
 
-  const handleSignUp = () => {
-    console.log("Sign up")
+  const handleLogIn = () => {
+    console.log("User exists Log In")
   };
 
   return (
@@ -200,7 +200,7 @@ export function SignUpForm() {
               />
               {errors.first_name && (
                 <p className="text-red-500 text-sm mt-1 ml-10">{errors.first_name.join(" ")}</p>
-                )}
+                )};
             </div>
 
             <div className="relative">

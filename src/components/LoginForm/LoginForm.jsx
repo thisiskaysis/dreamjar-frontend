@@ -7,6 +7,7 @@ import postLogin from "../../api/post-login"
 
 export function LoginForm() {
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const [emailText, setEmailText] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -25,12 +26,17 @@ export function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrors({});
+
     if (credentials.email && credentials.password) {
       postLogin(
-        credentials.email, credentials.password
-      ).then((response) => {
+        credentials.email, credentials.password)
+        .then((response) => {
         window.localStorage.setItem("access", response.access);
-        navigate("/")
+        navigate("/");
+      })
+      .catch((error) => {
+        setErrors(error);
       });
     }
   };
@@ -298,6 +304,12 @@ export function LoginForm() {
                 </svg>
               </button>
             </div>
+
+            {errors.non_field_errors && (
+              <p className="text-red-500 text-sm mb-2">{errors.non_field_errors.join(" ")}
+              </p>
+            )}
+
 
             {/* Submit Button */}
             <motion.button
