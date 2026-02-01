@@ -1,0 +1,117 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;800&display=swap');
+
+/* Global */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1, h2 {
+  font-family: 'Lilita One', cursive;
+  font-size: 15vmin;
+  letter-spacing: 0.2rem;
+  transform-style: preserve-3d;
+}
+
+.background {
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+section {
+  perspective: 1500px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  will-change: transform;
+  overflow: hidden;
+}
+
+/* Word & letters */
+.word {
+  --layers: 4;
+  --depth: 30;
+  --increment: 0.1vmin;
+  --color: darkred;
+  --color-front: red;
+  --color-back: var(--color);
+
+  z-index: 1;
+  transform-style: preserve-3d;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.word span {
+  position: relative;
+  z-index: 2;
+}
+
+.word .letter {
+  --layer-space: calc(var(--depth) / var(--layers));
+  --zStack: calc((var(--layer) * var(--layer-space)) * var(--increment));
+  --xPositionOffset: 50%;
+  --yPositionOffset: 50%;
+  --zPositionOffset: calc(var(--increment) * ((var(--depth) * 0.5) * var(--centerOffset)));
+
+  transform-style: preserve-3d;
+  position: relative;
+  color: var(--color);
+  backface-visibility: hidden;
+  transform:
+    translateX(calc((var(--x, 0) + var(--xOffset, 0)) * var(--increment)))
+    translateY(calc(var(--y, 0) * var(--increment)))
+    translateZ(calc(((var(--z, 0) - (var(--depth) * 0.5)) * var(--increment)) + var(--zStack)))
+    rotateZ(calc(var(--rotateZ, 0) * 1deg))
+    rotateY(calc(var(--rotateY, 0) * 1deg))
+    rotateX(calc(var(--rotateX, 0) * 1deg));
+  transform-origin: var(--xPositionOffset) var(--yPositionOffset) var(--zPositionOffset);
+}
+
+.word .letter.front {
+  color: var(--color-front);
+}
+
+.word .letter.under {
+  position: absolute;
+  top: 0;
+  left: calc(var(--xPos, 0) * 1px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.word .letter.back {
+  color: var(--color-back);
+}
+
+/* Boing section */
+.boing {
+  text-align: center;
+  perspective: 500px;
+}
+
+.boing .background {
+  background: #efefef;
+}
+
+.boing .word {
+  --color: #444;
+  --color-front: #444;
+  --depth: 2;
+  --layers: 4;
+  display: block;
+}

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import postLogin from "../../api/post-login"
 
 export function LoginForm() {
+  const navigate = useNavigate();
   const [emailText, setEmailText] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
