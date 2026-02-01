@@ -56,3 +56,7 @@ button:hover {
   background-color: #a7e1cd;
   transform: scale(105%);
 } */
+
+button {
+  cursor: pointer;
+}

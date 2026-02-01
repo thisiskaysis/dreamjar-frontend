@@ -1,18 +1,37 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoginJar } from "./LoginJar";
+import { useNavigate } from "react-router-dom";
+
+import postLogin from "../../api/post-login"
 
 export function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [emailText, setEmailText] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
-  const [isValid, setIsValid] = useState(false);
-  const [isNotValid, setIsNotValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState({
+    email:"",
+    password:"",
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (credentials.email && credentials.password) {
+      postLogin(
+        credentials.email, credentials.password
+      ).then((response) => {
+        window.localStorage.setItem("access", response.access);
+        navigate("/")
+      });
+    }
   };
 
   const handleGoogleLogin = () => {
@@ -22,14 +41,6 @@ export function LoginForm() {
 
   const handleSignUp = () => {
     console.log("Sign up")
-  };
-
-  const reset = () => {
-    setIsDisabled(false);
-    setIsValid(false);
-    setIsNotValid(false);
-    setEmailText("");
-    setShowPassword(false);
   };
 
   return (
@@ -198,7 +209,7 @@ export function LoginForm() {
           </AnimatePresence>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form className="space-y-6">
             {/* Title */}
             <motion.h1
               className="text-4xl font-bold text-[#8B7BA8] text-center mb-8"
@@ -221,10 +232,7 @@ export function LoginForm() {
               </label>
               <input
                 id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={isDisabled}
+                type="text"
                 className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
                 style={{
                   fontFamily: "'Fredoka One', sans-serif",
@@ -233,6 +241,7 @@ export function LoginForm() {
                 }}
                 placeholder="your@email.com"
                 required
+                onChange={handleChange}
               />
             </div>
 
@@ -248,9 +257,6 @@ export function LoginForm() {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isDisabled}
                 className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
                 style={{
                   fontFamily: "'Fredoka One', sans-serif",
@@ -259,6 +265,7 @@ export function LoginForm() {
                 }}
                 placeholder="••••••••"
                 required
+                onChange={handleChange}
               />
               <button
                 type="button"
@@ -291,25 +298,9 @@ export function LoginForm() {
               </button>
             </div>
 
-            {/* Error message */}
-            <AnimatePresence>
-              {isNotValid && (
-                <motion.p
-                  className="text-sm font-bold text-[#fbcdd7] text-center"
-                  style={{ fontFamily: "'Fredoka One', sans-serif" }}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  Please enter a valid email address!
-                </motion.p>
-              )}
-            </AnimatePresence>
-
             {/* Submit Button */}
             <motion.button
-              type="submit"
+              type="button"
               className="w-full h-14 rounded-full bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
               style={{
                 fontFamily: "'Fredoka One', sans-serif",
@@ -317,7 +308,7 @@ export function LoginForm() {
               }}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
-              disabled={isDisabled}
+              onClick={handleSubmit}
             >
               Log In
             </motion.button>
@@ -371,7 +362,7 @@ export function LoginForm() {
 
         {/* Jar Character */}
         <div className="flex-shrink-0">
-          <LoginJar swallow={isValid} spit={isNotValid} onAnimationDone={reset} />
+          <LoginJar />
         </div>
       </div>
     </div>
