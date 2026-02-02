@@ -1,5 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function GoogleLogin() {
     const url = `${import.meta.env.VITE_API_URL}/auth/google/login/?process=login`;

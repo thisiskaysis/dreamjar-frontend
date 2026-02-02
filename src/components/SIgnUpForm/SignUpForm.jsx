@@ -41,11 +41,6 @@ export function SignUpForm() {
       });
   };
 
-  const handleGoogleSignUp = () => {
-    console.log("Google signup clicked");
-    // Add Google login logic here
-  };
-
   const handleLogIn = () => {
     console.log("User exists Log In")
   };
