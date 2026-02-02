@@ -1,6 +1,12 @@
-.how-it-works, .featured-campaigns, .parents-section, .cta-section {
-  padding: 4rem 8%;
+.how-it-works, .parents-section, .cta-section {
   text-align: center;
+  max-height: 400px;
+}
+
+.featured-campaigns {
+  text-align: center;
+  height: 800px;
+  width: 100%;
 }
 
 .hero {
@@ -26,13 +32,13 @@
 
 .campaign-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;
 }
 
 .campaign-card {
-  width: 200px;
+  width: 700px;
   padding: 1rem;
   border-radius: 15px;
   background: #fff;

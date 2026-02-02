@@ -42,11 +42,6 @@ export function LoginForm() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    console.log("Google login clicked");
-    // Add Google login logic here
-  };
-
   const handleSignUp = () => {
     console.log("Sign up")
   };
@@ -176,7 +171,6 @@ export function LoginForm() {
                 style={{
                   left: "1rem",
                   top: "2rem",
-                  fontFamily: "'Fredoka One', sans-serif",
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -221,7 +215,6 @@ export function LoginForm() {
             {/* Title */}
             <motion.h1
               className="text-4xl font-bold text-[#8B7BA8] text-center mb-8"
-              style={{ fontFamily: "'Fredoka One', sans-serif" }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -234,7 +227,6 @@ export function LoginForm() {
               <label
                 htmlFor="email"
                 className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
-                style={{ fontFamily: "'Fredoka One', sans-serif" }}
               >
                 EMAIL
               </label>
@@ -243,7 +235,6 @@ export function LoginForm() {
                 type="text"
                 className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
                 style={{
-                  fontFamily: "'Fredoka One', sans-serif",
                   caretColor: "#fbcdd7",
                   boxShadow: "3px 3px 0 #8B7BA8",
                 }}
@@ -258,7 +249,6 @@ export function LoginForm() {
               <label
                 htmlFor="password"
                 className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
-                style={{ fontFamily: "'Fredoka One', sans-serif" }}
               >
                 PASSWORD
               </label>
@@ -267,7 +257,6 @@ export function LoginForm() {
                 type={showPassword ? "text" : "password"}
                 className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
                 style={{
-                  fontFamily: "'Fredoka One', sans-serif",
                   caretColor: "#fbcdd7",
                   boxShadow: "3px 3px 0 #8B7BA8",
                 }}
@@ -317,7 +306,6 @@ export function LoginForm() {
               type="button"
               className="w-full h-14 rounded-full bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
               style={{
-                fontFamily: "'Fredoka One', sans-serif",
                 boxShadow: "4px 4px 0 #8B7BA8",
               }}
               whileHover={{ y: -2 }}
@@ -332,7 +320,6 @@ export function LoginForm() {
               <div className="flex-1 h-1 bg-[#8B7BA8] rounded-full opacity-20" />
               <span
                 className="text-sm font-bold text-[#8B7BA8]"
-                style={{ fontFamily: "'Fredoka One', sans-serif" }}
               >
                 OR
               </span>
