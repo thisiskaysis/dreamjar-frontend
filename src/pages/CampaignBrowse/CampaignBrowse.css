@@ -1,6 +1,22 @@
-#campaign-list {
-  display: grid;
-  grid-template-columns: 30% 30% 30%;
+.campaign-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
   column-gap: 10px;
   row-gap: 10px;
+}
+
+.campaign-card {
+  width: 70%;
+  height: 200px;
+  padding: 1rem;
+  border-radius: 50px;
+  border: 4px solid #8B7BA8;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+  font-size: 1.25rem;
+  background: #fff;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }

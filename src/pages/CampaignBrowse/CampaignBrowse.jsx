@@ -6,7 +6,7 @@ function CampaignBrowse() {
     const { campaigns } = useCampaigns();
 
     return (
-        <div id="campaign-list">
+        <div className="campaign-list">
             {campaigns.map((campaignData, key) => {
                 return <CampaignCard key={key} campaignData={campaignData} />;
             })}

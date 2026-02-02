@@ -2,10 +2,10 @@ function FeaturedCampaigns() {
     return (
         <section className="featured-campaigns">
             <h2>Featured DreamJars</h2>
-            <div className="campaign-grid">
+            <div className="feature-campaign-grid">
                 {/* example campaign cards */}
                 {[1, 2, 3].map((id) => (
-                    <div key={id} className="campaign-card">
+                    <div key={id} className="feature-campaign-card">
                         <div className="campaign-image">Image {id}</div>
                         <h3> Dream Title {id} </h3>
                         <p>by Dreamer {id}</p>
