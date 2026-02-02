@@ -201,7 +201,7 @@ export function SignUpForm() {
               />
               {errors.first_name && (
                 <p className="text-red-500 text-sm mt-1 ml-10">{errors.first_name.join(" ")}</p>
-                )};
+                )}
             </div>
 
             <div className="relative">
