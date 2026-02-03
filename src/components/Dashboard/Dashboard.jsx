@@ -3,12 +3,13 @@ import { useChildActions } from "../../hooks/useChildActions";
 import "./Dashboard.css";
 
 function Dashboard({ user }) {
-  const { createChild } = useChildActions();
+  const { createChild, removeChild } = useChildActions();
   const [children, setChildren] = useState(user.children || []);
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
 
+  {/* Create new child */}
   const handleAddChild = async (e) => {
     e.preventDefault();
     if (!name || !dob) return;
@@ -19,6 +20,20 @@ function Dashboard({ user }) {
       setName("");
       setDob("");
       setShowForm(false);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  {/* Delete child */}
+  const handleRemoveChild = async (childId) => {
+    const confirmDelete = confirm("Are you sure you want to delete this child?");
+    if (!confirmDelete) return;
+
+    try {
+      await removeChild(childId);
+      setChildren(children.filter((child) => child.id !== childId)); // update UI
+      alert("Child deleted successfully")
     } catch (error) {
       alert(error.message);
     }
@@ -82,7 +97,7 @@ function Dashboard({ user }) {
             <div className="child-actions">
               <button>Create Campaign</button>
               <button>Edit Child</button>
-              <button>Delete Child</button>
+              <button onClick={() => handleRemoveChild(child.id)}>Delete Child</button>
             </div>
 
             <div className="campaign-list">
