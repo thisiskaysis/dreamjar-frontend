@@ -1,3 +1,9 @@
+.browse-header {
+  display: flex;
+  align-items: center;
+  max-height: 350px;
+}
+
 .campaign-list {
   display: flex;
   flex-direction: column;

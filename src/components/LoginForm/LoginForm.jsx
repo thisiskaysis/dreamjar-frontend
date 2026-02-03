@@ -34,7 +34,7 @@ export function LoginForm() {
         credentials.email, credentials.password)
         .then((response) => {
         window.localStorage.setItem("access", response.access);
-        navigate("/");
+        navigate("/account");
       })
       .catch((error) => {
         setErrors(error);

@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "/dreamjars", element: <CampaignBrowse /> },
       { path: "/dreamjars/:id", element: <CampaignPage /> },
-      { path: "/account", element: <AccountPage />},
+      { path: "/account/", element: <AccountPage />},
       { path: "/login", element: <LoginPage />},
       { path: "/signup", element: <SignUpPage />},
       { path: "/oauth-success", element: <OAuthSuccess /> },

@@ -1,0 +1,9 @@
+.account-header {
+    display: flex;
+    justify-content: center;
+}
+
+.account-bar {
+    display: flex;
+    flex-direction: column;
+}

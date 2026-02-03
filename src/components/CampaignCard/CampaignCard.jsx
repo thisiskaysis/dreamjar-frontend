@@ -9,6 +9,7 @@ function CampaignCard(props) {
         <div className="campaign-card">
             <Link to={campaignLink}>
             <h3>{campaignData.title}</h3>
+            <h3>{campaignData.description}</h3>
             </Link>
         </div>
     );
