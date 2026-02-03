@@ -4,17 +4,23 @@ import getUser from "../api/get-user";
 
 export default function useUser() {
     const { auth } = useAuth();
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState();
-    const [userId = window.localStorage.getItem("userId"), setUserId] = useState();
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
-            try {
-                const user = await getUser(auth.userId, auth.token);
-                setUser(user)
+            const token = auth.access || window.localStorage.getItem("access");
+
+            if (!token) {
                 setIsLoading(false);
+                setError(new Error("Not logged in"));
+                return;
+            }
+
+            try {
+                const userData = await getUser(token);
+                setUser(userData);
             } catch (error) {
                 setError(error);
             } finally {
@@ -22,12 +28,8 @@ export default function useUser() {
             }
         };
 
-        if (auth.userId && auth.access) {
             fetchUser();
-        } else {
-            setIsLoading(false);
-        }
-    }, [auth.userId, auth.access]);
+    }, [auth.access]);
 
     return { user, isLoading, error };
 }

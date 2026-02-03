@@ -35,17 +35,30 @@ export function LoginForm() {
     if (credentials.email && credentials.password) {
       postLogin(
         credentials.email, credentials.password)
-        .then((response) => {
+        .then(async (response) => {
+        const access = response.access;
         window.localStorage.setItem("access", response.access);
-        window.localStorage.setItem("userId", response.user.id);
-        setAuth({
-          access: response.access,
-          userId: response.user.id,
+
+        const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/parents/me`, {
+          headers: {
+            "Authorization": `Bearer ${access}`,
+          },
         });
+
+        if (!userResponse.ok) throw new Error("Failed to fetch user.");
+
+        const userData = await userResponse.json();
+        window.localStorage.setItem("access", access);
+
+        setAuth({
+          access,
+        });
+
         navigate("/account");
       })
+
       .catch((error) => {
-        setErrors(error);
+        setErrors({ non_field_errors: [error.message] });
       });
     }
   };

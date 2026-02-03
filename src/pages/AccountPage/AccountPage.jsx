@@ -1,44 +1,24 @@
-import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/use-auth";
+import { Navigate } from "react-router-dom";
 import useUser from "../../hooks/use-user";
-import { useNavigate } from "react-router-dom";
-import "./AccountPage.css"
+import Dashboard from "../../components/Dashboard/Dashboard";
+// import "./AccountPage.css"
 
 function AccountPage() {
-    const navigate = useNavigate();
-    const { auth } = useAuth();
-    const userId = auth?.user?.id;
-    const { user, isLoading, error } = useUser();
+  const { auth } = useAuth();
+  const { user, isLoading, error } = useUser();
 
+  // Redirect if not logged in
+  if (!auth?.access) return <Navigate to="/login" />;
 
-    if (!userId) {
-        return (
-            <div>
-                <p>You must be logged in to view Account Details.</p>
-                <button onClick={() => navigate("/")}>Return Home</button>
-            </div>
-        );
-    }
+  // Show loading state while fetching user
+  if (isLoading) return <p className="text-center mt-20 text-xl text-[#8B7BA8]">Loading your account...</p>;
 
-    if (isLoading) {
-        return <p>Loading...</p>
-    }
+  // Show error if fetch fails
+  if (error) return <p className="text-center mt-20 text-xl text-red-500">{error.message}</p>;
 
-    if (error) {
-        return <p>{error.message || "Oops! An error occurred. Please try again later."}</p>
-    }
-
-
-
-    return <div className="account-page">
-        <div className="account-header">
-            <h1>Welcome, {account.first_name}</h1>
-        </div>
-        <div className="account-bar">
-            <h3>{account.email}</h3>
-            <h3>Account settings</h3>
-        </div>
-    </div>
+  // Render Dashboard with user data
+  return <Dashboard user={user} />;
 }
 
 export default AccountPage;
