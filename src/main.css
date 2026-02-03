@@ -61,3 +61,7 @@ button:hover {
 button {
   cursor: pointer;
 }
+
+h2 {
+  font-size: xx-large;
+}
