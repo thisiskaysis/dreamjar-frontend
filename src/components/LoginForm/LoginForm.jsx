@@ -5,9 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 import postLogin from "../../api/post-login"
 import GoogleLogin from "../GoogleLogin";
+import { useAuth } from "../../hooks/use-auth";
 
 export function LoginForm() {
   const navigate = useNavigate();
+  const {auth, setAuth} = useAuth();
+
   const [errors, setErrors] = useState({});
   const [emailText, setEmailText] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -34,6 +37,11 @@ export function LoginForm() {
         credentials.email, credentials.password)
         .then((response) => {
         window.localStorage.setItem("access", response.access);
+        window.localStorage.setItem("userId", response.user.id);
+        setAuth({
+          access: response.access,
+          userId: response.user.id,
+        });
         navigate("/account");
       })
       .catch((error) => {

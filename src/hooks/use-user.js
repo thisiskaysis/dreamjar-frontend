@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
-
+import { useAuth } from "./use-auth";
 import getUser from "../api/get-user";
 
-export default function useAccount(token) {
-    const [account, setAccount] = useState(null);
+export default function useUser() {
+    const { auth } = useAuth();
+    const [user, setUser] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState();
+    const [userId = window.localStorage.getItem("userId"), setUserId] = useState();
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const userData = await getUser(token);
-                setAccount(userData);
+                const user = await getUser(auth.userId, auth.token);
+                setUser(user)
+                setIsLoading(false);
             } catch (error) {
                 setError(error);
             } finally {
@@ -19,12 +22,12 @@ export default function useAccount(token) {
             }
         };
 
-        if (token) {
+        if (auth.userId && auth.access) {
             fetchUser();
         } else {
             setIsLoading(false);
         }
-    }, [token]);
+    }, [auth.userId, auth.access]);
 
-    return { account, isLoading, error };
+    return { user, isLoading, error };
 }
