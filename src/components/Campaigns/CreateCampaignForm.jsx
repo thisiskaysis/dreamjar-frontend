@@ -37,8 +37,8 @@ const handleSubmit = async (e) => {
     };
 
     try {
-        await createCampaign(childId, payload);
-        onSuccess();
+        const newCampaign = await createCampaign(childId, payload);
+        onSuccess(newCampaign);
     } catch (error) {
         setErrors(error);
     }

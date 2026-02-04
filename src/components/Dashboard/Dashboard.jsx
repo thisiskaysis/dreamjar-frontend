@@ -61,7 +61,16 @@ function Dashboard({ user }) {
     <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
       <CreateCampaignForm
         childId={selectedChildId}
-        onSuccess={closeCampaignModal}
+        onSuccess={(newCampaign) => {
+          setChildren((prevChildren) =>
+          prevChildren.map((child) =>
+          child.id === selectedChildId
+        ? { ...child, campaigns: [...(child.campaigns || []), newCampaign] }
+      : child
+    )
+  );
+  closeCampaignModal();
+}}
       />
     </Modal>
   </div>
