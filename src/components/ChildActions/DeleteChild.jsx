@@ -3,7 +3,7 @@ import { useChildActions } from "../../hooks/useChildActions";
 function DeleteChild({ childId, setChildren }) {
     const { removeChild } = useChildActions();
 
-    const handleRemoveChild = async (childId) => {
+    const handleRemoveChild = async () => {
         const confirmDelete = confirm("Are you sure you want to delete this child?");
         if (!confirmDelete) return;
 
@@ -19,10 +19,8 @@ function DeleteChild({ childId, setChildren }) {
     };
 
     return (
-        <div>
             <button onClick={handleRemoveChild}>Delete Child   
             </button>
-        </div>
     )
 }
 

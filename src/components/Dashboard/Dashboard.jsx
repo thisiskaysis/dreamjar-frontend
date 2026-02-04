@@ -1,40 +1,11 @@
 import { useState } from "react";
-import { useChildActions } from "../../hooks/useChildActions";
 import "./Dashboard.css";
 import CreateChild from "../ChildActions/CreateChild";
 import DeleteChild from "../ChildActions/DeleteChild";
+import EditChild from "../ChildActions/EditChild";
 
 function Dashboard({ user }) {
-  const { createChild, removeChild, editChild } = useChildActions();
   const [children, setChildren] = useState(user.children || []);
-
-  {/* Edit child */}
-  const handleEditChild = async (childId) => {
-    const childToEdit = children.find((child) => child.id === childId);
-
-    const newName = prompt("Edit child's name", childToEdit.name);
-    const newDob = prompt(
-      "Edit child's date of birth (YYYY-MM-DD):",
-      childToEdit.date_of_birth
-    );
-
-    if (!newName || !newDob) return;
-
-    try {
-      const updateChild = await editChild(childId, {
-        name: newName,
-        date_of_birth: newDob,
-      });
-
-      setChildren((prevChildren) =>
-      prevChildren.map((child) =>
-      child.id === childId ? updateChild : child));
-
-      alert("Child updated successfully");
-    } catch (error) {
-      alert(error.message);
-    }
-  };
 
   return (
     <div className="dashboard">
@@ -53,7 +24,7 @@ function Dashboard({ user }) {
 
             <div className="child-actions">
               <button>Create Campaign</button>
-              <button onClick={() => handleEditChild(child.id)}>Edit Child</button>
+              <EditChild childId={child.id} setChildren={setChildren} />
               <DeleteChild childId={child.id} setChildren={setChildren}/>
             </div>
 
