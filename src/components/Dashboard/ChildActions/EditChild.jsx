@@ -1,4 +1,4 @@
-import { useChildActions } from "../../hooks/useChildActions";
+import { useChildActions } from "../../../hooks/useChildActions";
 
 function EditChild({ childId, setChildren }) {
     const { editChild } = useChildActions();
