@@ -1,43 +1,12 @@
 import { useState } from "react";
 import { useChildActions } from "../../hooks/useChildActions";
 import "./Dashboard.css";
+import CreateChild from "../ChildActions/CreateChild";
+import DeleteChild from "../ChildActions/DeleteChild";
 
 function Dashboard({ user }) {
   const { createChild, removeChild, editChild } = useChildActions();
   const [children, setChildren] = useState(user.children || []);
-  const [showForm, setShowForm] = useState(false);
-  const [name, setName] = useState("");
-  const [dob, setDob] = useState("");
-
-  {/* Create new child */}
-  const handleAddChild = async (e) => {
-    e.preventDefault();
-    if (!name || !dob) return;
-
-    try {
-      const newChild = await createChild(user.id, { name, date_of_birth: dob });
-      setChildren([...children, newChild]);
-      setName("");
-      setDob("");
-      setShowForm(false);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
-  {/* Delete child */}
-  const handleRemoveChild = async (childId) => {
-    const confirmDelete = confirm("Are you sure you want to delete this child?");
-    if (!confirmDelete) return;
-
-    try {
-      await removeChild(childId);
-      setChildren(children.filter((child) => child.id !== childId)); // update UI
-      alert("Child deleted successfully")
-    } catch (error) {
-      alert(error.message);
-    }
-  };
 
   {/* Edit child */}
   const handleEditChild = async (childId) => {
@@ -71,47 +40,7 @@ function Dashboard({ user }) {
     <div className="dashboard">
       <h1>Welcome, {user.first_name}</h1>
 
-      {/* Add Child Button */}
-      <button
-        className="add-child-btn"
-        onClick={() => setShowForm(true)}
-      >
-        Add Child
-      </button>
-
-      {/* Modal */}
-      {showForm && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Add a Child</h2>
-            <form onSubmit={handleAddChild} className="child-form">
-              <input
-                type="text"
-                placeholder="Child's Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="input-field"
-              />
-              <input
-                type="date"
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
-                className="input-field"
-              />
-              <div className="form-buttons">
-                <button type="submit" className="submit-btn">Create</button>
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() => setShowForm(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <CreateChild user={user} setChildren={setChildren} />
 
       {/* Children List */}
       <div className="children-section">
@@ -125,7 +54,7 @@ function Dashboard({ user }) {
             <div className="child-actions">
               <button>Create Campaign</button>
               <button onClick={() => handleEditChild(child.id)}>Edit Child</button>
-              <button onClick={() => handleRemoveChild(child.id)}>Delete Child</button>
+              <DeleteChild childId={child.id} setChildren={setChildren}/>
             </div>
 
             <div className="campaign-list">
