@@ -3,7 +3,7 @@ import { useChildActions } from "../../hooks/useChildActions";
 import "./Dashboard.css";
 
 function Dashboard({ user }) {
-  const { createChild, removeChild } = useChildActions();
+  const { createChild, removeChild, editChild } = useChildActions();
   const [children, setChildren] = useState(user.children || []);
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
@@ -34,6 +34,34 @@ function Dashboard({ user }) {
       await removeChild(childId);
       setChildren(children.filter((child) => child.id !== childId)); // update UI
       alert("Child deleted successfully")
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  {/* Edit child */}
+  const handleEditChild = async (childId) => {
+    const childToEdit = children.find((child) => child.id === childId);
+
+    const newName = prompt("Edit child's name", childToEdit.name);
+    const newDob = prompt(
+      "Edit child's date of birth (YYYY-MM-DD):",
+      childToEdit.date_of_birth
+    );
+
+    if (!newName || !newDob) return;
+
+    try {
+      const updateChild = await editChild(childId, {
+        name: newName,
+        date_of_birth: newDob,
+      });
+
+      setChildren((prevChildren) =>
+      prevChildren.map((child) =>
+      child.id === childId ? updateChild : child));
+
+      alert("Child updated successfully");
     } catch (error) {
       alert(error.message);
     }
@@ -96,7 +124,7 @@ function Dashboard({ user }) {
 
             <div className="child-actions">
               <button>Create Campaign</button>
-              <button>Edit Child</button>
+              <button onClick={() => handleEditChild(child.id)}>Edit Child</button>
               <button onClick={() => handleRemoveChild(child.id)}>Delete Child</button>
             </div>
 
