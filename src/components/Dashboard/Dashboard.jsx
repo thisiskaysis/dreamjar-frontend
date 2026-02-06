@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Dashboard.css";
-import Modal from "../UI/Modal";
+import CampaignModal from "../UI/CampaignModal";
 import CreateCampaignForm from "../Campaigns/CreateCampaignForm";
 import CreateChild from "./ChildActions/CreateChild";
 import DeleteChild from "./ChildActions/DeleteChild";
@@ -58,7 +58,7 @@ function Dashboard({ user }) {
     </div>
 
     {/* ONE modal only */}
-    <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
+    <CampaignModal isOpen={showCampaignModal} onClose={closeCampaignModal}>
       <CreateCampaignForm
         childId={selectedChildId}
         onSuccess={(newCampaign) => {
@@ -72,7 +72,7 @@ function Dashboard({ user }) {
   closeCampaignModal();
 }}
       />
-    </Modal>
+    </CampaignModal>
   </div>
 );
 }

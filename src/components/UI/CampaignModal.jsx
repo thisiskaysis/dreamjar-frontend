@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import "./Modal.css"
 
-function Modal({ isOpen, onClose, children }) {
+function CampaignModal({ isOpen, onClose, children }) {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -31,4 +31,4 @@ function Modal({ isOpen, onClose, children }) {
     );
 }
 
-export default Modal;
+export default CampaignModal;
