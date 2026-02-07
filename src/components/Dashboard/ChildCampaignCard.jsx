@@ -28,9 +28,9 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
 
       {/* Expanded details */}
       {expanded && (
-        <div className="campaign-details">
+        <div className="campaign-actions">
           <button
-            className="edit-button"
+            className="dj-button"
             onClick={() => navigate(`/campaigns/${campaign.id}/edit`)}
           >
             Edit Campaign

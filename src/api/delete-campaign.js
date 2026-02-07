@@ -1,7 +1,7 @@
 async function deleteCampaign(campaignId, token) {
     const url = `${import.meta.env.VITE_API_URL}/campaigns/${campaignId}/`;
 
-    const reponse = await fetch(url, {
+    const response = await fetch(url, {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${token}`,

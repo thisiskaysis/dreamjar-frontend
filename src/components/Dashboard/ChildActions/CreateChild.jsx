@@ -25,7 +25,7 @@ function CreateChild({ user, setChildren }) {
     return (
         <div>
         {/* Add Child Button */}
-      <button className="add-child-btn" onClick={() => setShowForm(true)}
+      <button className="dj-button" onClick={() => setShowForm(true)}
       >
         Add Child
       </button>
@@ -50,10 +50,10 @@ function CreateChild({ user, setChildren }) {
                 className="input-field"
               />
               <div className="form-buttons">
-                <button type="submit" className="submit-btn">Create</button>
+                <button type="submit" className="dj-button">Create</button>
                 <button
                   type="button"
-                  className="cancel-btn"
+                  className="dj-button"
                   onClick={() => setShowForm(false)}
                 >
                   Cancel

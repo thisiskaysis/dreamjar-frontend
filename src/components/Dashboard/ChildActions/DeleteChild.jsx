@@ -19,7 +19,7 @@ function DeleteChild({ childId, setChildren }) {
     };
 
     return (
-            <button onClick={handleRemoveChild}>Delete Child   
+            <button className="dj-button" onClick={handleRemoveChild}>Delete Child   
             </button>
     )
 }

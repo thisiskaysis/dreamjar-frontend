@@ -12,7 +12,7 @@ function FeaturedCampaigns() {
                         <div className="progress-bar">
                             <div className="progress" style={{ width: '50%' }}></div>
                         </div>
-                        <button className="featureview-btn">View DreamJar</button>
+                        <button className="dj-button">View DreamJar</button>
                         </div>
                 ))}
             </div>

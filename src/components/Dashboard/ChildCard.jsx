@@ -27,7 +27,7 @@ function ChildCard({ children, setChildren }) {
           <p>Age: {child.age}</p>
 
           <div className="child-actions">
-            <button onClick={() => openCampaignModal(child.id)}>
+            <button className="dj-button" onClick={() => openCampaignModal(child.id)}>
               Create Campaign
             </button>
             <EditChild childId={child.id} setChildren={setChildren} />
@@ -35,20 +35,22 @@ function ChildCard({ children, setChildren }) {
           </div>
 
           {/* Render child campaigns */}
-        {child.campaigns && child.campaigns.length > 0 && (
-  <div className="child-campaigns">
-    {child.campaigns.map((campaign) => (
-      <ChildCampaignCard
-        key={campaign.id}
-        campaign={campaign}
-        childId={child.id}
-        setChildren={setChildren}
-      />
-    ))}
-  </div>
-)}
+          {child.campaigns && child.campaigns.length > 0 && (
+            <div className="child-campaigns">
+              {child.campaigns.map((campaign) => (
+                <ChildCampaignCard
+                  key={campaign.id}
+                  campaign={campaign}
+                  childId={child.id}
+                  setChildren={setChildren}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
 
-      {/* ONE modal only */}
+      {/* Render modal once, outside the map */}
       <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
         <CreateCampaignForm
           childId={selectedChildId}
@@ -67,10 +69,9 @@ function ChildCard({ children, setChildren }) {
           }}
         />
       </Modal>
-        </div>
-      ))}
     </div>
   );
 }
+
 
 export default ChildCard;

@@ -24,7 +24,7 @@ function EditChild({ childId, setChildren }) {
     };
 
     return (
-        <button onClick={handleEditChild}>Edit Child</button>
+        <button className="dj-button" onClick={handleEditChild}>Edit Child</button>
     )
 }
 

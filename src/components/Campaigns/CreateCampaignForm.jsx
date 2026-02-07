@@ -151,7 +151,7 @@ return (
       {/* Submit */}
       <motion.button
         type="submit"
-        className="dream-button"
+        className="dj-button"
         whileHover={{ y: -2 }}
         whileTap={{ y: 0 }}
       >

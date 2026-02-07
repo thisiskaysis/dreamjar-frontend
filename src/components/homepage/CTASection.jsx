@@ -2,7 +2,7 @@ function CTASection() {
     return (
         <section className="cta-section">
             <h2>Ready to Start a Dream?</h2>
-            <button className="start-a-dream-button">Create Your First Dream</button>
+            <button className="dj-button">Create Your First Dream</button>
         </section>
     );
 }
