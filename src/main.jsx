@@ -6,7 +6,6 @@ import Layout from "./layout.jsx";
 import HomePage from "./pages/HomePage/Homepage.jsx";
 import CampaignBrowse from "./pages/CampaignBrowse/CampaignBrowse.jsx";
 import CampaignPage from "./pages/CampaignPage/CampaignPage.jsx";
-import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
 import AccountPage from "./pages/AccountPage/AccountPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
@@ -28,7 +27,6 @@ const router = createBrowserRouter([
       { path: "/dreamjars/:id", element: <CampaignPage /> },
       { path: "/account/", element: <AccountPage />},
       { path: "/login", element: <LoginPage />},
-      { path: "/signup", element: <SignUpPage />},
       { path: "/oauth-success", element: <OAuthSuccess /> },
     ],
   },

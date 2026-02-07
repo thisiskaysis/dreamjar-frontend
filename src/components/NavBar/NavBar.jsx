@@ -16,11 +16,10 @@ function NavBar() {
                 <Link to="/">Home</Link>
                 <Link to="/dreamjars">Browse</Link>
                 <Link to="/account">Account</Link>
-                <Link to="/signup">Sign Up</Link>
                 {auth.access ? (
                     <Link to="/" onClick={handleLogout}>Log Out</Link>
                 ) : (
-                    <Link to="/login">Log In</Link>
+                    <Link to="/login">Log In/Sign Up</Link>
                 )}
             </nav>
         </div>
