@@ -13,9 +13,7 @@ async function postChild(parentId, data, token) {
     const resData = await response.json();
 
     if (!response.ok) {
-        const fallbackError = "Error creating child";
-        const errorMessage = resData?.detail ?? fallbackError;
-        throw new Error(errorMessage);
+        throw resData;
     }
 
     return resData;
