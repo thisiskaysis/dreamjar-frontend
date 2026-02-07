@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DeleteCampaign from "../Campaigns/CampaignActions/DeleteCampaign"
+import DeleteCampaign from "../Campaigns/CampaignActions/DeleteCampaign";
 
 function ChildCampaignCard({ campaign, childId, setChildren }) {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
           ${campaign.amount_raised || 0} / ${campaign.goal}{" "}
         </p>
       </div>
-      
+
       {/* Expanded details */}
       {expanded && (
         <div className="campaign-details">
@@ -36,9 +36,9 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
             Edit Campaign
           </button>
           <DeleteCampaign
-          campaignId={campaign.id}
-          childId={childId}
-          setChildren={setChildren}
+            campaignId={campaign.id}
+            childId={childId}
+            setChildren={setChildren}
           />
         </div>
       )}
