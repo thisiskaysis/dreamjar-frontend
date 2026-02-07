@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import "./Modal.css"
+import "./Modal.css" 
 
 function CampaignModal({ isOpen, onClose, children }) {
     return (

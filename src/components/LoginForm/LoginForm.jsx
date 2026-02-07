@@ -356,7 +356,7 @@ export function LoginForm() {
               }}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
-              onClick={() => openSignUpModal}
+              onClick={openSignUpModal}
             >
               New Here? Sign up
             </motion.button>

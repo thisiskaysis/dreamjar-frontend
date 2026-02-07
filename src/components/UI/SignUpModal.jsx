@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import "./Modal.css"
 
-function SignUpModal({ isOpen, onClose }) {
+function SignUpModal({ isOpen, onClose, children }) {
     return (
         <AnimatePresence>
             {isOpen && (
