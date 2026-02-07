@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/use-auth";
 
 import postLogin from "../../api/post-login";
 import GoogleLogin from "../GoogleLogin";
-import Modal from "../UI/SignUpModal"
+import Modal from "../UI/Modal"
 import SignUpForm from "../SIgnUpForm/SignUpForm"
 
 export function LoginForm() {
