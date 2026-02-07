@@ -4,8 +4,7 @@ import CreateCampaignForm from "../Campaigns/CreateCampaignForm";
 import DeleteChild from "./ChildActions/DeleteChild";
 import EditChild from "./ChildActions/EditChild";
 
-function ChildCard() {
-  const [children, setChildren] = useState(user.children || []);
+function ChildCard({children, setChildren}) {
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [showCampaignModal, setShowCampaignModal] = useState(false);
   const openCampaignModal = (childId) => {
@@ -55,7 +54,7 @@ function ChildCard() {
           onSuccess={(newCampaign) => {
             setChildren((prevChildren) =>
               prevChildren.map((child) =>
-                child.id === selectedChildId
+                child.id === newCampaign.child
                   ? {
                       ...child,
                       campaigns: [...(child.campaigns || []), newCampaign],
