@@ -1,132 +1,173 @@
-/* ===== PAGE ===== */
-
+/* -------------------------------
+   DASHBOARD BASE
+-------------------------------- */
 .dashboard {
-  min-height: 100vh;
-  padding: 4rem 3rem;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 2rem;
+  border-radius: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  color: #4b3a6b;
   background: linear-gradient(
-    to bottom right,
-    #c9b3e0,
-    #fbcdd7,
-    #ffe7a1
-  );
+  to bottom right, /* corresponds to "to-br" */
+  #c9b3e0,          /* from color */
+  #fbcdd7,          /* via color */
+  #ffe7a1           /* to color */
+);
 }
 
-.dashboard h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #8B7BA8;
+/* Dashboard Header */
+.dashboard-header {
   text-align: center;
-  margin-bottom: 3rem;
+  padding: 1rem 0;
 }
 
+.dashboard-header h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #8B7BA8;
+}
 
-/* ===== CHILDREN WRAPPER ===== */
+.dashboard-header p {
+  font-size: 1.2rem;
+  color: #6b5b8c;
+}
 
+/* -------------------------------
+   CREATE CHILD SECTION
+-------------------------------- */
+.create-child-section {
+  background: #fce8f0;
+  border-radius: 2rem;
+  border: 3px solid #8B7BA8;
+  box-shadow: 8px 8px 0 #8B7BA8;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.create-child-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 12px 12px 0 #8B7BA8;
+}
+
+.create-child-section h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #8B7BA8;
+}
+
+.create-child-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* -------------------------------
+   CHILDREN SECTION
+-------------------------------- */
 .children-section {
+  text-align: center;
+}
+
+.children-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #8B7BA8;
+}
+
+.children-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2.5rem;
+  gap: 2rem;
+  padding-bottom: 2rem;
 }
 
-
-/* ===== CARDS ===== */
-
+/* -------------------------------
+   CHILD CARD
+-------------------------------- */
 .child-card {
-  width: 380px;
-  min-height: 420px;
+  width: 300px;
+  min-height: 400px;
+  background: #fff3fb;
+  border-radius: 2rem;
+  border: 3px solid #8B7BA8;
+  box-shadow: 8px 8px 0 #8B7BA8;
   padding: 2rem;
-  border-radius: 50px;
-  border: 4px solid #8B7BA8;
-  background: #ffffff;
-  box-shadow: 6px 6px 0 #8B7BA8;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  align-items: center;
+  gap: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .child-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 10px 10px 0 #8B7BA8;
+  transform: translateY(-8px);
+  box-shadow: 12px 12px 0 #8B7BA8;
 }
 
+/* Profile Picture */
+.child-profile-pic {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #8B7BA8;
+  margin-bottom: 1rem;
+  background: #ffe7f5;
+}
+
+.child-profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name & Age */
 .child-card h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.6rem;
+  font-weight: 800;
   color: #8B7BA8;
   text-align: center;
 }
 
 .child-card p {
-  color: #8B7BA8;
   font-weight: 600;
+  color: #8B7BA8;
   text-align: center;
 }
 
-
-/* ===== ACTION BUTTONS ===== */
-
+/* Child Action Buttons */
 .child-actions {
-  margin-top: 0.5rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-/* ===== CAMPAIGN LIST ===== */
-
-.campaign-list {
+  justify-content: center;
+  gap: 1rem;
   margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
-.campaign-item {
-  background: #f9dde3;
-  border: 3px solid #8B7BA8;
-  border-radius: 25px;
-  padding: 0.75rem 1rem;
-  color: #8B7BA8;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.campaign-item h4 {
-  font-size: 1rem;
-  margin: 0;
-}
-
-.campaign-item p {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-/* Form Inputs */
-.input-field {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  border: 2px solid #8B7BA8;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-}
-
-/* Child Campaign Card */
+/* -------------------------------
+   CHILD CAMPAIGN CARD
+-------------------------------- */
 .child-campaign-card {
-  width: 100%; /* fill parent card width */
-  border-radius: 30px;
-  background: #f0f7fb; /* subtle contrasting background */
+  width: 100%;
+  border-radius: 1.5rem;
+  background: #e0f7ff;
   border: 2px solid #8B7BA8;
   box-shadow: 4px 4px 0 #8B7BA8;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 0.5rem;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .child-campaign-card:hover {
@@ -134,31 +175,69 @@
   box-shadow: 6px 6px 0 #8B7BA8;
 }
 
-.child-campaign-card .campaign-summary {
-  padding: 1rem 1.5rem;
-  text-align: center;
+/* Campaign Summary */
+.campaign-summary {
+  padding: 0.75rem 1rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.child-campaign-card .campaign-summary h4 {
-  font-size: 1.2rem;
+.campaign-summary h4 {
+  font-size: 1.1rem;
   font-weight: 700;
   color: #8B7BA8;
   margin: 0;
 }
 
-.child-campaign-card .campaign-summary p {
+.campaign-summary p {
   font-size: 1rem;
   font-weight: 600;
   color: #8B7BA8;
   margin: 0;
 }
 
-.child-campaign-card .campaign-actions {
+/* Expand Icon */
+.expand-icon {
+  transition: transform 0.3s ease;
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+/* Expanded Actions */
+.campaign-actions {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  padding: 0.75rem 1rem 1rem 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
+  flex-wrap: wrap;
+}
+
+.child-actions button,
+.campaign-actions button {
+  flex: 1;               
+  min-width: 100px;      
+  max-width: 200px;      
+  text-align: center;
+}
+
+
+/* -------------------------------
+   RESPONSIVE
+-------------------------------- */
+@media (max-width: 768px) {
+  .child-card {
+    width: 90%;
+  }
+
+  .create-child-section {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .children-grid {
+    gap: 1.5rem;
+  }
 }

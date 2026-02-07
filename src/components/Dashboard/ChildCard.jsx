@@ -1,77 +1,43 @@
 import { useState } from "react";
-import Modal from "../UI/Modal";
-import CreateCampaignForm from "../Campaigns/CreateCampaignForm";
-import DeleteChild from "./ChildActions/DeleteChild";
-import EditChild from "./ChildActions/EditChild";
 import ChildCampaignCard from "./ChildCampaignCard";
-import deleteCampaign from "../../api/delete-campaign";
+import EditChild from "./ChildActions/EditChild";
+import DeleteChild from "./ChildActions/DeleteChild"
+import getChildAvatar from "./ChildActions/getChildAvatar";
 
-function ChildCard({ children, setChildren }) {
-  const [selectedChildId, setSelectedChildId] = useState(null);
-  const [showCampaignModal, setShowCampaignModal] = useState(false);
-
-  const openCampaignModal = (childId) => {
-    setSelectedChildId(childId);
-    setShowCampaignModal(true);
-  };
-
-  const closeCampaignModal = () => setShowCampaignModal(false);
+function ChildCard({ child, setChildren }) {
+  if (!child) return null; // extra safety
 
   return (
-    <div className="children-section">
-      {children.length === 0 && <p>No children yet.</p>}
+    <div className="child-card">
+  {/* Profile pic */}
+  <div className="child-profile-pic">
+    <img src={getChildAvatar(child)} alt={child?.name || "Child"} />
+  </div>
 
-      {children.map((child) => (
-        <div key={child.id} className="child-card">
-          <h2>{child.name}</h2>
-          <p>Age: {child.age}</p>
+  {/* Name & Age */}
+  <h2>{child?.name || "Unnamed"}</h2>
+  <p>Age: {child?.age || "?"}</p>
 
-          <div className="child-actions">
-            <button className="dj-button" onClick={() => openCampaignModal(child.id)}>
-              Create Campaign
-            </button>
-            <EditChild childId={child.id} setChildren={setChildren} />
-            <DeleteChild childId={child.id} setChildren={setChildren} />
-          </div>
+  {/* Actions */}
+  <div className="child-actions">
+    <button className="dj-button" onClick={() => openCreateCampaign(child.id)}>Create Campaign</button>
+    <EditChild childId={child.id} setChildren={setChildren} />
+    <DeleteChild childId={child.id} setChildren={setChildren} />
+  </div>
 
-          {/* Render child campaigns */}
-          {child.campaigns && child.campaigns.length > 0 && (
-            <div className="child-campaigns">
-              {child.campaigns.map((campaign) => (
-                <ChildCampaignCard
-                  key={campaign.id}
-                  campaign={campaign}
-                  childId={child.id}
-                  setChildren={setChildren}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-
-      {/* Render modal once, outside the map */}
-      <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
-        <CreateCampaignForm
-          childId={selectedChildId}
-          onSuccess={(newCampaign) => {
-            setChildren((prevChildren) =>
-              prevChildren.map((child) =>
-                child.id === newCampaign.child
-                  ? {
-                      ...child,
-                      campaigns: [...(child.campaigns || []), newCampaign],
-                    }
-                  : child
-              )
-            );
-            closeCampaignModal();
-          }}
-        />
-      </Modal>
-    </div>
+  {/* Campaigns */}
+  <div className="child-campaigns">
+    {child.campaigns?.map(c => (
+      <ChildCampaignCard
+        key={c.id}
+        campaign={c}
+        childId={child.id}
+        setChildren={setChildren}
+      />
+    ))}
+  </div>
+</div>
   );
 }
-
 
 export default ChildCard;

@@ -26,19 +26,6 @@ h1, h2 {
   height: 100vh;
 }
 
-section {
-  perspective: 1500px;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex-direction: column;
-  will-change: transform;
-  overflow: hidden;
-}
-
 /* Word & letters */
 .word {
   --layers: 4;
