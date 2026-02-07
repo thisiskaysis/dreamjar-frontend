@@ -1,0 +1,37 @@
+.search-bar {
+  display: flex;
+  gap: 12px;
+  background-color: #fcf2f5; /* soft light pink like modal/pill background */
+  padding: 12px 16px;
+  border-radius: 2rem; /* pill-style rounded */
+  box-shadow: 2px 2px 6px rgba(139, 123, 168, 0.2); /* subtle shadow */
+  align-items: center;
+  margin: 16px 0;
+  flex-wrap: wrap; /* responsive on smaller screens */
+}
+
+.search-bar input,
+.search-bar select {
+  flex: 1 1 auto; /* grow as needed */
+  min-width: 150px; /* prevents too-small inputs */
+  padding: 10px 14px;
+  border: 2px solid #8b7ba8; /* accent border */
+  border-radius: 1.5rem;
+  background-color: #f9dde3; /* lighter inner color */
+  color: #8b7ba8;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-bar input:focus,
+.search-bar select:focus {
+  border-color: #fbcdd7;
+  box-shadow: 0 0 0 3px rgba(251, 205, 215, 0.3);
+}
+
+.search-bar input::placeholder {
+  color: #bfa3c2;
+  font-weight: 400;
+}
