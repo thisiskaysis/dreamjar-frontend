@@ -15,7 +15,7 @@ function BrowseCampaignCard({ campaign, onView }) {
 
   const remainingText = seconds_remaining
     ? `${Math.floor(seconds_remaining / 86400)} days remaining`
-    : "No deadline";
+    : null;
 
   return (
     <motion.div

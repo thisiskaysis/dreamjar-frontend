@@ -21,7 +21,7 @@ function BrowseCampaignPage() {
       result = result.filter(
         (c) =>
           c.title.toLowerCase().includes(searchText.toLowerCase()) ||
-          c.child_name.toLowerCase().includes(searchText.toLowerCase())
+          c.child_name.toLowerCase().includes(searchText.toLowerCase()),
       );
     }
 
@@ -35,8 +35,19 @@ function BrowseCampaignPage() {
       switch (sortOption) {
         case "newest":
           result.sort(
-            (a, b) => new Date(b.date_created) - new Date(a.date_created)
+            (a, b) => new Date(b.date_created) - new Date(a.date_created),
           );
+          break;
+        case "endingSoon":
+          result.sort((a, b) => {
+            const aTime = a.deadline
+              ? new Date(a.deadline).getTime()
+              : Infinity;
+            const bTime = b.deadline
+              ? new Date(b.deadline).getTime()
+              : Infinity;
+            return aTime - bTime;
+          });
           break;
         case "goalAsc":
           result.sort((a, b) => a.goal - b.goal);
@@ -82,10 +93,7 @@ function BrowseCampaignPage() {
       ) : (
         <div className="browse-grid">
           {displayCampaigns.map((campaign) => (
-            <BrowseCampaignCard
-              key={campaign.id}
-              campaign={campaign}
-            />
+            <BrowseCampaignCard key={campaign.id} campaign={campaign} />
           ))}
         </div>
       )}

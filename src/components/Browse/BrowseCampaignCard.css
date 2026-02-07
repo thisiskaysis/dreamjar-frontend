@@ -2,14 +2,15 @@
   cursor: pointer;
   background-color: #fff;
   border-radius: 16px;
-  border: 1px solid #e0d7f1;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 3px solid #8B7BA8;
+  box-shadow: 8px 8px 0 #8B7BA8;
   overflow: hidden;
   transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .browse-card:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 12px 12px 0 #8B7BA8;
 }
 
 .browse-card-image {

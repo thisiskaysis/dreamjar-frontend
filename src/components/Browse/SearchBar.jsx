@@ -39,6 +39,7 @@ function SearchBar({ searchText, setSearchText, categoryFilter, setCategoryFilte
       <select value={sortOption} onChange={handleSortChange}>
         <option value="">Sort by</option>
         <option value="newest">Newest</option>
+        <option value="endingSoon">Ending Soon</option>
         <option value="goalAsc">Goal: Low → High</option>
         <option value="goalDesc">Goal: High → Low</option>
         <option value="raisedAsc">Raised: Low → High</option>
