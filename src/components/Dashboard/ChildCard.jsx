@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CampaignModal from "../UI/CampaignModal";
+import Modal from "../UI/Modal";
 import CreateCampaignForm from "../Campaigns/CreateCampaignForm";
 import DeleteChild from "./ChildActions/DeleteChild";
 import EditChild from "./ChildActions/EditChild";
@@ -48,7 +48,7 @@ function ChildCard({children, setChildren}) {
       ))}
 
       {/* ONE modal only */}
-      <CampaignModal isOpen={showCampaignModal} onClose={closeCampaignModal}>
+      <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
         <CreateCampaignForm
           childId={selectedChildId}
           onSuccess={(newCampaign) => {
@@ -65,7 +65,7 @@ function ChildCard({children, setChildren}) {
             closeCampaignModal();
           }}
         />
-      </CampaignModal>
+      </Modal>
     </div>
   );
 }

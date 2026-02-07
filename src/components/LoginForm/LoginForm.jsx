@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/use-auth";
 
 import postLogin from "../../api/post-login";
 import GoogleLogin from "../GoogleLogin";
-import SignUpModal from "../UI/SignUpModal"
+import Modal from "../UI/SignUpModal"
 import SignUpForm from "../SIgnUpForm/SignUpForm"
 
 export function LoginForm() {
@@ -73,10 +73,6 @@ export function LoginForm() {
   const closeSignUpModal = () => {
     setShowSignUpModal(false);
   }
-
-  const handleSignUp = () => {
-    console.log("Sign up")
-  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#c9b3e0] via-[#fbcdd7] to-[#ffe7a1] relative overflow-hidden">
@@ -382,9 +378,9 @@ export function LoginForm() {
           <LoginJar />
         </div>
       </div>
-      <SignUpModal isOpen={showSignUpModal} onClose={closeSignUpModal}>
+      <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
       <SignUpForm />
-    </SignUpModal>
+    </Modal>
     </div>
   );
 }
