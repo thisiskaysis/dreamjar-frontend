@@ -15,7 +15,7 @@ function DeleteChild({ childId, setChildren }) {
             alert("Child deleted successfully")
         } catch (error) {
             alert(error.message);
-        }
+        } 
     };
 
     return (

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "../UI/Modal";
+import DeleteCampaign from "../Campaigns/CampaignActions/DeleteCampaign"
 
-function ChildCampaignCard({ campaign, onDelete }) {
+function ChildCampaignCard({ campaign, childId, setChildren }) {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
@@ -10,6 +10,7 @@ function ChildCampaignCard({ campaign, onDelete }) {
 
   return (
     <div className="child-campaign-card">
+      {/* Summary */}
       <div className="campaign-summary" onClick={handleToggle}>
         <h4
           className="campaign-title"
@@ -24,21 +25,21 @@ function ChildCampaignCard({ campaign, onDelete }) {
           ${campaign.amount_raised || 0} / ${campaign.goal}{" "}
         </p>
       </div>
-
+      
+      {/* Expanded details */}
       {expanded && (
         <div className="campaign-details">
           <button
-            className="edit-btn"
+            className="edit-button"
             onClick={() => navigate(`/campaigns/${campaign.id}/edit`)}
           >
             Edit Campaign
           </button>
-          <button
-            className="delete-btn"
-            onClick={() => onDelete && onDelete(campaign.id)}
-          >
-            Delete Campaign
-          </button>
+          <DeleteCampaign
+          campaignId={campaign.id}
+          childId={childId}
+          setChildren={setChildren}
+          />
         </div>
       )}
     </div>

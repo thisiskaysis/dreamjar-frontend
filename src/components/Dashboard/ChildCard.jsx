@@ -34,35 +34,19 @@ function ChildCard({ children, setChildren }) {
             <DeleteChild childId={child.id} setChildren={setChildren} />
           </div>
 
-          {child.campaigns?.map((campaign) => (
-            <ChildCampaignCard
-              key={campaign.id}
-              campaign={campaign}
-              onDelete={async (campaignId) => {
-                const confirmDelete = confirm("Delete this campaign?");
-                if (!confirmDelete) return;
-
-                // Call API to delete campaign
-                await deleteCampaign(campaignId);
-
-                // Update child state
-                setChildren((prevChildren) =>
-                  prevChildren.map((c) =>
-                    c.id === child.id
-                      ? {
-                          ...c,
-                          campaigns: c.campaigns.filter(
-                            (camp) => camp.id !== campaignId
-                          ),
-                        }
-                      : c
-                  )
-                );
-              }}
-            />
-          ))}
-        </div>
-      ))}
+          {/* Render child campaigns */}
+        {child.campaigns && child.campaigns.length > 0 && (
+  <div className="child-campaigns">
+    {child.campaigns.map((campaign) => (
+      <ChildCampaignCard
+        key={campaign.id}
+        campaign={campaign}
+        childId={child.id}
+        setChildren={setChildren}
+      />
+    ))}
+  </div>
+)}
 
       {/* ONE modal only */}
       <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
@@ -83,6 +67,8 @@ function ChildCard({ children, setChildren }) {
           }}
         />
       </Modal>
+        </div>
+      ))}
     </div>
   );
 }
