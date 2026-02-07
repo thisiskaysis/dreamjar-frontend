@@ -1,0 +1,87 @@
+.browse-card {
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 16px;
+  border: 1px solid #e0d7f1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.browse-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.browse-card-image {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+.browse-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.browse-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.browse-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.browse-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #5a3b91;
+  margin: 0;
+}
+
+.browse-card-category {
+  font-size: 12px;
+  color: #5a3b91;
+  background-color: #f0e6fa;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: capitalize;
+}
+
+.browse-card-child {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.browse-card-progress-bg {
+  width: 100%;
+  height: 8px;
+  background-color: #e0d7f1;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.browse-card-progress {
+  height: 100%;
+  background-color: #8b7ba8;
+  border-radius: 4px 0 0 4px;
+}
+
+.browse-card-progress-text {
+  font-size: 12px;
+  color: #555;
+  margin: 4px 0 0 0;
+}
+
+.browse-card-deadline {
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+}

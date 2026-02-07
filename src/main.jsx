@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Layout from "./layout.jsx";
 import HomePage from "./pages/HomePage/Homepage.jsx";
-import CampaignBrowse from "./pages/CampaignBrowse/CampaignBrowse.jsx";
+import BrowseCampaignPage from "./pages/BrowseCampaign/BrowseCampaignPage.jsx";
 import CampaignPage from "./pages/CampaignPage/CampaignPage.jsx";
 import AccountPage from "./pages/AccountPage/AccountPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <HomePage /> },
-      { path: "/dreamjars", element: <CampaignBrowse /> },
+      { path: "/dreamjars", element: <BrowseCampaignPage /> },
       { path: "/dreamjars/:id", element: <CampaignPage /> },
       { path: "/account/", element: <AccountPage />},
       { path: "/login", element: <LoginPage />},

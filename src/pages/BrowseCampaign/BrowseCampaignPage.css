@@ -1,0 +1,32 @@
+.browse-page {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.browse-page-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #5a3b91;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.no-campaigns {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}
+
+.browse-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
