@@ -2,16 +2,19 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoginJar } from "./LoginJar";
 import { useNavigate } from "react-router-dom";
-
-import postLogin from "../../api/post-login"
-import GoogleLogin from "../GoogleLogin";
 import { useAuth } from "../../hooks/use-auth";
+
+import postLogin from "../../api/post-login";
+import GoogleLogin from "../GoogleLogin";
+import SignUpModal from "../UI/SignUpModal"
+import SignUpForm from "../SIgnUpForm/SignUpForm"
 
 export function LoginForm() {
   const navigate = useNavigate();
   const {auth, setAuth} = useAuth();
 
   const [errors, setErrors] = useState({});
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [emailText, setEmailText] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -62,6 +65,14 @@ export function LoginForm() {
       });
     }
   };
+
+  const openSignUpModal = () => {
+    setShowSignUpModal(true);
+  }
+
+  const closeSignUpModal = () => {
+    setShowSignUpModal(false);
+  }
 
   const handleSignUp = () => {
     console.log("Sign up")
@@ -336,6 +347,20 @@ export function LoginForm() {
               Log In
             </motion.button>
 
+            {/* Sign Up Button */}
+            <motion.button
+              type="button"
+              className="w-full h-14 rounded-full bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
+              style={{
+                boxShadow: "4px 4px 0 #8B7BA8",
+              }}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+              onClick={() => openSignUpModal}
+            >
+              New Here? Sign up
+            </motion.button>
+
             {/* Divider */}
             <div className="flex items-center gap-4 my-6">
               <div className="flex-1 h-1 bg-[#8B7BA8] rounded-full opacity-20" />
@@ -357,6 +382,9 @@ export function LoginForm() {
           <LoginJar />
         </div>
       </div>
+      <SignUpModal isOpen={showSignUpModal} onClose={closeSignUpModal}>
+      <SignUpForm />
+    </SignUpModal>
     </div>
   );
 }
