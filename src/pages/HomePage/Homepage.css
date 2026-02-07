@@ -1,47 +1,22 @@
-.how-it-works, .featured-campaigns, .parents-section, .cta-section {
-  padding: 4rem 8%;
+.how-it-works, .parents-section, .cta-section {
   text-align: center;
+  max-height: 350px;
+}
+
+.featured-campaigns {
+  text-align: center;
+  height: 800px;
+  width: 100%;
 }
 
 .hero {
   position: relative;
-  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   overflow: hidden;
   background: linear-gradient(135deg, #e0c3fc, #8ec5fc, #fbc2eb);
-}
-
-/* .hero-background {
-  position: relative;
-  width: 100%;
-  height: 100%;
-} */
-
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.primary-btn {
-  padding: 0.8rem 1.5rem;
-  border-radius: 30px;
-  border: none;
-  background: #6c63ff;
-  color: white;
-  cursor: pointer;
-}
-
-.secondary-btn {
-  padding: 0.8rem 1.5rem;
-  border-radius: 30px;
-  border: 2px solid #6c63ff;
-  background: transparent;
-  color: #6c63ff;
-  cursor: pointer;
 }
 
 .steps {
@@ -52,22 +27,39 @@
 }
 
 .step {
-  max-width: 200px;
+  width: 300px;
+  padding: 1rem;
+  border-radius: 50px;
+  border: 4px solid #8B7BA8;
+  font-size: 1.25rem;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+  align-items: center;
+  justify-content: center;
+  outline: none;
 }
 
-.campaign-grid {
+.feature-campaign-grid {
   display: flex;
+  width: 100%;
+  flex-direction: row;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;
 }
 
-.campaign-card {
-  width: 200px;
+.feature-campaign-card {
+  width: 400px;
+  height: 300px;
   padding: 1rem;
-  border-radius: 15px;
+  border-radius: 50px;
+  border: 4px solid #8B7BA8;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+  font-size: 1.25rem;
   background: #fff;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
 }
 
 .progress-bar {
@@ -81,4 +73,24 @@
   height: 100%;
   background: #6c63ff;
   border-radius: 4px;
+}
+
+.featureview-btn {
+  border-radius: 9999px;
+  width: 75%;
+  height: 56px;
+  background-color: #ffffff;
+
+  border: 4px solid #8B7BA8;
+  box-shadow: 4px 4px 0 #8B7BA8;
+
+  color: #8B7BA8;
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700;   /* font-bold */
+
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem; /* gap-3 = 12px */
+
+  transition: all 0.3s ease;
 }

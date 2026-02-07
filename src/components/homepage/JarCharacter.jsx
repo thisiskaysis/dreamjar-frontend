@@ -15,7 +15,7 @@ export function JarCharacter() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#c9b3e0] via-[#fbcdd7] to-[#ffe7a1]">
+    <div className="flex items-center justify-center min-h-screen">
       {/* Background floating stars */}
       <motion.div
         className="absolute top-[10%] left-[15%]"

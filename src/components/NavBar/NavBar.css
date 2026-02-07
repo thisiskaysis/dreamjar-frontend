@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
-
 .nav-container {
     background: #f8f9fa;
 }
@@ -10,7 +8,6 @@
     justify-content: flex-end;
     align-items: center;
     cursor: pointer;
-    font-family: "Rampart One", sans-serif;
     padding: 1rem 2rem;
     gap: 1rem;
     font-size: 30px;
