@@ -88,27 +88,22 @@
   color: #8B7BA8;
 }
 
+/* Children Grid - responsive tiles */
 .children-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding-bottom: 2rem;
-}
-
-.children-grid .child-card {
-  flex: 1 1 300px;
-  max-width: 400px;
+  justify-items: center; /* center cards in each column */
 }
 
 /* -------------------------------
-   CHILD CARD
+   CHILD CARD - tile style
 -------------------------------- */
 .child-card {
-  width: 350px;
-  min-width: 280px;
-  max-width: 400px;
-  min-height: 400px;
+  width: 100%;            /* fills the grid column */
+  max-width: 400px;       /* limits max size */
+  min-height: 420px;
   background: #fff3fb;
   border-radius: 2rem;
   border: 3px solid #8B7BA8;
@@ -117,7 +112,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.2rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -128,8 +123,8 @@
 
 /* Profile Picture */
 .child-profile-pic {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid #8B7BA8;
@@ -157,16 +152,42 @@
   text-align: center;
 }
 
-/* Child Action Buttons */
+/* Child Actions Container */
 .child-actions {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  flex-direction: column; /* stack vertically */
+  gap: 0.5rem;            /* spacing between buttons */
   margin-top: 1rem;
-  flex-wrap: wrap;
+  width: 100%;            /* let buttons use full card width */
 }
 
-.child-actions button,
+/* Main button (first child) */
+.child-actions button:first-child {
+  flex: 1;                /* full width */
+  min-width: 0;           /* prevent shrinking weirdness */
+  width: 100%;        /* full width of container */
+  padding: 0.75rem 1rem;  /* bigger padding for main button */
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Secondary buttons (Edit / Delete) */
+.child-actions button:not(:first-child) {
+  flex: 1;                /* let them share space evenly if on same row */
+  width: 48%;          /* two buttons can fit side by side */
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* Wrap secondary buttons on small screens */
+.child-actions {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* .child-actions button, */
 .campaign-actions button {
   flex: 1;
   min-width: 100px;
