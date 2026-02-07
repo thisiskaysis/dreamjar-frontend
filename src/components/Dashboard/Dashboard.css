@@ -5,20 +5,24 @@
   max-width: 1200px;
   margin: 50px auto;
   padding: 2rem;
+  border: 3px solid #8B7BA8;
+  box-shadow: 8px 8px 0 #8B7BA8;
   border-radius: 100px;
   display: flex;
   flex-direction: column;
   gap: 3rem;
   color: #4b3a6b;
   background: linear-gradient(
-  to bottom right, /* corresponds to "to-br" */
-  #c9b3e0,          /* from color */
-  #fbcdd7,          /* via color */
-  #ffe7a1           /* to color */
-);
+    to bottom right,
+    #c9b3e0,
+    #fbcdd7,
+    #ffe7a1
+  );
 }
 
-/* Dashboard Header */
+/* -------------------------------
+   DASHBOARD HEADER
+-------------------------------- */
 .dashboard-header {
   text-align: center;
   padding: 1rem 0;
@@ -67,6 +71,7 @@
   justify-content: center;
   margin-top: 1rem;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 /* -------------------------------
@@ -91,11 +96,18 @@
   padding-bottom: 2rem;
 }
 
+.children-grid .child-card {
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
 /* -------------------------------
    CHILD CARD
 -------------------------------- */
 .child-card {
-  width: 300px;
+  width: 350px;
+  min-width: 280px;
+  max-width: 400px;
   min-height: 400px;
   background: #fff3fb;
   border-radius: 2rem;
@@ -154,6 +166,35 @@
   flex-wrap: wrap;
 }
 
+.child-actions button,
+.campaign-actions button {
+  flex: 1;
+  min-width: 100px;
+  max-width: 200px;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 4px solid #8B7BA8;
+  background: #a0d4f1;
+  color: #8B7BA8;
+  box-shadow: 4px 4px 0 #8B7BA8;
+  transition: all 0.25s ease;
+}
+
+.child-actions button:hover,
+.campaign-actions button:hover {
+  background: #ffe7a1;
+  transform: translateY(-3px);
+}
+
+.child-actions button:active,
+.campaign-actions button:active {
+  transform: translateY(0);
+  box-shadow: 2px 2px 0 #8B7BA8;
+}
+
 /* -------------------------------
    CHILD CAMPAIGN CARD
 -------------------------------- */
@@ -168,6 +209,7 @@
   gap: 0.5rem;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.75rem 1rem;
 }
 
 .child-campaign-card:hover {
@@ -177,10 +219,12 @@
 
 /* Campaign Summary */
 .campaign-summary {
-  padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #d9f0ff; /* subtle background to look like a container */
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
 }
 
 .campaign-summary h4 {
@@ -215,14 +259,14 @@
   flex-wrap: wrap;
 }
 
-.child-actions button,
-.campaign-actions button {
-  flex: 1;               
-  min-width: 100px;      
-  max-width: 200px;      
-  text-align: center;
+/* Campaigns container inside child card */
+.child-campaigns {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
-
 
 /* -------------------------------
    RESPONSIVE
@@ -239,5 +283,14 @@
 
   .children-grid {
     gap: 1.5rem;
+  }
+
+  .child-actions button,
+  .campaign-actions button {
+    max-width: none; /* allow buttons to shrink naturally */
+  }
+
+  .child-campaign-card {
+    padding: 0.5rem 0.75rem;
   }
 }

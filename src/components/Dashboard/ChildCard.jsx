@@ -1,11 +1,11 @@
-import { useState } from "react";
 import ChildCampaignCard from "./ChildCampaignCard";
 import EditChild from "./ChildActions/EditChild";
 import DeleteChild from "./ChildActions/DeleteChild"
 import getChildAvatar from "./ChildActions/getChildAvatar";
 
-function ChildCard({ child, setChildren }) {
+function ChildCard({ child, setChildren, onOpenCampaignModal }) {
   if (!child) return null; // extra safety
+
 
   return (
     <div className="child-card">
@@ -20,9 +20,20 @@ function ChildCard({ child, setChildren }) {
 
   {/* Actions */}
   <div className="child-actions">
-    <button className="dj-button" onClick={() => openCreateCampaign(child.id)}>Create Campaign</button>
-    <EditChild childId={child.id} setChildren={setChildren} />
-    <DeleteChild childId={child.id} setChildren={setChildren} />
+    <button
+    className="dj-button"
+    onClick={() =>
+    onOpenCampaignModal(child.id)}>
+      Create Campaign
+    </button>
+
+    <EditChild
+    childId={child.id}
+    setChildren={setChildren} />
+    
+    <DeleteChild
+    childId={child.id}
+    setChildren={setChildren} />
   </div>
 
   {/* Campaigns */}

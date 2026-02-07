@@ -2,9 +2,22 @@ import { useState } from "react";
 import "./Dashboard.css";
 import CreateChild from "./ChildActions/CreateChild";
 import ChildCard from "./ChildCard";
+import CreateCampaignForm from "../Campaigns/CreateCampaignForm";
+import Modal from "../UI/Modal";
 
 function Dashboard({ user }) {
   const [children, setChildren] = useState(user.children || []);
+  const [selectedChildId, setSelectedChildId] = useState(null);
+  const [showCampaignModal, setShowCampaignModal] = useState(false);
+
+  const openCampaignModal = (childId) => {
+    setSelectedChildId(childId);
+    setShowCampaignModal(true);
+  }
+
+  const closeCampaignModal = () => {
+    setShowCampaignModal(false);
+  };
 
   return (
     <div className="dashboard">
@@ -32,11 +45,34 @@ function Dashboard({ user }) {
             <ChildCard
               key={child.id}
               child={child}
+              onOpenCampaignModal={(childId) => {
+                setSelectedChildId(childId);
+                setShowCampaignModal(true);
+              }}
               setChildren={setChildren}
             />
           ))}
         </div>
       </section>
+      {/* ONE modal only */}
+      <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
+        <CreateCampaignForm
+          childId={selectedChildId}
+          onSuccess={(newCampaign) => {
+            setChildren((prevChildren) =>
+              prevChildren.map((child) =>
+                child.id === newCampaign.child
+                  ? {
+                      ...child,
+                      campaigns: [...(child.campaigns || []), newCampaign],
+                    }
+                  : child,
+              ),
+            );
+            closeCampaignModal();
+          }}
+        />
+      </Modal>
     </div>
   );
 }
