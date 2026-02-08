@@ -19,6 +19,14 @@
   background: linear-gradient(135deg, #e0c3fc, #8ec5fc, #fbc2eb);
 }
 
+.hero-text {
+  width: 80%;
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+}
+
+
 .steps {
   display: flex;
   justify-content: center;
