@@ -23,6 +23,18 @@
   --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* Global */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  font-family: 'Lilita One', cursive;
+  font-size: 15vmin;
+  letter-spacing: 0.2rem;
+  transform-style: preserve-3d;
+}
 
 body {
   color: var(--gray-dark);

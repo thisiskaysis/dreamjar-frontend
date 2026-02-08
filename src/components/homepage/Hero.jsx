@@ -4,7 +4,7 @@ import { JarCharacter } from "./JarCharacter.jsx";
 
 function Hero({children}) {
     return (
-        <section className="hero relative w-full h-screen overflow-hidden">
+        <section className="hero relative w-full min-h-screen overflow-hidden">
             <div className="hero-background absolute top-0 left-0 w-full h-full">
                 <JarCharacter />
                 <div className="w-full h-full bg-gradient-to-br from-[#c9b3e0] via-[#fbcdd7] to-[#ffe7a1]"></div>

@@ -1,3 +1,9 @@
+.browse-header {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
 .browse-card {
   cursor: pointer;
   background-color: #fff;

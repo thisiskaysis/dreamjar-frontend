@@ -36,3 +36,12 @@
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 24px;
 }
+
+.search-container {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 2rem;
+}

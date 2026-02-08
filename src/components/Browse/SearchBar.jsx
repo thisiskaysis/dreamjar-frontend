@@ -1,5 +1,5 @@
-import { useState } from "react";
 import "./SearchBar.css";
+
 
 function SearchBar({ searchText, setSearchText, categoryFilter, setCategoryFilter, sortOption, setSortOption }) {
   // Handlers

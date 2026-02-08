@@ -7,16 +7,13 @@ import "./BrowseCampaignPage.css";
 function BrowseCampaignPage() {
   const { campaigns, isLoading, error } = useCampaigns();
 
-  // Search / Filter / Sort state
   const [searchText, setSearchText] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [sortOption, setSortOption] = useState("");
 
-  // Dynamically compute campaigns to display
   const getDisplayCampaigns = () => {
     let result = [...campaigns];
 
-    // 1️⃣ Filter by search text
     if (searchText) {
       result = result.filter(
         (c) =>
@@ -25,12 +22,10 @@ function BrowseCampaignPage() {
       );
     }
 
-    // 2️⃣ Filter by category
     if (categoryFilter) {
       result = result.filter((c) => c.category === categoryFilter);
     }
 
-    // 3️⃣ Sort
     if (sortOption) {
       switch (sortOption) {
         case "newest":
@@ -75,18 +70,21 @@ function BrowseCampaignPage() {
   if (error) return <p className="error">Error loading campaigns</p>;
 
   return (
-    <div className="browse-page">
-      <h1>Browse Campaigns</h1>
+    <>
+    <h1 className="browse-header">Browse Campaigns</h1>
 
-      {/* Search / Filter / Sort bar */}
-      <SearchBar
-        searchText={searchText}
-        setSearchText={setSearchText}
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-        sortOption={sortOption}
-        setSortOption={setSortOption}
-      />
+    <div className="browse-page">
+      <div className="search-container">
+        {/* Search / Filter / Sort bar */}
+        <SearchBar
+          searchText={searchText}
+          setSearchText={setSearchText}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          sortOption={sortOption}
+          setSortOption={setSortOption}
+        />
+        </div>
 
       {displayCampaigns.length === 0 ? (
         <p className="no-campaigns">No campaigns available at the moment.</p>
@@ -98,6 +96,7 @@ function BrowseCampaignPage() {
         </div>
       )}
     </div>
+    </>
   );
 }
 
