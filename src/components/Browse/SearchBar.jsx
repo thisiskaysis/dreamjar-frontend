@@ -1,16 +1,13 @@
 import "./SearchBar.css";
-
+import { motion, useScroll, useTransform } from "framer-motion";
 
 function SearchBar({ searchText, setSearchText, categoryFilter, setCategoryFilter, sortOption, setSortOption }) {
-  // Handlers
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
   };
-
   const handleCategoryChange = (e) => {
     setCategoryFilter(e.target.value);
   };
-
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
