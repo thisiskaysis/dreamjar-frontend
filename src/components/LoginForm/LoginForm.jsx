@@ -332,7 +332,7 @@ export function LoginForm() {
             {/* Submit Button */}
             <motion.button
               type="button"
-              className="w-full h-14 rounded-full bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
+              className="w-full h-14 rounded-full cursor-pointer bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
               style={{
                 boxShadow: "4px 4px 0 #8B7BA8",
               }}
@@ -346,7 +346,7 @@ export function LoginForm() {
             {/* Sign Up Button */}
             <motion.button
               type="button"
-              className="w-full h-14 rounded-full bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
+              className="w-full h-14 rounded-full cursor-pointer bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
               style={{
                 boxShadow: "4px 4px 0 #8B7BA8",
               }}

@@ -21,7 +21,7 @@ function GoogleLogin() {
         <motion.button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full h-14 rounded-full bg-white border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#a7e1cd] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+              className="w-full h-14 rounded-full cursor-pointer bg-white border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#a7e1cd] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
               style={{
                 boxShadow: "4px 4px 0 #8B7BA8",
               }}
