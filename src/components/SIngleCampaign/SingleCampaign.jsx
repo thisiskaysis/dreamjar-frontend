@@ -19,14 +19,14 @@ function SingleCampaign({ campaign }) {
     : "No deadline";
 
   return (
-    <div className="single-wrapper">
+    <div className="campaign-wrapper">
       <motion.div
-        className="single-card"
+        className="campaign-card"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
         {/* Image */}
-        <div className="single-image">
+        <div className="campaign-image">
           <img
             src={image || "/dreamjar-banner.svg"}
             alt={title}
@@ -34,36 +34,36 @@ function SingleCampaign({ campaign }) {
         </div>
 
         {/* Content */}
-        <div className="single-content">
-          <div className="single-header">
-            <h1 className="single-title">{title}</h1>
-            <span className="single-category">{category}</span>
+        <div className="campaign-content">
+          <div className="campaign-header">
+            <h1 className="campaign-title">{title}</h1>
+            <span className="campaign-category">{category}</span>
           </div>
 
-          <p className="single-child">By {child_name}</p>
+          <p className="campaign-child">By {child_name}</p>
 
           {/* Progress */}
-          <div className="single-progress-bg">
+          <div className="campaign-progress-bg">
             <div
-              className="single-progress"
+              className="campaign-progress"
               style={{ width: `${percentage_raised}%` }}
             />
           </div>
 
-          <p className="single-progress-text">
+          <p className="campaign-progress-text">
             <strong>${total_raised}</strong> raised of ${goal}
           </p>
 
-          <p className="single-deadline">{remainingText}</p>
+          <p className="campaign-deadline">{remainingText}</p>
 
           {/* Description */}
-          <div className="single-description">
-            <h3>About this Dream</h3>
+          <div className="campaign-description">
+            <h2>About this Dream</h2>
             <p>{description}</p>
           </div>
 
           {/* Donate Button */}
-          <button className="single-donate-btn">
+          <button className="dj-button">
             Support This Dream ✨
           </button>
         </div>

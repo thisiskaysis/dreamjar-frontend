@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useCampaign from "../../hooks/use-campaign";
 import SingleCampaign from "../../components/SIngleCampaign/SingleCampaign";
+import DonationCard from "../../components/SIngleCampaign/DonationCard";
 
 
 function CampaignPage() {
@@ -19,6 +20,7 @@ function CampaignPage() {
     return (
         <div>
             <SingleCampaign campaign={campaign} />
+            <DonationCard campaign={campaign} />
         </div>
     );
 }
