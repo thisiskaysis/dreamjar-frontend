@@ -31,7 +31,7 @@ html, body {
 
 h1, h2 {
   font-family: 'Lilita One', cursive;
-  font-size: 15vmin;
+  font-size: 10vmin;
   letter-spacing: 0.2rem;
   transform-style: preserve-3d;
 }

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import "./BrowseCampaignCard.css";
+import { useNavigate } from "react-router-dom";
 
 function BrowseCampaignCard({ campaign, onView }) {
   const {
@@ -13,6 +14,8 @@ function BrowseCampaignCard({ campaign, onView }) {
     percentage_raised,
   } = campaign;
 
+  const navigate = useNavigate();
+
   const remainingText = seconds_remaining
     ? `${Math.floor(seconds_remaining / 86400)} days remaining`
     : null;
@@ -21,7 +24,7 @@ function BrowseCampaignCard({ campaign, onView }) {
     <motion.div
       className="browse-card"
       whileHover={{ scale: 1.02 }}
-      onClick={onView}
+      onClick={() => navigate(`/dreamjars/${campaign.id}`)}
     >
       {/* Image */}
       <div className="browse-card-image">

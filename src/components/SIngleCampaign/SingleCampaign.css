@@ -1,0 +1,134 @@
+.single-wrapper {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.single-card {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 3px solid #8B7BA8;
+  box-shadow: 12px 12px 0 #8B7BA8;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+  .single-card {
+    flex-direction: row;
+  }
+}
+
+.single-image {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .single-image {
+    width: 50%;
+    height: auto;
+  }
+}
+
+.single-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.single-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.single-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.single-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #5a3b91;
+  margin: 0;
+}
+
+.single-category {
+  font-size: 13px;
+  color: #5a3b91;
+  background-color: #f0e6fa;
+  padding: 4px 10px;
+  border-radius: 16px;
+  text-transform: capitalize;
+}
+
+.single-child {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+}
+
+/* Progress (same style, slightly bigger) */
+.single-progress-bg {
+  width: 100%;
+  height: 10px;
+  background-color: #e0d7f1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.single-progress {
+  height: 100%;
+  background-color: #8b7ba8;
+}
+
+.single-progress-text {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0 0 0;
+}
+
+.single-deadline {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.single-description h3 {
+  margin: 16px 0 4px 0;
+  color: #5a3b91;
+}
+
+.single-description p {
+  color: #444;
+  line-height: 1.5;
+}
+
+.single-donate-btn {
+  margin-top: 16px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #8b7ba8;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.single-donate-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0 #5a3b91;
+}
