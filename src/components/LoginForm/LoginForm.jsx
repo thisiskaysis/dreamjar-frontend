@@ -177,78 +177,17 @@ export function LoginForm() {
       </motion.div>
 
       {/* Main container */}
-      <div className="flex items-center gap-8 max-w-5xl w-full px-8">
+      <div className="flex items-center gap-8 max-w-3xl w-full px-8">
         {/* Form section */}
         <div className="flex-1 relative">
-          {/* Cloud background */}
-          <svg
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] -z-10"
-            viewBox="0 0 277 145"
-          >
-            <path
-              fill="#fff"
-              d="M218,20c-0.74,0-1.47,0.03-2.2,0.06C204.99,7.77,189.16,0,171.5,0c-12.22,0-23.58,3.72-33,10.09 C129.08,3.72,117.72,0,105.5,0C87.84,0,72.01,7.77,61.2,20.06C60.47,20.03,59.74,20,59,20C26.42,20,0,46.42,0,79 c0,32.58,26.42,59,59,59c5.26,0,10.36-0.7,15.21-1.99C83.28,141.7,94,145,105.5,145c12.22,0,23.58-3.72,33-10.09 c9.42,6.37,20.78,10.09,33,10.09c11.5,0,22.22-3.3,31.29-8.99c4.85,1.29,9.95,1.99,15.21,1.99c32.58,0,59-26.42,59-59 C277,46.42,250.58,20,218,20z"
-            />
-          </svg>
-
-          {/* Animated email text */}
-          <AnimatePresence>
-            {emailText && (
-              <motion.div
-                className="absolute z-10 text-2xl font-bold text-[#8B7BA8] flex gap-1"
-                style={{
-                  left: "1rem",
-                  top: "2rem",
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                {emailText.split("").map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    className="inline-block"
-                    animate={{
-                      y: [0, -6, 4, -6, 4, 0],
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      delay: index * 0.03,
-                    }}
-                    style={{
-                      transformOrigin: "center bottom",
-                    }}
-                    onAnimationComplete={() => {
-                      if (index === emailText.length - 1) {
-                        setTimeout(() => {
-                          const letters = document.querySelectorAll(".input-text-letter");
-                          letters.forEach((letter, i) => {
-                            setTimeout(() => {
-                              HTMLElement.style.transform = `translateX(${300 + i * 20}px)`;
-                              HTMLElement.style.transition = "transform 0.5s ease-in";
-                            }, (emailText.length - 1 - i) * 50);
-                          });
-                        }, 200);
-                      }
-                    }}
-                  >
-                    <span className="input-text-letter">{letter}</span>
-                  </motion.span>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
           {/* Form */}
           <form className="space-y-6">
             {/* Title */}
-            <motion.h1
-              className="text-4xl font-bold text-[#8B7BA8] text-center mb-8"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <h1
+              className="text-8xl font-bold text-[#8B7BA8] text-center mb-8"
             >
               Welcome Back!
-            </motion.h1>
+            </h1>
 
             {/* Email Input */}
             <div className="relative">
@@ -261,11 +200,7 @@ export function LoginForm() {
               <input
                 id="email"
                 type="text"
-                className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
-                style={{
-                  caretColor: "#fbcdd7",
-                  boxShadow: "3px 3px 0 #8B7BA8",
-                }}
+                className="dream-input"
                 placeholder="your@email.com"
                 required
                 onChange={handleChange}
@@ -283,11 +218,7 @@ export function LoginForm() {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
-                style={{
-                  caretColor: "#fbcdd7",
-                  boxShadow: "3px 3px 0 #8B7BA8",
-                }}
+                className="dream-input"
                 placeholder="••••••••"
                 required
                 onChange={handleChange}
@@ -330,35 +261,24 @@ export function LoginForm() {
 
 
             {/* Submit Button */}
-            <motion.button
-              type="button"
-              className="w-full h-14 rounded-full cursor-pointer bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
-              style={{
-                boxShadow: "4px 4px 0 #8B7BA8",
-              }}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              onClick={handleSubmit}
+            <button
+              type="submit"
+              className="dj-button w-full my-1"
             >
               Log In
-            </motion.button>
+            </button>
 
             {/* Sign Up Button */}
-            <motion.button
+            <button
               type="button"
-              className="w-full h-14 rounded-full cursor-pointer bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
-              style={{
-                boxShadow: "4px 4px 0 #8B7BA8",
-              }}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+              className="dj-button w-full"
               onClick={openSignUpModal}
             >
               New Here? Sign up
-            </motion.button>
+            </button>
 
             {/* Divider */}
-            <div className="flex items-center gap-4 my-6">
+            <div className="flex items-center gap-4 my-1">
               <div className="flex-1 h-1 bg-[#8B7BA8] rounded-full opacity-20" />
               <span
                 className="text-sm font-bold text-[#8B7BA8]"

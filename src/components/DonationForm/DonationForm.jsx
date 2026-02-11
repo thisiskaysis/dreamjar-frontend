@@ -82,11 +82,13 @@ export default function DonationForm({ campaignId, onSuccess }) {
 
       {/* Amount */}
       <div className="relative">
-        <label className="form-label">AMOUNT ($)</label>
+        <label 
+        htmlFor="amount"
+        className="form-label">AMOUNT ($)</label>
         <input
           type="number"
           min="1"
-          name="amount"
+          id="amount"
           value={formData.amount}
           onChange={handleChange}
           required

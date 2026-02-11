@@ -54,14 +54,11 @@ export function SignUpForm() {
           {/* Form */}
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Title */}
-            <motion.h1
-              className="text-xl font-bold text-[#8B7BA8] text-center mb-8 mt-10 mb-10"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <h1
+              className="text-m font-bold text-[#8B7BA8] text-center mb-8 mt-10 mb-10"
             >
               Sign Up
-            </motion.h1>
+            </h1>
 
             <div className="relative">
               <label
@@ -73,11 +70,7 @@ export function SignUpForm() {
               <input
                 id="first_name"
                 type="text"
-                className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
-                style={{
-                  caretColor: "#fbcdd7",
-                  boxShadow: "3px 3px 0 #8B7BA8",
-                }}
+                className="dream-input"
                 placeholder="First Name"
                 required
                 onChange={handleChange}
@@ -97,11 +90,7 @@ export function SignUpForm() {
               <input
                 id="last_name"
                 type="text"
-                className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
-                style={{
-                  caretColor: "#fbcdd7",
-                  boxShadow: "3px 3px 0 #8B7BA8",
-                }}
+                className="dream-input"
                 placeholder="Last Name"
                 required
                 onChange={handleChange}
@@ -121,11 +110,7 @@ export function SignUpForm() {
               <input
                 id="username"
                 type="text"
-                className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
-                style={{
-                  caretColor: "#fbcdd7",
-                  boxShadow: "3px 3px 0 #8B7BA8",
-                }}
+                className="dream-input"
                 placeholder="Username"
                 required
                 onChange={handleChange}
@@ -145,11 +130,7 @@ export function SignUpForm() {
               <input
                 id="email"
                 type="text"
-                className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
-                style={{
-                  caretColor: "#fbcdd7",
-                  boxShadow: "3px 3px 0 #8B7BA8",
-                }}
+                className="dream-input"
                 placeholder="Email"
                 required
                 onChange={handleChange}
@@ -170,11 +151,7 @@ export function SignUpForm() {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] disabled:bg-[#fcf2f5] disabled:border-[#f9dde3] transition-all duration-300"
-                style={{
-                  caretColor: "#fbcdd7",
-                  boxShadow: "3px 3px 0 #8B7BA8",
-                }}
+                className="dream-input"
                 placeholder="Password"
                 required
                 onChange={handleChange}
@@ -226,7 +203,7 @@ export function SignUpForm() {
             {/* Submit Button */}
             <motion.button
               type="button"
-              className="w-full h-14 rounded-full bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 disabled:bg-[#f9dde3] disabled:scale-100 disabled:opacity-50 transition-all duration-300"
+              className="dj-button w-full hover:scale-105"
               style={{
                 boxShadow: "4px 4px 0 #8B7BA8",
               }}
