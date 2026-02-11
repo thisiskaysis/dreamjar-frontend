@@ -4,11 +4,12 @@ async function postDonation(campaignId, data, token) {
     const response = await fetch(url, {
         method: "POST",
         headers: {
-            "Content-type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+            ...(token && { Authorization: `Bearer ${token}` }),
         },
         body: JSON.stringify(data),
     });
+
 
     const resData = await response.json();
 

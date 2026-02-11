@@ -1,123 +1,171 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate} from "react-router-dom";
+import { useDonationActions } from "../../hooks/useDonationActions";
+import { useAuth } from "../../hooks/use-auth";
 
-import postDonation from "../../api/post-donation"
+export default function DonationForm({ campaignId, onSuccess }) {
+  const { auth, user } = useAuth();
+  const { createDonation } = useDonationActions();
 
-function DonationForm({ campaignId }) {
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [credentials, setCredentials] = useState({
-    amount:"",
-    comment:"",
-    donor_name:"",
+  const [formData, setFormData] = useState({
+    amount: "",
+    comment: "",
+    donor_name: "",
+    donor_email: "",
+    anonymous: false,
   });
 
-  const handleChange = (event) => {
-    const { id, value } = event.target;
-    setCredentials((prevCredentials) => ({
-      ...prevCredentials,
-      [id]: value,
+  const [errors, setErrors] = useState({});
+
+  // Autofill for logged-in user
+  useEffect(() => {
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        donor_name: user.first_name || user.username,
+        donor_email: user.email || "",
+      }));
+    }
+  }, [user]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setErrors({}); // clear previous errors
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({});
 
-    postDonation(credentials)
-    .then((response) => {
-      navigate("/donate/success");
-    }) 
-    .catch ((error) => {
-          setErrors(error);
+    const payload = {
+      amount: Number(formData.amount),
+      comment: formData.comment,
+      anonymous: formData.anonymous,
+    };
+
+    // Only send name/email if user is not anonymous
+    if (!formData.anonymous) {
+      payload.donor_name = formData.donor_name;
+      payload.donor_email = formData.donor_email;
+    }
+
+    try {
+      const response = await createDonation(campaignId, payload);
+      onSuccess?.(response);
+
+      // Reset form
+      setFormData({
+        amount: "",
+        comment: "",
+        donor_name: user ? user.first_name || user.username : "",
+        donor_email: user ? user.email : "",
+        anonymous: false,
       });
+    } catch (err) {
+      setErrors(err.response?.data || { non_field_errors: ["Something went wrong"] });
+    }
   };
 
+  // Show name/email fields only if anonymous is unchecked
+  const showAnonFields = !formData.anonymous;
+
   return (
-    <div className="flex items-center justify-center min-h-screen relative overflow-hidden">
-      {/* Main container */}
-      <div className="flex items-center gap-8 max-w-5xl w-full px-8">
-        {/* Form section */}
-        <div className="flex-1 relative">
+    <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/* Form */}
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Title */}
-            <motion.h1
-              className="text-xl font-bold text-[#8B7BA8] text-center mb-8 mt-10 mb-10"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              Make a Donation
-            </motion.h1>
+      <h2 className="text-3xl font-bold text-[#8B7BA8] text-center mb-4">
+        Make a Donation
+      </h2>
 
-            {/* Amount */}
-            <div>
-              <label htmlFor="amount" className="block text-sm font-medium text-gray-700">
-                Amount
-              </label>
-              <input
-                type="number"
-                id="amount"
-                value={credentials.amount}
-                onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required
-              />
-            </div>
-
-            {/* Comment */}
-            <div>
-              <label htmlFor="comment" className="block text-sm font-medium text-gray-700">
-                Comment
-              </label>
-              <textarea
-                id="comment"
-                value={credentials.comment}
-                onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-
-            {/* Donor Name */}
-            <div>
-              <label htmlFor="donor_name" className="block text-sm font-medium text-gray-700">
-                Donor Name
-              </label>
-              <input
-                type="text"
-                id="donor_name"
-                value={credentials.donor_name}
-                onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-
-            </div>
-
-            {/* Submit Button */}
-            <div>
-              <button
-                type="submit"
-                disabled={isDisabled}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
-              >
-                Donate
-              </button>
-            </div>
-
-            {/* Display errors if any */}
-            {errors && (
-              <div className="text-red-500 text-sm mt-4">
-                {Object.values(errors).flat().join(" ")}
-              </div>
-            )}
-          </form>
-        </div>
+      {/* Amount */}
+      <div className="relative">
+        <label className="form-label">AMOUNT ($)</label>
+        <input
+          type="number"
+          min="1"
+          name="amount"
+          value={formData.amount}
+          onChange={handleChange}
+          required
+          className="dream-input"
+        />
+        {errors.amount && <p className="error">{errors.amount.join(", ")}</p>}
       </div>
-    </div>
+
+      {/* Anonymous toggle */}
+      <div className="flex items-center gap-3">
+        <input
+          type="checkbox"
+          name="anonymous"
+          checked={formData.anonymous}
+          onChange={handleChange}
+        />
+        <label className="text-[#8B7BA8] font-bold">
+          Donate anonymously
+        </label>
+      </div>
+
+      {/* Name/Email for non-anonymous donations */}
+      {showAnonFields && (
+        <>
+          <div className="relative">
+            <label className="form-label">NAME</label>
+            <input
+              type="text"
+              name="donor_name"
+              value={formData.donor_name}
+              onChange={handleChange}
+              className="dream-input"
+              required={!user}
+            />
+            {errors.donor_name && <p className="error">{errors.donor_name.join(", ")}</p>}
+          </div>
+
+          <div className="relative">
+            <label className="form-label">EMAIL</label>
+            <input
+              type="email"
+              name="donor_email"
+              value={formData.donor_email}
+              onChange={handleChange}
+              className="dream-input"
+              required={!user}
+            />
+            {errors.donor_email && <p className="error">{errors.donor_email.join(", ")}</p>}
+          </div>
+        </>
+      )}
+
+      {/* Comment */}
+      <div className="relative">
+        <label className="form-label">COMMENT</label>
+        <textarea
+          name="comment"
+          value={formData.comment}
+          onChange={handleChange}
+          rows={4}
+          className="dream-textarea"
+        />
+        {errors.comment && <p className="error">{errors.comment.join(", ")}</p>}
+      </div>
+
+      {/* Submit */}
+      <motion.button
+        type="submit"
+        className="dj-button"
+        whileHover={{ y: -2 }}
+        whileTap={{ y: 0 }}
+      >
+        Donate
+      </motion.button>
+
+      {errors.non_field_errors && (
+        <p className="error text-center">
+          {errors.non_field_errors.join(", ")}
+        </p>
+      )}
+    </form>
   );
 }
-
-export default DonationForm;

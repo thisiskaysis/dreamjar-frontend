@@ -52,7 +52,7 @@ export function SignUpForm() {
         <div className="flex-1 relative">
 
           {/* Form */}
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Title */}
             <motion.h1
               className="text-xl font-bold text-[#8B7BA8] text-center mb-8 mt-10 mb-10"
