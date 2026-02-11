@@ -4,7 +4,8 @@ import { useDonationActions } from "../../hooks/useDonationActions";
 import { useAuth } from "../../hooks/use-auth";
 
 export default function DonationForm({ campaignId, onSuccess }) {
-  const { auth, user } = useAuth();
+  const { auth } = useAuth();
+  const user = auth?.user;
   const { createDonation } = useDonationActions();
 
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ export default function DonationForm({ campaignId, onSuccess }) {
     if (user) {
       setFormData((prev) => ({
         ...prev,
-        donor_name: user.first_name || user.username,
+        donor_name: user.first_name || user.username || "",
         donor_email: user.email || "",
       }));
     }
