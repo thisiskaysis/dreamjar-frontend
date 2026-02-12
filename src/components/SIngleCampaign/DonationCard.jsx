@@ -1,52 +1,15 @@
 import { useState, useEffect, useMemo } from "react";
-import Modal from "../UI/Modal";
-import DonationForm from "../DonationForm/DonationForm";
+import DonateButtonWithModal from "../../components/Donations/DonateButtonWithModal";
 import { useDonationActions } from "../../hooks/useDonationActions";
 import "./DonationCard.css";
 
-function DonationCard({ campaignId, donations = [], setDonations }) {
-  const [showDonationModal, setShowDonationModal] = useState(false);
-  const { fetchDonations } = useDonationActions();
-
-  const openDonationModal = () => setShowDonationModal(true);
-  const closeDonationModal = () => setShowDonationModal(false);
-
-  // Fetch donations when campaignId changes
-  useEffect(() => {
-    if (!campaignId) return;
-
-    let isMounted = true; // avoid state update if unmounted
-
-    async function loadDonations() {
-      try {
-        const fetched = await fetchDonations(campaignId);
-        if (isMounted && setDonations) setDonations(fetched);
-      } catch (err) {
-        console.error("Error fetching donations:", err);
-      }
-    }
-
-    loadDonations();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [campaignId, setDonations]); // <- only campaignId and setDonations
-
+function DonationCard({ campaignId, donations = [], onDonateSuccess }) {
   // Always display newest donations first
   const sortedDonations = useMemo(() => {
     return [...donations].sort(
-      (a, b) => new Date(b.date_donated) - new Date(a.date_donated)
+      (a, b) => new Date(b.date_donated) - new Date(a.date_donated),
     );
   }, [donations]);
-
-  // Handle a new donation from the form
-  const handleSuccess = (newDonation) => {
-    if (setDonations) {
-      setDonations((prev) => [newDonation, ...prev]);
-    }
-    closeDonationModal();
-  };
 
   return (
     <div className="donation-wrapper">
@@ -62,7 +25,7 @@ function DonationCard({ campaignId, donations = [], setDonations }) {
             sortedDonations.map((donation) => (
               <div key={donation.id} className="donation-item">
                 <p className="donation-amount">
-                  ${donation.amount} from {donation.donor_name}
+                  ${donation.amount} from {donation.donor_name || "Anonymous"}
                 </p>
                 {donation.comment && (
                   <p className="donation-comment">{donation.comment}</p>
@@ -74,15 +37,14 @@ function DonationCard({ campaignId, donations = [], setDonations }) {
             ))
           )}
 
-          <button onClick={openDonationModal} className="dj-button">
+          <DonateButtonWithModal
+            campaignId={campaignId}
+            onSuccess={onDonateSuccess}
+          >
             Donate Now
-          </button>
+          </DonateButtonWithModal>
         </div>
       </div>
-
-      <Modal isOpen={showDonationModal} onClose={closeDonationModal}>
-        <DonationForm campaignId={campaignId} onSuccess={handleSuccess} />
-      </Modal>
     </div>
   );
 }

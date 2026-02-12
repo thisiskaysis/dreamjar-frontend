@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+import DonateButtonWithModal from "../Donations/DonateButtonWithModal";
 import "./SingleCampaign.css";
 
-function SingleCampaign({ campaign }) {
+function SingleCampaign({ campaign, onDonateSuccess }) {
   const {
     title,
     child_name,
@@ -20,10 +21,8 @@ function SingleCampaign({ campaign }) {
 
   return (
     <div className="campaign-wrapper">
-      <motion.div
+      <div
         className="campaign-card"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
       >
         {/* Image */}
         <div className="campaign-image">
@@ -63,11 +62,14 @@ function SingleCampaign({ campaign }) {
           </div>
 
           {/* Donate Button */}
-          <button className="dj-button">
+          <DonateButtonWithModal
+            campaignId={campaign.id}
+            onSuccess={onDonateSuccess}
+          >
             Support This Dream ✨
-          </button>
+          </DonateButtonWithModal>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

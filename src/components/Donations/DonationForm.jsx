@@ -17,7 +17,7 @@ export default function DonationForm({ campaignId, onSuccess }) {
 
   const [errors, setErrors] = useState({});
 
-  // Autofill for logged-in user
+  // Autofill for logged-in user?
   useEffect(() => {
     if (user) {
       setFormData((prev) => ({
@@ -87,7 +87,7 @@ export default function DonationForm({ campaignId, onSuccess }) {
         <input
           type="number"
           min="1"
-          id="amount"
+          name="amount"
           value={formData.amount}
           onChange={handleChange}
           required
