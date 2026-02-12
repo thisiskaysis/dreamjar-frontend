@@ -32,6 +32,9 @@ function ChildCard({ child, setChildren, onOpenCampaignModal }) {
       </div>
 
       {/* Campaigns */}
+      <h3 className="font-semibold text-2xl w-full mt-5 mb-2">
+        {child.name}'s Campaigns</h3>
+
       {child.campaigns?.length > 0 && (
         <div className="flex flex-col gap-2 w-full mt-2">
           {child.campaigns.map((c) => (
