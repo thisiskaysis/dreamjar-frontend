@@ -1,16 +1,21 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import "./Dashboard.css";
 import CreateChild from "./ChildActions/CreateChild";
-import ChildCard from "./ChildCard";
 import CreateCampaignForm from "../Campaigns/CreateCampaignForm";
+import ChildrenTab from "./ChildrenTab";
+import DonationsList from "./DonationsList";
 import Modal from "../UI/Modal";
+import { useMyDonations } from "../../hooks/use-myDonations";
 
 function Dashboard({ user }) {
   const [children, setChildren] = useState(user.children || []);
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [showCampaignModal, setShowCampaignModal] = useState(false);
   const [showCreateChildModal, setShowCreateChildModal] = useState(false);
+  const [activePage, setActivePage] = useState("children");
+  const [donations, setDonations] = useState([]);
+
+  const { fetchMyDonations } = useMyDonations();
 
   const openCampaignModal = (childId) => {
     setSelectedChildId(childId);
@@ -18,11 +23,20 @@ function Dashboard({ user }) {
   };
   const closeCampaignModal = () => setShowCampaignModal(false);
 
+  useEffect(() => {
+    const loadDonations = async () => {
+      const data = await fetchMyDonations();
+      setDonations(data);
+    };
+    loadDonations();
+  }, []);
+
   // Stats
   const totalCampaigns = children.reduce(
     (sum, c) => sum + (c.campaigns?.length || 0),
     0,
   );
+
   const totalRaised = children.reduce(
     (sum, c) =>
       sum +
@@ -38,59 +52,43 @@ function Dashboard({ user }) {
       {/* Header */}
       <header className="mb-6">
         <h1 className="flex justify-center">Welcome, {user.first_name}!</h1>
-        <p className="flex justify-center">
+        <p className="flex justify-center text-gray-600 text-lg">
           Manage your children and campaigns below.
         </p>
+        {/* Page Toggle */}
+        <div className="flex gap-4 mt-4">
+          <button
+            className={`dj-button ${activePage === "children" ? "bg-[#fbcdd7]" : ""}`}
+            onClick={() => setActivePage("children")}
+          >
+            My Children
+          </button>
+          <button
+            className={`dj-button ${activePage === "donations" ? "bg-[#fbcdd7]" : ""}`}
+            onClick={() => setActivePage("donations")}
+          >
+            My Donations
+          </button>
+        </div>
       </header>
 
-      {/* Stats Panel & Create Child */}
-      <div className="flex flex-col md:flex-row gap-6 mb-6">
-        {/* Stats */}
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="stat-panel">
-            <p className="stat-text">Total Children</p>
-            <p className="text-2xl font-bold">{children.length}</p>
-          </div>
-          <div className="stat-panel">
-            <p className="stat-text">Total Campaigns</p>
-            <p className="text-2xl font-bold">{totalCampaigns}</p>
-          </div>
-          <div className="stat-panel">
-            <p className="stat-text">Total Raised</p>
-            <p className="text-2xl font-bold">${totalRaised}</p>
-          </div>
-        </div>
-      </div>
+      {activePage === "children" && (
+        <ChildrenTab
+          children={children}
+          setChildren={setChildren}
+          openCampaignModal={openCampaignModal}
+          showCreateChildModal={showCreateChildModal}
+          setShowCreateChildModal={setShowCreateChildModal}
+          totalCampaigns={totalCampaigns}
+          totalRaised={totalRaised}
+        />
+      )}
 
-      {/* Create Child */}
-      <div className="flex items-center justify-center">
-        <button
-          className="dj-button w-90"
-          onClick={() => setShowCreateChildModal(true)}
-        >
-          Add Child
-        </button>
-      </div>
-
-      {/* Children Grid */}
-      <section>
-        {children.length === 0 && (
-          <p className="text-gray-500 text-center">
-            No children yet. Start by creating one!
-          </p>
-        )}
-
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
-          {children.map((child) => (
-            <ChildCard
-              key={child.id}
-              child={child}
-              setChildren={setChildren}
-              onOpenCampaignModal={openCampaignModal}
-            />
-          ))}
-        </div>
-      </section>
+      {activePage === "donations" && (
+        <section>
+          <DonationsList donations={donations} />
+        </section>
+      )}
 
       {/* Campaign Modal */}
       <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
