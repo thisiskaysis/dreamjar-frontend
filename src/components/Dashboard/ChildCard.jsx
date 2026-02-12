@@ -24,10 +24,16 @@ function ChildCard({ child, setChildren, onOpenCampaignModal }) {
         <DeleteChild childId={child.id} setChildren={setChildren} />
       </div>
 
+      {/* Campaigns container */}
       {child.campaigns?.length > 0 && (
         <div className="child-campaigns">
           {child.campaigns.map((c) => (
-            <ChildCampaignCard key={c.id} campaign={c} />
+            <ChildCampaignCard
+              key={c.id}
+              campaign={c}
+              childId={child.id}
+              setChildren={setChildren}
+            />
           ))}
         </div>
       )}
