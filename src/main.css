@@ -76,6 +76,24 @@ body {
   background: #f57777;
 }
 
+.tab-variant {
+  border-radius: 10px;
+  box-shadow: none;
+  border: 2px solid #8B7BA8;
+  background: inherit;
+}
+
+/* Hover effect */
+.tab-variant:hover {
+  background: inherit;
+}
+
+/* Currently active tab */
+.tab-variant.active {
+  transform: translateY(-2px);                
+  box-shadow: inset 2px 2px 0 #5e4970;
+}
+
 
 h2 {
   font-size: xx-large;

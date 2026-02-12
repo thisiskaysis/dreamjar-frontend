@@ -56,15 +56,15 @@ function Dashboard({ user }) {
           Manage your children and campaigns below.
         </p>
         {/* Page Toggle */}
-        <div className="flex gap-4 mt-4">
+        <div className="flex gap-4 mt-4 justify-center">
           <button
-            className={`dj-button ${activePage === "children" ? "bg-[#fbcdd7]" : ""}`}
+            className={`dj-button tab-variant ${activePage === "children" ? "active" : ""}`}
             onClick={() => setActivePage("children")}
           >
             My Children
           </button>
           <button
-            className={`dj-button ${activePage === "donations" ? "bg-[#fbcdd7]" : ""}`}
+            className={`dj-button tab-variant ${activePage === "donations" ? "active" : ""}`}
             onClick={() => setActivePage("donations")}
           >
             My Donations
