@@ -31,7 +31,9 @@ function DeleteCampaign({ campaignId, setChildren }) {
   };
 
   return (
-    <button className="dj-button" onClick={handleRemoveCampaign}>
+    <button 
+     onClick={handleRemoveCampaign}
+     className="dj-button delete-variant w-90">
       Delete Campaign
     </button>
   );

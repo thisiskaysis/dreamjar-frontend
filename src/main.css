@@ -68,9 +68,12 @@ body {
   transform: translateY(-3px);
 }
 
-.dj-button:active {
-  transform: translateY(0);
-  box-shadow: 2px 2px 0 #8B7BA8;
+.delete-variant {
+  background: #fca5a5;
+}
+
+.delete-variant:hover {
+  background: #f57777;
 }
 
 

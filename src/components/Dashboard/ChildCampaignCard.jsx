@@ -9,7 +9,7 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
 
   const percentage = Math.min(
     Math.round((campaign.amount_raised / campaign.goal) * 100),
-    100
+    100,
   );
 
   const remainingText = campaign.seconds_remaining
@@ -19,14 +19,14 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
   const handleToggle = () => setExpanded((prev) => !prev);
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      className="bg-white shadow-md rounded-xl overflow-hidden"
-    >
+    <motion.div whileHover={{ scale: 1.02 }} className="campaign-dropdown">
       {/* Summary */}
       <div className="flex justify-between items-start p-3 cursor-pointer">
-        <div className="flex-1" onClick={() => navigate(`/dreamjars/${campaign.id}`)}>
-          <h4 className="font-semibold text-gray-800">{campaign.title}</h4>
+        <div
+          className="flex-1"
+          onClick={() => navigate(`/dreamjars/${campaign.id}`)}
+        >
+          <h4 className="text-2xl">{campaign.title}</h4>
           <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
             <motion.div
               className="bg-pink-400 h-2 rounded-full"
@@ -36,10 +36,10 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
               transition={{ duration: 0.8 }}
             />
           </div>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-s text-gray-500 mt-1">
             ${campaign.amount_raised || 0} / ${campaign.goal}
           </p>
-          <p className="text-xs text-gray-400">{remainingText}</p>
+          <p className="text-s text-gray-400">{remainingText}</p>
         </div>
 
         <span
@@ -56,14 +56,14 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
       <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
-            className="flex flex-col gap-2 p-3 border-t border-gray-200"
+            className="flex flex-col gap-2 p-3 border-t border-gray-200 items-center"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
             <button
-              className="dj-button w-full bg-pink-400 hover:bg-pink-500 text-white py-2 rounded-md"
+              className="dj-button w-90"
               onClick={() => navigate(`/campaigns/${campaign.id}/edit`)}
             >
               Edit Campaign
