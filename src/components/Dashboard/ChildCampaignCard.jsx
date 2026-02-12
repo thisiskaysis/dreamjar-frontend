@@ -1,59 +1,42 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import DeleteCampaign from "../Campaigns/CampaignActions/DeleteCampaign";
 
-function ChildCampaignCard({ campaign, childId, setChildren }) {
+function ChildCampaignCard({ campaign }) {
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState(false);
 
-  const handleToggle = () => setExpanded((prev) => !prev);
+  const percentage = Math.min(
+    Math.round((campaign.amount_raised / campaign.goal) * 100),
+    100
+  );
+
+  const remainingText = campaign.seconds_remaining
+    ? `${Math.floor(campaign.seconds_remaining / 86400)} days left`
+    : null;
 
   return (
     <div className="child-campaign-card">
-      {/* Summary panel */}
-      <div className="campaign-summary" onClick={handleToggle}>
-        <div>
-          <h4
-            className="campaign-title"
-            onClick={(e) => {
-              e.stopPropagation();
-              navigate(`/dreamjars/${campaign.id}`);
-            }}
-          >
-            {campaign.title}
-          </h4>
-          <p>${campaign.amount_raised || 0} / ${campaign.goal}</p>
-        </div>
-        <span className={`expand-icon ${expanded ? "expanded" : ""}`}>
-          ▼
-        </span>
+      {/* Title */}
+      <h4
+        className="campaign-title"
+        onClick={() => navigate(`/dreamjars/${campaign.id}`)}
+      >
+        {campaign.title}
+      </h4>
+
+      {/* Progress bar */}
+      <div className="campaign-progress-bar-bg">
+        <div
+          className="campaign-progress-bar-fill"
+          style={{ width: `${percentage}%` }}
+        />
       </div>
 
-      {/* Expanded actions */}
-      <AnimatePresence initial={false}>
-        {expanded && (
-          <motion.div
-            className="campaign-actions"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ type: "ease", duration: 0.3 }}
-          >
-            <button
-              className="dj-button"
-              onClick={() => navigate(`/campaigns/${campaign.id}/edit`)}
-            >
-              Edit Campaign
-            </button>
-            <DeleteCampaign
-              campaignId={campaign.id}
-              childId={childId}
-              setChildren={setChildren}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Raised / Goal */}
+      <p>
+        ${campaign.amount_raised || 0} / ${campaign.goal}
+      </p>
+
+      {/* Deadline */}
+      <p className="campaign-deadline-text">{remainingText}</p>
     </div>
   );
 }

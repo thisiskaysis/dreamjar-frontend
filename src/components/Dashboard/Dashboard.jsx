@@ -16,9 +16,13 @@ function Dashboard({ user }) {
     setShowCampaignModal(true);
   };
 
-  const closeCampaignModal = () => {
-    setShowCampaignModal(false);
-  };
+  const closeCampaignModal = () => setShowCampaignModal(false);
+
+  // Stats
+  const totalCampaigns = children.reduce(
+    (sum, c) => sum + (c.campaigns?.length || 0),
+    0
+  );
 
   return (
     <div className="dashboard">
@@ -28,20 +32,32 @@ function Dashboard({ user }) {
         <p>Manage your children and campaigns below.</p>
       </header>
 
-      {/* Create Child Section */}
-      <section className="create-child-section">
-        <h2>Create a new child</h2>
-        <button
-          className="dj-button"
-          onClick={() => setShowCreateChildModal(true)}
-        >
-          Add Child
-        </button>
+      {/* Top Panel: Create Child + Stats */}
+      <section className="dashboard-top">
+        <div className="create-child-section">
+          <h2>Create a New Child</h2>
+          <button
+            className="dj-button"
+            onClick={() => setShowCreateChildModal(true)}
+          >
+            Add Child
+          </button>
+        </div>
+
+        <div className="dashboard-stats">
+          <div className="stat-card">
+            <h3>Total Children</h3>
+            <p>{children.length}</p>
+          </div>
+          <div className="stat-card">
+            <h3>Total Campaigns</h3>
+            <p>{totalCampaigns}</p>
+          </div>
+        </div>
       </section>
 
-      {/* Children Section */}
+      {/* Children Grid */}
       <section className="children-section">
-        <h2>Your Children</h2>
         {children.length === 0 && (
           <p>No children yet. Start by creating one!</p>
         )}
@@ -51,17 +67,14 @@ function Dashboard({ user }) {
             <ChildCard
               key={child.id}
               child={child}
-              onOpenCampaignModal={(childId) => {
-                setSelectedChildId(childId);
-                setShowCampaignModal(true);
-              }}
+              onOpenCampaignModal={openCampaignModal}
               setChildren={setChildren}
             />
           ))}
         </div>
       </section>
 
-      {/* Campaign modal */}
+      {/* Campaign Modal */}
       <Modal isOpen={showCampaignModal} onClose={closeCampaignModal}>
         <CreateCampaignForm
           childId={selectedChildId}
@@ -73,8 +86,8 @@ function Dashboard({ user }) {
                       ...child,
                       campaigns: [...(child.campaigns || []), newCampaign],
                     }
-                  : child,
-              ),
+                  : child
+              )
             );
             closeCampaignModal();
           }}
