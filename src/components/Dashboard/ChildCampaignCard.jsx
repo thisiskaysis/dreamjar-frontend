@@ -14,19 +14,21 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
 
   const remainingText = campaign.seconds_remaining
     ? `${Math.floor(campaign.seconds_remaining / 86400)} days left`
-    : "No deadline";
+    : null;
 
   const handleToggle = () => setExpanded((prev) => !prev);
 
   return (
     <motion.div whileHover={{ scale: 1.02 }} className="campaign-dropdown">
       {/* Summary */}
-      <div className="flex justify-between items-start p-3 cursor-pointer">
+      <div className="flex justify-between items-start p-3 cursor-pointer"
+      onClick={handleToggle}>
         <div
           className="flex-1"
-          onClick={() => navigate(`/dreamjars/${campaign.id}`)}
         >
-          <h4 className="text-2xl">{campaign.title}</h4>
+          <h4 className="text-2xl"
+          onClick={() => navigate(`/dreamjars/${campaign.id}`)}>
+            {campaign.title}</h4>
           <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
             <motion.div
               className="bg-pink-400 h-2 rounded-full"
@@ -36,7 +38,7 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
               transition={{ duration: 0.8 }}
             />
           </div>
-          <p className="text-s text-gray-500 mt-1">
+          <p className="text-lg text-gray-700 mt-1">
             ${campaign.amount_raised || 0} / ${campaign.goal}
           </p>
           <p className="text-s text-gray-400">{remainingText}</p>
@@ -46,7 +48,7 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
           className={`text-gray-400 text-xl ml-2 transform transition-transform ${
             expanded ? "rotate-180" : ""
           }`}
-          onClick={handleToggle}
+
         >
           ▼
         </span>

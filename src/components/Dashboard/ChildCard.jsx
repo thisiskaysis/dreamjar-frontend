@@ -32,7 +32,7 @@ function ChildCard({ child, setChildren, onOpenCampaignModal }) {
       </div>
 
       {/* Campaigns */}
-      <h3 className="font-semibold text-2xl w-full mt-5 mb-2">
+      <h3 className="font-semibold text-2xl text-gray-600 w-full mt-5 mb-2">
         {child.name}'s Campaigns</h3>
 
       {child.campaigns?.length > 0 && (
@@ -46,6 +46,11 @@ function ChildCard({ child, setChildren, onOpenCampaignModal }) {
             />
           ))}
         </div>
+      )}
+
+      {child.campaigns?.length === 0 && (
+        <p className="text-gray-500 italic">
+          No campaigns yet.</p>
       )}
     </div>
   );
