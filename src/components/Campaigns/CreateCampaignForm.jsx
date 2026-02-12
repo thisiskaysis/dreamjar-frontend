@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { useCampaignActions } from "../../hooks/useCampaignActions";
-import "./CreateCampaign.css"
 
 function CreateCampaignForm({ childId, onSuccess }) {
 const { createCampaign } = useCampaignActions();

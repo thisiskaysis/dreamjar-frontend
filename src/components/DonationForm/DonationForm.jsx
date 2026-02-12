@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { useDonationActions } from "../../hooks/useDonationActions";
 import { useAuth } from "../../hooks/use-auth";
 
