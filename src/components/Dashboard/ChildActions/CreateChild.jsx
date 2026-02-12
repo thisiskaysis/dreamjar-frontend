@@ -44,22 +44,18 @@ function CreateChild({ user, setChildren, closeModal }) {
 
   return (
     <div className="child-form-modal">
-      <motion.h2
-        className="text-center text-2xl font-bold text-[#8B7BA8] mb-6"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
+      <h1 className="text-lg font-bold text-center text-[#8B7BA8] mb-3">
         Add a Child
-      </motion.h2>
+      </h1>
 
       <form className="space-y-4">
         {/* Name */}
         <div className="relative">
           <label
             htmlFor="name"
-            className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+            className="form-label"
           >
-            Name
+            NAME
           </label>
           <input
             id="name"
@@ -68,7 +64,7 @@ function CreateChild({ user, setChildren, closeModal }) {
             value={credentials.name}
             onChange={handleChange}
             placeholder="Child's Name"
-            className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] transition-all duration-300"
+            className="dream-input"
             required
           />
           {renderFieldError("name")}
@@ -78,9 +74,9 @@ function CreateChild({ user, setChildren, closeModal }) {
         <div className="relative">
           <label
             htmlFor="date_of_birth"
-            className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+            className="form-label"
           >
-            Date of Birth
+            DATE OF BIRTH
           </label>
           <input
             id="date_of_birth"
@@ -88,7 +84,7 @@ function CreateChild({ user, setChildren, closeModal }) {
             type="date"
             value={credentials.date_of_birth}
             onChange={handleChange}
-            className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] transition-all duration-300"
+            className="dream-input"
             required
           />
           {renderFieldError("date_of_birth")}
@@ -98,20 +94,20 @@ function CreateChild({ user, setChildren, closeModal }) {
         <div className="relative">
           <label
             htmlFor="gender"
-            className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+            className="form-label"
           >
-            Gender
+            GENDER
           </label>
           <select
             id="gender"
             name="gender"
             value={credentials.gender}
             onChange={handleChange}
-            className="w-full h-14 px-4 pr-16 rounded-full border-4 border-[#8B7BA8] bg-[#f9dde3] text-[#8B7BA8] text-xl font-bold focus:outline-none focus:border-[#fbcdd7] transition-all duration-300"
+            className="dream-input"
             required
           >
             <option value="" disabled>
-              Select gender
+              Select Gender
             </option>
             <option value="male">Boy</option>
             <option value="female">Girl</option>
@@ -130,15 +126,13 @@ function CreateChild({ user, setChildren, closeModal }) {
         )}
 
         {/* Submit */}
-        <motion.button
+        <button
           type="button"
-          className="w-full h-14 rounded-full bg-[#a0d4f1] border-4 border-[#8B7BA8] text-[#8B7BA8] text-xl font-bold hover:bg-[#ffe7a1] hover:scale-105 transition-all duration-300"
-          whileHover={{ y: -2 }}
-          whileTap={{ y: 0 }}
+          className="dj-button w-full"
           onClick={handleSubmit}
         >
           Create Child
-        </motion.button>
+        </button>
       </form>
     </div>
   );

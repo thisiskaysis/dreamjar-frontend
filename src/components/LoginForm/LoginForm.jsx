@@ -193,7 +193,7 @@ export function LoginForm() {
             <div className="relative">
               <label
                 htmlFor="email"
-                className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+                className="form-label"
               >
                 EMAIL
               </label>
@@ -211,7 +211,7 @@ export function LoginForm() {
             <div className="relative">
               <label
                 htmlFor="password"
-                className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+                className="form-label"
               >
                 PASSWORD
               </label>
@@ -264,6 +264,7 @@ export function LoginForm() {
             <button
               type="submit"
               className="dj-button w-full my-1"
+              onClick={handleSubmit}
             >
               Log In
             </button>

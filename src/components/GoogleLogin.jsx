@@ -18,15 +18,10 @@ function GoogleLogin() {
     };
 
     return (
-        <motion.button
+        <button
               type="button"
               onClick={handleGoogleLogin}
-              className="dj-button w-full bg-white hover:scale-105 flex items-center justify-center gap-3"
-              style={{
-                boxShadow: "4px 4px 0 #8B7BA8",
-              }}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+              className="dj-button w-full flex items-center justify-center gap-2"
             >
               <svg width="24" height="24" viewBox="0 0 24 24">
                 <path
@@ -47,7 +42,7 @@ function GoogleLogin() {
                 />
               </svg>
               Continue with Google
-            </motion.button>
+            </button>
     )
 }
 

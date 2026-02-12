@@ -149,14 +149,12 @@ return (
       )}
 
       {/* Submit */}
-      <motion.button
+      <button
         type="submit"
-        className="dj-button"
-        whileHover={{ y: -2 }}
-        whileTap={{ y: 0 }}
+        className="dj-button w-full"
       >
         Create Campaign
-      </motion.button>
+      </button>
 
       {errors.non_field_errors && (
         <p className="error text-center">

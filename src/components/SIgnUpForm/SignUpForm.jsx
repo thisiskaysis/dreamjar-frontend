@@ -63,7 +63,7 @@ export function SignUpForm() {
             <div className="relative">
               <label
                 htmlFor="first_name"
-                className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+                className="form-label"
               >
                 FIRST NAME
               </label>
@@ -83,7 +83,7 @@ export function SignUpForm() {
             <div className="relative">
               <label
                 htmlFor="last_name"
-                className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+                className="form-label"
               >
                 LAST NAME
               </label>
@@ -103,7 +103,7 @@ export function SignUpForm() {
             <div className="relative">
               <label
                 htmlFor="username"
-                className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+                className="form-label"
               >
                 USERNAME
               </label>
@@ -123,7 +123,7 @@ export function SignUpForm() {
             <div className="relative">
               <label
                 htmlFor="email"
-                className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+                className="form-label"
               >
                 EMAIL
               </label>
@@ -144,7 +144,7 @@ export function SignUpForm() {
             <div className="relative">
               <label
                 htmlFor="password"
-                className="absolute -top-3 left-4 text-xs font-bold text-[#8B7BA8] bg-[#fcf2f5] px-2"
+                className="form-label"
               >
                 PASSWORD
               </label>
@@ -201,18 +201,13 @@ export function SignUpForm() {
 
 
             {/* Submit Button */}
-            <motion.button
+            <button
               type="button"
-              className="dj-button w-full hover:scale-105"
-              style={{
-                boxShadow: "4px 4px 0 #8B7BA8",
-              }}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+              className="dj-button w-full"
               onClick={handleSubmit}
             >
               Sign Up
-            </motion.button>
+            </button>
 
             {/* Divider */}
             <div className="flex items-center gap-4 my-6">

@@ -18,7 +18,7 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
             className="campaign-title"
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/campaigns/${campaign.id}`);
+              navigate(`/dreamjars/${campaign.id}`);
             }}
           >
             {campaign.title}
