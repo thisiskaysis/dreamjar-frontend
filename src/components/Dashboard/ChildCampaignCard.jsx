@@ -19,48 +19,51 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
   const handleToggle = () => setExpanded((prev) => !prev);
 
   return (
-    <div className="child-campaign-card">
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      className="bg-white shadow-md rounded-xl overflow-hidden"
+    >
       {/* Summary */}
-      <div className="campaign-summary">
-        <div>
-          <h4
-            className="campaign-title"
-            onClick={() => navigate(`/dreamjars/${campaign.id}`)}
-          >
-            {campaign.title}
-          </h4>
-          <div className="campaign-progress-bar-bg">
-            <div
-              className="campaign-progress-bar-fill"
+      <div className="flex justify-between items-start p-3 cursor-pointer">
+        <div className="flex-1" onClick={() => navigate(`/dreamjars/${campaign.id}`)}>
+          <h4 className="font-semibold text-gray-800">{campaign.title}</h4>
+          <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
+            <motion.div
+              className="bg-pink-400 h-2 rounded-full"
               style={{ width: `${percentage}%` }}
+              initial={{ width: 0 }}
+              animate={{ width: `${percentage}%` }}
+              transition={{ duration: 0.8 }}
             />
           </div>
-          <p className="campaign-raised-goal">
+          <p className="text-xs text-gray-500 mt-1">
             ${campaign.amount_raised || 0} / ${campaign.goal}
           </p>
-          <p className="campaign-deadline-text">{remainingText}</p>
+          <p className="text-xs text-gray-400">{remainingText}</p>
         </div>
 
         <span
-          className={`expand-icon ${expanded ? "expanded" : ""}`}
+          className={`text-gray-400 text-xl ml-2 transform transition-transform ${
+            expanded ? "rotate-180" : ""
+          }`}
           onClick={handleToggle}
         >
           ▼
         </span>
       </div>
 
-      {/* Expanded actions */}
+      {/* Expanded Actions */}
       <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
-            className="campaign-actions"
+            className="flex flex-col gap-2 p-3 border-t border-gray-200"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ type: "ease", duration: 0.25 }}
+            transition={{ duration: 0.25 }}
           >
             <button
-              className="dj-button w-full"
+              className="dj-button w-full bg-pink-400 hover:bg-pink-500 text-white py-2 rounded-md"
               onClick={() => navigate(`/campaigns/${campaign.id}/edit`)}
             >
               Edit Campaign
@@ -73,7 +76,7 @@ function ChildCampaignCard({ campaign, childId, setChildren }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 

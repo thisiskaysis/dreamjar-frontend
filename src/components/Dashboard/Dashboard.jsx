@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import "./Dashboard.css";
 import CreateChild from "./ChildActions/CreateChild";
 import ChildCard from "./ChildCard";
@@ -15,60 +16,88 @@ function Dashboard({ user }) {
     setSelectedChildId(childId);
     setShowCampaignModal(true);
   };
-
   const closeCampaignModal = () => setShowCampaignModal(false);
 
   // Stats
   const totalCampaigns = children.reduce(
     (sum, c) => sum + (c.campaigns?.length || 0),
-    0
+    0,
+  );
+  const totalRaised = children.reduce(
+    (sum, c) =>
+      sum +
+      (c.campaigns?.reduce(
+        (csum, camp) => csum + (camp.amount_raised || 0),
+        0,
+      ) || 0),
+    0,
   );
 
   return (
-    <div className="dashboard">
+    <div className="flex flex-col gap-8 p-6 min-h-screen bg-gradient-to-br from-[#c9b3e0] via-[#fbcdd7] to-[#ffe7a1]">
       {/* Header */}
-      <header className="dashboard-header">
-        <h1>Welcome, {user.first_name}!</h1>
-        <p>Manage your children and campaigns below.</p>
+      <header className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-800 flex justify-center">
+          Welcome, {user.first_name}!
+        </h1>
+        <p className="text-gray-600 mt-1 flex justify-center">
+          Manage your children and campaigns below.
+        </p>
       </header>
 
-      {/* Top Panel: Create Child + Stats */}
-      <section className="dashboard-top">
-        <div className="create-child-section">
-          <h2>Create a New Child</h2>
-          <button
-            className="dj-button"
-            onClick={() => setShowCreateChildModal(true)}
+      {/* Stats Panel & Create Child */}
+      <div className="flex flex-col md:flex-row gap-6 mb-6">
+        {/* Stats */}
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <motion.div
+            className="bg-white rounded-2xl shadow p-4 text-center"
+            whileHover={{ scale: 1.03 }}
           >
-            Add Child
-          </button>
+            <p className="text-gray-500 font-medium">Total Children</p>
+            <p className="text-2xl font-bold">{children.length}</p>
+          </motion.div>
+          <motion.div
+            className="bg-white rounded-2xl shadow p-4 text-center"
+            whileHover={{ scale: 1.03 }}
+          >
+            <p className="text-gray-500 font-medium">Total Campaigns</p>
+            <p className="text-2xl font-bold">{totalCampaigns}</p>
+          </motion.div>
+          <motion.div
+            className="bg-white rounded-2xl shadow p-4 text-center"
+            whileHover={{ scale: 1.03 }}
+          >
+            <p className="text-gray-500 font-medium">Total Raised</p>
+            <p className="text-2xl font-bold">${totalRaised}</p>
+          </motion.div>
         </div>
+      </div>
 
-        <div className="dashboard-stats">
-          <div className="stat-card">
-            <h3>Total Children</h3>
-            <p>{children.length}</p>
-          </div>
-          <div className="stat-card">
-            <h3>Total Campaigns</h3>
-            <p>{totalCampaigns}</p>
-          </div>
-        </div>
-      </section>
+      {/* Create Child */}
+      <div className="flex items-center justify-center md:flex-none">
+        <button
+          className="dj-button bg-pink-400 hover:bg-pink-500 text-white font-semibold py-3 px-6 rounded-xl shadow-lg"
+          onClick={() => setShowCreateChildModal(true)}
+        >
+          Add Child
+        </button>
+      </div>
 
       {/* Children Grid */}
-      <section className="children-section">
+      <section>
         {children.length === 0 && (
-          <p>No children yet. Start by creating one!</p>
+          <p className="text-gray-500">
+            No children yet. Start by creating one!
+          </p>
         )}
 
-        <div className="children-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
           {children.map((child) => (
             <ChildCard
               key={child.id}
               child={child}
-              onOpenCampaignModal={openCampaignModal}
               setChildren={setChildren}
+              onOpenCampaignModal={openCampaignModal}
             />
           ))}
         </div>
@@ -86,8 +115,8 @@ function Dashboard({ user }) {
                       ...child,
                       campaigns: [...(child.campaigns || []), newCampaign],
                     }
-                  : child
-              )
+                  : child,
+              ),
             );
             closeCampaignModal();
           }}
