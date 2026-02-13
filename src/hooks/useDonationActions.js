@@ -7,8 +7,6 @@ export function useDonationActions() {
   const token = auth?.access;
 
   const createDonation = async (campaignId, data) => postDonation(campaignId, data, token);
-
-  // Fetch donations is always public
   const fetchDonations = async (campaignId) => getDonations(campaignId);
 
   return { createDonation, fetchDonations };
