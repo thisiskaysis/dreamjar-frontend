@@ -10,6 +10,15 @@
   width: 100%;
 }
 
+.jar-background {
+  position: fixed; /* stays in viewport */
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -10;
+  pointer-events: none;
+}
+
 .hero {
   position: relative;
   display: flex;

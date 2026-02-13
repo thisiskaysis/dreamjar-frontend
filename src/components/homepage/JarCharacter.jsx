@@ -15,7 +15,7 @@ export function JarCharacter() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+        <div className="absolute inset-0 -z-10 flex justify-center items-center opacity-80 pointer-events-none">
       {/* Background floating stars */}
       <motion.div
         className="absolute top-[10%] left-[15%]"
@@ -117,7 +117,7 @@ export function JarCharacter() {
       </motion.div>
 
       <motion.div
-        className="relative"
+        className="relative -translate-y-10"
         animate={{
           y: [0, -20, 0],
         }}

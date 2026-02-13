@@ -148,3 +148,18 @@ h2 {
   font-size: 14px;
   margin-top: 6px;
 }
+
+/* Glass Panel */
+.glass-panel {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.15);
+}

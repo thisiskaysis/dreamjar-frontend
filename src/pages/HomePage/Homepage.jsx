@@ -1,18 +1,13 @@
-import { Hero, HowItWorks, FeaturedCampaigns, ParentsSection, CTASection } from "../../components/homepage";
+import { Hero, HowItWorks, FeaturedCampaigns } from "../../components/homepage";
 import "./Homepage.css"
 
 function HomePage() {
     return (
-        <main className="home-main">
-            <section className="hero">
-            <Hero>
-            </Hero>
-            </section>
-            <HowItWorks />
-            <FeaturedCampaigns />
-            <ParentsSection />
-            <CTASection />
-        </main>
+        <div className="homepage w-full min-h-screen flex flex-col">
+      <Hero />
+      <FeaturedCampaigns />
+      <HowItWorks />
+      </div>
     );
 }
 
