@@ -16,7 +16,7 @@ function FeaturedCampaigns() {
   const slowDuration = 80;
 
   return (
-    <section className="featured-campaigns py-16 px-6">
+    <section className="featured-campaigns py-16 px-30">
       <h2 className="text-4xl font-bold text-center mb-12">Featured Campaigns</h2>
 
       <div className="featured-carousel relative overflow-hidden cursor-grab"
