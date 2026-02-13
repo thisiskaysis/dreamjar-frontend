@@ -26,7 +26,7 @@ function DonationsList({ donations }) {
       </div>
 
       {/* Donations List */}
-      <section className="flex flex-col items-center gap-4 w-full max-w-2xl">
+      <section className="glass-panel flex flex-col items-center gap-4 w-full max-w-2xl">
         {sortedDonations.map((donation) => (
           <Link
             key={donation.id}

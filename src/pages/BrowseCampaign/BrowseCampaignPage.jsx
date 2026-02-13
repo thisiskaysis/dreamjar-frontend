@@ -73,7 +73,7 @@ function BrowseCampaignPage() {
     <>
     <h1 className="browse-header">Browse Campaigns</h1>
 
-    <div className="browse-page">
+    <div className="browse-page glass-panel">
       <div className="search-container">
         {/* Search / Filter / Sort bar */}
         <SearchBar

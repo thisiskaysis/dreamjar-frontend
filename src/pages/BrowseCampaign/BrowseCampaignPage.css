@@ -1,14 +1,9 @@
 .browse-page {
-  padding: 32px;
   max-width: 1200px;
   margin: auto;
   margin-top: 20px;
   align-items: center;
   justify-content: center;
-  border: 3px solid #8B7BA8;
-  box-shadow: 4px 4px 0 #8B7BA8;
-  background: linear-gradient(135deg, #e0c3fc, #8ec5fc, #fbc2eb);
-  border-radius: 20px;
 }
 
 .browse-page h1 {

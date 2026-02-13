@@ -12,7 +12,7 @@ function SearchBar({ searchText, setSearchText, categoryFilter, setCategoryFilte
   };
 
   return (
-    <div className="search-bar">
+    <div className="search-bar glass-panel">
       {/* Search Input */}
       <input
         type="text"
