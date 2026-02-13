@@ -3,7 +3,7 @@ import "./Homepage.css"
 
 function HomePage() {
     return (
-        <main>
+        <main className="home-main">
             <section className="hero">
             <Hero>
             </Hero>

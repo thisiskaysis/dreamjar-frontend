@@ -12,7 +12,7 @@ function Hero({ children }) {
           </div>
           <JarCharacter />
         </div>
-        <div className="w-full h-full bg-gradient-to-br from-[#c9b3e0] via-[#fbcdd7] to-[#ffe7a1]"></div>
+        <div className="w-full h-full"></div>
       </div>
 
       <div className="hero-content relative z-10 flex items-center justify-center w-full h-full">

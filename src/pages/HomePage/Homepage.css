@@ -1,3 +1,4 @@
+
 .how-it-works, .parents-section, .cta-section {
   text-align: center;
   max-height: 350px;
@@ -16,7 +17,6 @@
   align-items: center;
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(135deg, #e0c3fc, #8ec5fc, #fbc2eb);
 }
 
 .hero-text {

@@ -31,6 +31,16 @@ body {
   padding: 0;
 }
 
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
 /* Buttons */
 .dj-button {
   height: 50px;

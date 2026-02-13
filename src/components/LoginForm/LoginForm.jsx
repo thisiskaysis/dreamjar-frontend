@@ -75,7 +75,7 @@ export function LoginForm() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#c9b3e0] via-[#fbcdd7] to-[#ffe7a1] relative overflow-hidden">
+    <div className="flex items-center justify-center min-h-screen relative overflow-hidden">
       {/* Background floating stars */}
       <motion.div
         className="absolute top-[10%] left-[15%]"
@@ -177,14 +177,14 @@ export function LoginForm() {
       </motion.div>
 
       {/* Main container */}
-      <div className="flex items-center gap-8 max-w-3xl w-full px-8">
+      <div className="flex items-center gap-0 max-w-3xl w-full px-8">
         {/* Form section */}
         <div className="flex-1 relative">
           {/* Form */}
           <form className="space-y-6">
             {/* Title */}
             <h1
-              className="text-8xl font-bold text-[#8B7BA8] text-center mb-8"
+              className="font-bold text-[#8B7BA8] text-center mb-8"
             >
               Welcome Back!
             </h1>

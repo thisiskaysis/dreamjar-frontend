@@ -48,7 +48,7 @@ function Dashboard({ user }) {
   );
 
   return (
-    <div className="flex flex-col gap-8 p-6 min-h-screen bg-gradient-to-br from-[#c9b3e0] via-[#fbcdd7] to-[#ffe7a1]">
+    <div className="flex flex-col gap-8 p-6 min-h-screen">
       {/* Header */}
       <header className="mb-6">
         <h1 className="flex justify-center">Welcome, {user.first_name}!</h1>
