@@ -18,7 +18,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="how-it-works py-16 px-6 bg-[#f7f0ff] text-center">
+    <section className="how-it-works py-16 px-6 text-center">
       <h2 className="text-4xl font-bold mb-12">How It Works</h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
         {steps.map((step, i) => (
