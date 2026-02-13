@@ -1,0 +1,18 @@
+.featured-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1rem;
+  scrollbar-width: none;
+}
+
+.featured-carousel-card {
+  flex: 0 0 auto; /* prevents shrinking */
+  min-width: 260px; /* same as Tailwind min-w-[260px] */
+  scroll-snap-align: start;
+}
+
+.featured-carousel::-webkit-scrollbar {
+  display: none;
+}

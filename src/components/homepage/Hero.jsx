@@ -17,13 +17,13 @@ function Hero({ children }) {
 
           <div className="flex gap-4 flex-wrap justify-center">
             <a
-              href="/browse"
+              href="/dreamjars"
               className="bg-white text-purple-700 font-bold py-3 px-6 rounded-xl shadow-lg hover:scale-105 transition-transform"
             >
               Browse Campaigns
             </a>
             <a
-              href="/dashboard"
+              href="/account"
               className="bg-purple-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:scale-105 transition-transform"
             >
               Start a Campaign
