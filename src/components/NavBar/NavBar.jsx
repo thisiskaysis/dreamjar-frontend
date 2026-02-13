@@ -18,7 +18,7 @@ function NavBar() {
             <nav className="navbar">
                 <div className="nav-left">
                     <NavLink to="/" className="logo">
-                        DreamJar
+                        <img src="/DreamJar.svg" alt="DreamJar Logo" className="logo-image" />
                     </NavLink>
                 </div>
 

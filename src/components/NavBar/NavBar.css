@@ -12,6 +12,11 @@
     font-size: 1.25rem;
 }
 
+.logo-image {
+    height: 40px;
+    width: auto;
+}
+
 .nav-left .logo {
     font-weight: 700;
     color: white;
