@@ -1,5 +1,4 @@
 import "./SearchBar.css";
-import { motion, useScroll, useTransform } from "framer-motion";
 
 function SearchBar({ searchText, setSearchText, categoryFilter, setCategoryFilter, sortOption, setSortOption }) {
   const handleSearchChange = (e) => {
