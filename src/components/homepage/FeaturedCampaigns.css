@@ -8,8 +8,8 @@
 }
 
 .featured-carousel-card {
-  flex: 0 0 auto; /* prevents shrinking */
-  min-width: 260px; /* same as Tailwind min-w-[260px] */
+  flex: 0 0 auto;
+  width: 260px;
   scroll-snap-align: start;
 }
 
