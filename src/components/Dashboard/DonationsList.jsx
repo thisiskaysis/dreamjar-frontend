@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"; // for linking to campaigns
+import { Link } from "react-router-dom";
 
 function DonationsList({ donations }) {
   const sortedDonations = [...donations].sort(
@@ -30,19 +30,16 @@ function DonationsList({ donations }) {
         {sortedDonations.map((donation) => (
           <Link
             key={donation.id}
-            to={`/dreamjars/${donation.campaign}`}
+            to={`/dreamjars/${donation.campaign.id}`}
             className="stat-panel w-full hover:shadow-lg transition-shadow"
           >
-            <p className="font-semibold text-center">{donation.campaign.title}</p>
-            <p className="text-sm text-gray-600 text-center">
-              Child: {donation.campaign.child_name}
-            </p>
-            <p className="text-lg font-bold text-center">Amount: ${donation.amount}</p>
+            <h3 className="font-semibold text-left text-xl">{donation.campaign.title}</h3>
+            <p className="text-lg font-bold text-center">You donated ${donation.amount} to {donation.campaign.child_name}</p>
             {donation.comment && (
               <p className="italic text-gray-500 text-center">"{donation.comment}"</p>
             )}
-            <p className="text-gray-500 text-sm text-center">
-              Donated on {new Date(donation.date_donated).toLocaleDateString()}
+            <p className="text-gray-500 text-sm text-right">
+              {new Date(donation.date_donated).toLocaleDateString()}
             </p>
           </Link>
         ))}
