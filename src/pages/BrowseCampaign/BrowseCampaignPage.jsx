@@ -71,31 +71,30 @@ function BrowseCampaignPage() {
 
   return (
     <>
-    <h1 className="browse-header">Browse Campaigns</h1>
+      <h1 className="browse-header">Browse Campaigns</h1>
 
-    <div className="browse-page glass-panel">
-      <div className="search-container">
-        {/* Search / Filter / Sort bar */}
-        <SearchBar
-          searchText={searchText}
-          setSearchText={setSearchText}
-          categoryFilter={categoryFilter}
-          setCategoryFilter={setCategoryFilter}
-          sortOption={sortOption}
-          setSortOption={setSortOption}
-        />
+      <div className="browse-page glass-panel">
+        <div className="search-container">
+          <SearchBar
+            searchText={searchText}
+            setSearchText={setSearchText}
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
+            sortOption={sortOption}
+            setSortOption={setSortOption}
+          />
         </div>
 
-      {displayCampaigns.length === 0 ? (
-        <p className="no-campaigns">No campaigns available at the moment.</p>
-      ) : (
-        <div className="browse-grid">
-          {displayCampaigns.map((campaign) => (
-            <BrowseCampaignCard key={campaign.id} campaign={campaign} />
-          ))}
-        </div>
-      )}
-    </div>
+        {displayCampaigns.length === 0 ? (
+          <p className="no-campaigns">No campaigns available at the moment.</p>
+        ) : (
+            <div className="browse-grid">
+              {displayCampaigns.map((campaign) => (
+                <BrowseCampaignCard key={campaign.id} campaign={campaign} />
+              ))}
+            </div>
+        )}
+      </div>
     </>
   );
 }

@@ -60,7 +60,7 @@ function FeaturedCampaigns() {
                 ></div>
               </div>
               <a
-                href={`/campaign/${c.id}`}
+                href={`/dreamjars/${c.id}`}
                 className="mt-auto text-center bg-purple-700 text-white py-2 px-4 rounded-xl hover:scale-105 transition-transform"
               >
                 Donate

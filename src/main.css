@@ -99,11 +99,6 @@ body {
     transform: translateY(0);
 }
 
-
-h2 {
-  font-size: xx-large;
-}
-
 /* Forms */
 .form-label {
   position: absolute;
