@@ -39,6 +39,7 @@ body {
 
 .main-content {
   flex: 1;
+  padding-top: 8rem;
 }
 
 /* Buttons */
@@ -74,21 +75,28 @@ body {
 }
 
 .tab-variant {
-  border-radius: 10px;
-  box-shadow: none;
-  border: 2px solid #8B7BA8;
-  background: inherit;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    background: rgba(108, 99, 255, 0.5);
+    transition: all 0.25s ease;
 }
 
 /* Hover effect */
 .tab-variant:hover {
-  background: inherit;
+    background: rgba(108, 99, 255, 0.2);
+    transform: translateY(-2px);
+    cursor: pointer;
 }
 
 /* Currently active tab */
 .tab-variant.active {
-  transform: translateY(-2px);                
-  box-shadow: inset 2px 2px 0 #5e4970;
+    background-color: #ffde7d;
+    color: #6c63ff;
+    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.2);
+    transform: translateY(0);
 }
 
 

@@ -6,7 +6,7 @@ import getChildAvatar from "./ChildActions/getChildAvatar";
 function ChildCard({ child, setChildren, onOpenCampaignModal }) {
   return (
     <div
-      className="child-card flex flex-col items-center text-center"
+      className="child-card flex flex-col items-center text-center w-full"
     >
       {/* Avatar */}
       <div className="avatar">

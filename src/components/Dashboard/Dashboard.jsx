@@ -58,13 +58,13 @@ function Dashboard({ user }) {
         {/* Page Toggle */}
         <div className="flex gap-4 mt-4 justify-center">
           <button
-            className={`dj-button tab-variant ${activePage === "children" ? "active" : ""}`}
+            className={`tab-variant ${activePage === "children" ? "active" : ""}`}
             onClick={() => setActivePage("children")}
           >
             My Children
           </button>
           <button
-            className={`dj-button tab-variant ${activePage === "donations" ? "active" : ""}`}
+            className={`tab-variant ${activePage === "donations" ? "active" : ""}`}
             onClick={() => setActivePage("donations")}
           >
             My Donations
