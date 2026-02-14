@@ -57,8 +57,8 @@
 }
 
 .campaign-title {
-  font-size: 28px;
   font-weight: bold;
+  font-size: 40px;
   color: #5a3b91;
   margin: 0;
 }
@@ -105,7 +105,8 @@
   margin: 0;
 }
 
-.campaign-description h3 {
+.campaign-description h2 {
+  font-size: 35px;
   margin: 16px 0 4px 0;
   color: #5a3b91;
 }
