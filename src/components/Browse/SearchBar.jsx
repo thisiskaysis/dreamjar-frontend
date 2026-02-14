@@ -16,7 +16,7 @@ function SearchBar({ searchText, setSearchText, categoryFilter, setCategoryFilte
       {/* Search Input */}
       <input
         type="text"
-        placeholder="Search campaigns..."
+        placeholder="Search DreamJars..."
         value={searchText}
         onChange={handleSearchChange}
       />

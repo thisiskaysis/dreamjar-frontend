@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/use-auth";
+import { useMyDonations } from "../../hooks/use-myDonations";
 import "./Dashboard.css";
 import CreateChild from "./ChildActions/CreateChild";
 import CreateCampaignForm from "../Campaigns/CreateCampaignForm";
@@ -6,10 +8,12 @@ import ChildrenTab from "./ChildrenTab";
 import DonationsList from "./DonationsList";
 import Modal from "../UI/Modal";
 import SettingsTab from "./Settings";
-import { useMyDonations } from "../../hooks/use-myDonations";
 
-function Dashboard({ user }) {
-  const [children, setChildren] = useState(user.children || []);
+function Dashboard() {
+  const { auth } = useAuth();
+  const user = auth?.user;
+
+  const [children, setChildren] = useState([]);
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [showCampaignModal, setShowCampaignModal] = useState(false);
   const [showCreateChildModal, setShowCreateChildModal] = useState(false);
@@ -23,6 +27,12 @@ function Dashboard({ user }) {
     setShowCampaignModal(true);
   };
   const closeCampaignModal = () => setShowCampaignModal(false);
+
+  useEffect(() => {
+    if(user?.children) {
+      setChildren(user.children);
+    }
+  }, [user]);
 
   useEffect(() => {
     const loadDonations = async () => {
@@ -48,6 +58,8 @@ function Dashboard({ user }) {
     0,
   );
 
+  console.log("AUTH:", auth);
+
   return (
     <div className="flex flex-col gap-8 p-6 min-h-screen">
       {/* Header */}
@@ -71,8 +83,8 @@ function Dashboard({ user }) {
             My Donations
           </button>
           <button
-          className={`tab-variant ${activePage === "settings" ? "active" : ""}`}
-          onClick={() => setActivePage("settings")}
+            className={`tab-variant ${activePage === "settings" ? "active" : ""}`}
+            onClick={() => setActivePage("settings")}
           >
             Settings
           </button>
@@ -99,7 +111,7 @@ function Dashboard({ user }) {
 
       {activePage === "settings" && (
         <section>
-          <SettingsTab user={user}/>
+          <SettingsTab user={user} />
         </section>
       )}
 

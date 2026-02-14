@@ -46,12 +46,18 @@ export function LoginForm() {
               headers: {
                 Authorization: `Bearer ${access}`,
               },
-            }
+            },
           );
 
           if (!userResponse.ok) throw new Error("Failed to fetch user.");
 
-          setAuth({ access });
+          const userData = await userResponse.json();
+
+          setAuth({
+            access,
+            user: userData,
+          });
+          
           navigate("/account");
         })
         .catch((error) => {
@@ -62,9 +68,7 @@ export function LoginForm() {
 
   return (
     <div className="relative flex items-center justify-center overflow-hidden px-4 py-12">
-
       <div className="absolute inset-0 z-0 pointer-events-none">
-
         {/* Floating Star 1 */}
         <motion.div
           className="absolute top-[10%] left-[15%]"
@@ -86,7 +90,12 @@ export function LoginForm() {
         <motion.div
           className="absolute top-[25%] right-[20%]"
           animate={{ y: [0, 25, 0], rotate: [360, 0], scale: [1, 1.15, 1] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
         >
           <svg width="60" height="60" viewBox="0 0 60 60">
             <path
@@ -102,8 +111,17 @@ export function LoginForm() {
         {/* Floating Star 3 */}
         <motion.div
           className="absolute bottom-[20%] left-[25%]"
-          animate={{ y: [0, -20, 0], rotate: [0, 180, 360], scale: [1, 1.3, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 180, 360],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         >
           <svg width="70" height="70" viewBox="0 0 70 70">
             <path
@@ -120,7 +138,6 @@ export function LoginForm() {
         <div className="absolute bottom-0 right-0 opacity-80 scale-75 sm:scale-90 md:scale-100">
           <LoginJar />
         </div>
-
       </div>
 
       {/* =========== FORM ============ */}
@@ -205,7 +222,6 @@ export function LoginForm() {
       <Modal isOpen={showSignUpModal} onClose={() => setShowSignUpModal(false)}>
         <SignUpForm />
       </Modal>
-
     </div>
   );
 }

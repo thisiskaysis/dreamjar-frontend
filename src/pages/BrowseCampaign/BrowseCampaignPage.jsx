@@ -71,7 +71,7 @@ function BrowseCampaignPage() {
 
   return (
     <>
-      <h1 className="browse-header">Browse Campaigns</h1>
+      <h1 className="browse-header">Browse DreamJars</h1>
 
       <div className="browse-page glass-panel">
         <div className="search-container">

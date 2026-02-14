@@ -1,5 +1,5 @@
 import { useAuth } from "./use-auth";
-import putUser from "../api/get-user";
+import putUser from "../api/put-user";
 import deleteUser from "../api/delete-user";
 
 export function useUserActions() {

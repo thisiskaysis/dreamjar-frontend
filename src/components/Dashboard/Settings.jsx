@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useAuth } from "../../hooks/use-auth";
 import { useUserActions } from "../../hooks/useUserActions";
 
 export default function SettingsTab({ user }) {
   const [notifications, setNotifications] = useState(true);
   const [privateProfile, setPrivateProfile] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const { setAuth } = useAuth();
   const { editUser } = useUserActions();
 
   const [errors, setErrors] = useState({});
@@ -33,6 +36,7 @@ export default function SettingsTab({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
+    setSuccessMessage("");
 
     try {
       const updatedUser = await editUser(user.id, formData);
@@ -41,6 +45,8 @@ export default function SettingsTab({ user }) {
         ...prev,
         user: updatedUser,
       }));
+
+      setSuccessMessage("Details updated successfully");
     } catch (error) {
       setErrors(error);
     }
@@ -58,67 +64,73 @@ export default function SettingsTab({ user }) {
         <div className="mb-6">
           <h2 className="font-bold">Settings</h2>
           <p className="text-gray-500 mt-1">
+            {successMessage && (
+              <div className="bg-green-100 text-green-700 px-4 py-3 rounded-xl mb-4">
+                {successMessage}
+              </div>
+            )}
             Manage your account preferences and privacy.
           </p>
         </div>
 
         {/* Account Section */}
-        <form className="space-y-6">
-          <div className="space-y-6" onSubmit={handleSubmit}>
-            {/* First Name */}
-            <div>
-              <label className="dream-label">First Name</label>
-              <input
-                type="text"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleChange}
-                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-              />
-            </div>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          {/* First Name */}
+          <div>
+            <label className="dream-label">First Name</label>
+            <input
+              type="text"
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+            />
+          </div>
 
-            {/* Last Name */}
-            <div>
-              <label className="dream-label">Last Name</label>
-              <input
-                type="text"
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleChange}
-                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-              />
-            </div>
+          {/* Last Name */}
+          <div>
+            <label className="dream-label">Last Name</label>
+            <input
+              type="text"
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+            />
+          </div>
 
-            {/* Username */}
-            <div>
-              <label className="dream-label">Username</label>
-              <input
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-              />
-            </div>
+          {/* Username */}
+          <div>
+            <label className="dream-label">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+            />
+          </div>
 
-            {/* Email */}
-            <div>
-              <label className="dream-label">Email Address</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-              />
-            </div>
+          {/* Email */}
+          <div>
+            <label className="dream-label">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+            />
+          </div>
 
-            {/* Change Password */}
-            <div>
-              <button className="tab-variant w-full flex justify-center">
-                Save Changes
-              </button>
-            </div>
+          {/* Change Password */}
+          <div>
+            <button
+              type="submit"
+              className="tab-variant w-full flex justify-center"
+            >
+              Save Changes
+            </button>
           </div>
 
           {/* Divider */}
