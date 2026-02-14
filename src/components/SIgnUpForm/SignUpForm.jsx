@@ -44,9 +44,9 @@ export function SignUpForm() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen relative overflow-hidden">
+    <div className="flex items-center justify-center relative overflow-hidden">
       {/* Main container */}
-      <div className="flex items-center gap-8 max-w-5xl w-full px-8">
+      <div className="flex items-center gap-8 w-full px-8">
         {/* Form section */}
         <div className="flex-1 relative">
 
