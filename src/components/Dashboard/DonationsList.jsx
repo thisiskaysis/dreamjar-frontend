@@ -31,14 +31,14 @@ function DonationsList({ donations }) {
       </div>
 
       {/* Donations List */}
-      <section className="glass-panel flex flex-col items-center gap-4 w-full max-w-2xl">
+      <section className="glass-no-hover flex flex-col items-center gap-4 w-full max-w-2xl">
         {sortedDonations.map((donation) => (
           <Link
             key={donation.id}
             to={`/dreamjars/${donation.campaign.id}`}
-            className="stat-panel w-full hover:shadow-lg transition-shadow"
-          >
-            <h3 className="font-semibold text-left text-xl">{donation.campaign.title}</h3>
+            className="glass-panel w-full hover:shadow-lg transition-shadow">
+
+            <h3 className="font-semibold text-left text-xl cursor-pointer hover:text-indigo-500/70">{donation.campaign.title}</h3>
             <p className="text-lg font-bold text-center">You donated ${donation.amount} to {donation.campaign.child_name}</p>
             {donation.comment && (
               <p className="italic text-gray-500 text-center">"{donation.comment}"</p>

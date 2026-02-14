@@ -34,7 +34,7 @@ function DeleteCampaign({ campaignId, setChildren }) {
     <button 
      onClick={handleRemoveCampaign}
      className="w-full py-3 px-3 rounded-xl cursor-pointer bg-red-200 text-red-600 hover:bg-red-300 transition">
-      Delete Campaign
+      Delete DreamJar
     </button>
   );
 }

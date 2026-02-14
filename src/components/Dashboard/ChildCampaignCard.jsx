@@ -77,17 +77,10 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
           <div className="flex gap-4">
             {/* IMAGE */}
             <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-              {campaign.image ? (
                 <img
-                  src={campaign.image}
-                  alt={campaign.title}
+                  src={campaign.image || "/dreamjar-banner.svg"}
                   className="w-full h-full object-cover"
                 />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-2xl">
-                  🎨
-                </div>
-              )}
             </div>
 
             {/* CONTENT */}
@@ -95,7 +88,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <h4
-                    className="text-lg font-semibold cursor-pointer"
+                    className="text-lg font-semibold cursor-pointer hover:text-indigo-500/70"
                     onClick={() => navigate(`/dreamjars/${campaign.id}`)}
                   >
                     {campaign.title}
@@ -109,7 +102,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
                 </div>
 
                 <button
-                  className="text-blue-500 hover:underline text-sm"
+                  className="w-full max-w-24 py-3 rounded-xl cursor-pointer bg-blue-200 text-blue-600 hover:bg-blue-300 transition"
                   onClick={() => setEditing(true)}
                 >
                   Edit
@@ -193,23 +186,26 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
 
             {/* BUTTONS */}
             <div className="flex flex-col gap-2 mt-2">
-              <button className="tab-variant w-full" onClick={handleSave}>
+              <button
+              type="submit"
+              className="w-full py-2 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition" 
+              onClick={handleSave}>
                 Save Changes
               </button>
 
               {campaign.is_open ? (
                 <button
-                  className="w-full py-2 rounded-xl bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
+                  className="w-full py-2 cursor-pointer rounded-xl bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
                   onClick={() => setShowCloseModal(true)}
                 >
-                  Close Campaign
+                  Close DreamJar
                 </button>
               ) : (
                 <button
                   className="w-full py-2 rounded-xl bg-green-100 text-green-700 hover:bg-green-200 transition"
                   onClick={() => handleToggleCampaignStatus(true)}
                 >
-                  Reopen Campaign
+                  Reopen DreamJar
                 </button>
               )}
 
@@ -220,7 +216,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
               />
 
               <button
-                className="w-full py-2 rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
+                className="w-full py-2 cursor-pointer rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
                 onClick={() => setEditing(false)}
               >
                 Cancel

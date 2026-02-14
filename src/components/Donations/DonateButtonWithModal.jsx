@@ -19,7 +19,11 @@ function DonateButtonWithModal({ campaignId, onSuccess, children }) {
 
   return (
     <>
-      <button type="button" onClick={openModal} className="dj-button w-full">
+      <button
+      type="button"
+      onClick={openModal}
+      className="w-full py-3 mt-10 rounded-xl cursor-pointer bg-indigo-500 text-white hover:bg-indigo-400 transition"
+      >
         {children || "Donate"}
       </button>
       <Modal isOpen={isOpen} onClose={closeModal}>

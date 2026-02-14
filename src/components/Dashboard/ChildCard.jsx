@@ -15,8 +15,7 @@ export default function ChildCard({ child, setChildren, onOpenCampaignModal }) {
 
   return (
     <motion.div
-      whileHover={{ scale: 1.01 }}
-      className="glass-panel p-6 rounded-3xl shadow-md border border-sky-100 flex flex-col gap-4"
+      className="glass-no-hover p-6 rounded-3xl shadow-md border border-sky-100 flex flex-col gap-4"
     >
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -30,7 +29,7 @@ export default function ChildCard({ child, setChildren, onOpenCampaignModal }) {
             <h2 className="text-xl font-semibold">{child?.name || "Unnamed"}</h2>
             <p className="text-gray-500">Age: {child?.age || "?"}</p>
             <p className="text-gray-700 font-medium mt-1">
-              {child.campaigns?.length || 0} Campaigns, ${totalRaised} Raised
+              {child.campaigns?.length || 0} DreamJars, ${totalRaised} Raised
             </p>
           </div>
         </div>
@@ -43,10 +42,10 @@ export default function ChildCard({ child, setChildren, onOpenCampaignModal }) {
 
       {/* Create Campaign */}
       <button
-        className="tab-variant w-full mt-2"
+        className="w-full py-3 rounded-xl cursor-pointer bg-indigo-500 text-white hover:bg-indigo-400 transition"
         onClick={() => onOpenCampaignModal(child.id)}
       >
-        Create New Campaign
+        Create New DreamJar
       </button>
 
       {/* Campaigns */}
@@ -55,7 +54,7 @@ export default function ChildCard({ child, setChildren, onOpenCampaignModal }) {
           className="glass-panel flex justify-between cursor-pointer"
           onClick={() => setExpanded(!expanded)}
         >
-          <h3 className="text-2xl font-semibold text-gray-700">Campaigns</h3>
+          <h3 className="text-2xl font-semibold text-gray-700">DreamJars</h3>
           <span className={`text-gray-400 text-xl transform transition-transform ${expanded ? "rotate-180" : ""}`}>
             ▼
           </span>

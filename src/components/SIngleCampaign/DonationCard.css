@@ -43,14 +43,21 @@
 }
 
 .donation-amount {
-  font-size: 18px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.donation-name {
+  font-size: 16px;
   font-weight: bold;
   color: #333;
   margin: 0;
 }
 
 .donation-comment {
-  font-size: 14px;
+  font-size: 16px;
   color: #555;
   margin: 0;
   font-style: italic;
@@ -96,6 +103,7 @@
   .donation-card {
     flex-direction: row;
   }
+
   .donation-content {
     flex: 1;
   }

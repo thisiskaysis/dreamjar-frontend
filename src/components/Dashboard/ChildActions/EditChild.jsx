@@ -24,7 +24,9 @@ function EditChild({ childId, setChildren }) {
     };
 
     return (
-        <button className="dj-button" onClick={handleEditChild}>Edit Child</button>
+        <button 
+        className="w-full min-w-24 py-3 rounded-xl cursor-pointer bg-blue-200 text-blue-600 hover:bg-blue-300 transition" 
+        onClick={handleEditChild}>Edit</button>
     )
 }
 

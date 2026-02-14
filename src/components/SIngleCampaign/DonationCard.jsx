@@ -1,6 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import DonateButtonWithModal from "../../components/Donations/DonateButtonWithModal";
-import { useDonationActions } from "../../hooks/useDonationActions";
 import "./DonationCard.css";
 
 function DonationCard({ campaignId, donations = [], onDonateSuccess }) {
@@ -13,7 +12,7 @@ function DonationCard({ campaignId, donations = [], onDonateSuccess }) {
 
   return (
     <div className="donation-wrapper">
-      <div className="donation-card">
+      <div className="glass-panel donation-card">
         <div className="donation-content">
           <h1>Donations</h1>
 
@@ -23,14 +22,16 @@ function DonationCard({ campaignId, donations = [], onDonateSuccess }) {
             </p>
           ) : (
             sortedDonations.map((donation) => (
-              <div key={donation.id} className="donation-item">
+              <div key={donation.id} className="glass-no-hover donation-item">
                 <p className="donation-amount">
-                  ${donation.amount} from {donation.donor_name || "Anonymous"}
+                  ${donation.amount}
                 </p>
+                <p className="donation-name">
+                  from {donation.donor_name || "Anonymous"}</p>
                 {donation.comment && (
                   <p className="donation-comment">{donation.comment}</p>
                 )}
-                <p className="donation-date">
+                <p className="donation-date text-right">
                   {new Date(donation.date_donated).toLocaleDateString()}
                 </p>
               </div>

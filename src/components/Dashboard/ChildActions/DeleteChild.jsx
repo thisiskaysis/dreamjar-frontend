@@ -21,9 +21,9 @@ function DeleteChild({ childId, setChildren }) {
 
   return (
     <button
-    className="w-full py-3 rounded-xl cursor-pointer bg-red-200 text-red-600 hover:bg-red-300 transition"
+    className="w-full min-w-24 py-3 rounded-xl cursor-pointer bg-red-200 text-red-600 hover:bg-red-300 transition"
     onClick={handleRemoveChild}>
-      Delete Child
+      Delete
     </button>
   );
 }

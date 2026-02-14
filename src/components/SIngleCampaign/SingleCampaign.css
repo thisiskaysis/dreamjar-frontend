@@ -78,7 +78,6 @@
   margin: 0;
 }
 
-/* Progress (same style, slightly bigger) */
 .campaign-progress-bg {
   width: 100%;
   height: 10px;
@@ -94,7 +93,7 @@
 }
 
 .campaign-progress-text {
-  font-size: 14px;
+  font-size: 20px;
   color: #555;
   margin: 4px 0 0 0;
 }
@@ -106,7 +105,8 @@
 }
 
 .campaign-description h2 {
-  font-size: 35px;
+  font-size: 26px;
+  font-weight: bold;
   margin: 16px 0 4px 0;
   color: #5a3b91;
 }

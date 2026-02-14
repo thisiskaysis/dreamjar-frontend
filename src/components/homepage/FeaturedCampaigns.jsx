@@ -12,8 +12,8 @@ function FeaturedCampaigns() {
   if (error) return <p className="text-center py-16 text-red-500">Error loading campaigns: {error.message}</p>;
 
   const loopedCampaigns = [...campaigns, ...campaigns];
-  const baseDuration = 40;
-  const slowDuration = 80;
+  const baseDuration = 80;
+  const slowDuration = 120;
 
   return (
     <section className="featured-campaigns py-16 px-30">

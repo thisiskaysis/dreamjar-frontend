@@ -27,7 +27,7 @@ function ChildrenTab({
               <p className="text-2xl font-bold">{children.length}</p>
             </div>
             <div className="glass-panel p-4 rounded-3xl shadow-md border border-sky-100 text-center">
-              <p className="text-gray-500">Total Campaigns</p>
+              <p className="text-gray-500">Total DreamJars</p>
               <p className="text-2xl font-bold">{totalCampaigns}</p>
             </div>
             <div className="glass-panel p-4 rounded-3xl shadow-md border border-sky-100 text-center">
@@ -40,7 +40,7 @@ function ChildrenTab({
         {/* Add Child Button */}
         <div className="flex items-center justify-center mb-6">
           <button
-            className="tab-variant w-90"
+            className="w-full max-w-64 py-3 rounded-xl cursor-pointer bg-indigo-600 text-white hover:bg-indigo-500 transition" 
             onClick={() => setShowCreateChildModal(true)}
           >
             Add Child
