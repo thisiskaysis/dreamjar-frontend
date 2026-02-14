@@ -5,6 +5,7 @@ import CreateCampaignForm from "../Campaigns/CreateCampaignForm";
 import ChildrenTab from "./ChildrenTab";
 import DonationsList from "./DonationsList";
 import Modal from "../UI/Modal";
+import SettingsTab from "./Settings";
 import { useMyDonations } from "../../hooks/use-myDonations";
 
 function Dashboard({ user }) {
@@ -69,6 +70,12 @@ function Dashboard({ user }) {
           >
             My Donations
           </button>
+          <button
+          className={`tab-variant ${activePage === "settings" ? "active" : ""}`}
+          onClick={() => setActivePage("settings")}
+          >
+            Settings
+          </button>
         </div>
       </header>
 
@@ -87,6 +94,12 @@ function Dashboard({ user }) {
       {activePage === "donations" && (
         <section>
           <DonationsList donations={donations} />
+        </section>
+      )}
+
+      {activePage === "settings" && (
+        <section>
+          <SettingsTab user={user}/>
         </section>
       )}
 
