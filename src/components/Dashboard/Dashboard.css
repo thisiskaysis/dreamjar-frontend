@@ -1,49 +1,115 @@
+/* --------------------------
+   Stats Panel (Dashboard)
+---------------------------- */
 .stat-panel {
-  background-color: #ffffffc2;
+  background-color: #ffffffc2;  
   backdrop-filter: blur(20px);
   border-radius: 16px;
   text-align: center;
-  transition: transform 0.2s ease;
-  padding: 0.75rem 1.5rem;
-  border: 1px solid #8B7BA8;
-  box-shadow: 2px 2px 0 #8B7BA8;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;      
+  padding: 1rem 1.5rem;
+  border: 1px solid #8B7BA8;
+  box-shadow: 2px 2px 0 #8B7BA8;
+  transition: transform 0.2s ease;
 }
 
 .stat-panel:hover {
   transform: scale(1.03);
 }
 
-/* Child card styles */
-/* .child-card {
+/* --------------------------
+   Child Card
+---------------------------- */
+.child-card {
   border-radius: 20px;
-  padding: 0.75rem 1.5rem;
+  padding: 1.5rem;
   border: 4px solid #8B7BA8;
   box-shadow: 2px 2px 0 #8B7BA8;
   transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 1.25rem;
+  background-color: #ffffffc2;
+  backdrop-filter: blur(20px);
   text-align: center;
-} */
+}
 
 .child-card:hover {
   transform: scale(1.02);
 }
 
+/* --------------------------
+   Avatar
+---------------------------- */
 .avatar {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  margin-bottom: 1rem;
   overflow: hidden;
+  margin-bottom: 1.5rem;
+  border: 3px solid #8B7BA8;
 }
 
+/* --------------------------
+   Campaign Dropdown Card
+---------------------------- */
 .campaign-dropdown {
   background-color: #ffffff;
   margin-top: 1rem;
   border-radius: 16px;
   width: 100%;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.5rem;
   border: 4px solid #8B7BA8;
   box-shadow: 2px 2px 0 #8B7BA8;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.campaign-dropdown:hover {
+  transform: scale(1.01);
+}
+
+/* --------------------------
+   Campaign Title
+---------------------------- */
+.campaign-dropdown h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+/* --------------------------
+   Progress Bar
+---------------------------- */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #f472b6;
+  border-radius: 9999px;
+  transition: width 0.8s ease;
+}
+
+/* --------------------------
+   Campaign Actions (Expanded)
+---------------------------- */
+.campaign-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid #d1d5db;
+  padding-top: 0.5rem;
 }

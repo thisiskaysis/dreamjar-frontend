@@ -1,59 +1,91 @@
+import { useState } from "react";
 import ChildCampaignCard from "./ChildCampaignCard";
 import EditChild from "./ChildActions/EditChild";
 import DeleteChild from "./ChildActions/DeleteChild";
 import getChildAvatar from "./ChildActions/getChildAvatar";
+import { motion, AnimatePresence } from "framer-motion";
 
-function ChildCard({ child, setChildren, onOpenCampaignModal }) {
+export default function ChildCard({ child, setChildren, onOpenCampaignModal }) {
+  const [expanded, setExpanded] = useState(true);
+
+  const totalRaised = child.campaigns?.reduce(
+    (sum, c) => sum + (c.amount_raised || 0),
+    0
+  ) || 0;
+
   return (
-    <div
-      className="child-card glass-panel flex flex-col items-center text-center w-full"
+    <motion.div
+      whileHover={{ scale: 1.01 }}
+      className="glass-panel p-6 rounded-3xl shadow-md border border-sky-100 flex flex-col gap-4"
     >
-      {/* Avatar */}
-      <div className="avatar">
-        <img
-          src={getChildAvatar(child)}
-          alt={child?.name || "Child"}
-        />
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <img
+            src={getChildAvatar(child)}
+            alt={child?.name || "Child"}
+            className="w-20 h-20 rounded-full object-cover shadow-sm"
+          />
+          <div>
+            <h2 className="text-xl font-semibold">{child?.name || "Unnamed"}</h2>
+            <p className="text-gray-500">Age: {child?.age || "?"}</p>
+            <p className="text-gray-700 font-medium mt-1">
+              {child.campaigns?.length || 0} Campaigns, ${totalRaised} Raised
+            </p>
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          <EditChild childId={child.id} setChildren={setChildren} />
+          <DeleteChild childId={child.id} setChildren={setChildren} />
+        </div>
       </div>
 
-      <h2 className="font-semibold text-lg">{child?.name || "Unnamed"}</h2>
-      <p className="text-gray-500 text-lg mb-3">Age: {child?.age || "?"}</p>
-
-      {/* Actions */}
-      <div className="flex gap-3 flex-wrap justify-center mb-3">
-        <button
-          className="dj-button"
-          onClick={() => onOpenCampaignModal(child.id)}
-        >
-          Create Campaign
-        </button>
-        <EditChild childId={child.id} setChildren={setChildren} />
-        <DeleteChild childId={child.id} setChildren={setChildren} />
-      </div>
+      {/* Create Campaign */}
+      <button
+        className="tab-variant w-full mt-2"
+        onClick={() => onOpenCampaignModal(child.id)}
+      >
+        Create New Campaign
+      </button>
 
       {/* Campaigns */}
-      <h3 className="font-semibold text-2xl text-gray-600 w-full mt-5 mb-2">
-        {child.name}'s Campaigns</h3>
-
-      {child.campaigns?.length > 0 && (
-        <div className="flex flex-col gap-2 w-full mt-2">
-          {child.campaigns.map((c) => (
-            <ChildCampaignCard
-              key={c.id}
-              campaign={c}
-              childId={child.id}
-              setChildren={setChildren}
-            />
-          ))}
+      <div className="mt-4">
+        <div
+          className="flex justify-between cursor-pointer"
+          onClick={() => setExpanded(!expanded)}
+        >
+          <h3 className="text-lg font-semibold text-gray-700">Campaigns</h3>
+          <span className={`text-gray-400 text-xl transform transition-transform ${expanded ? "rotate-180" : ""}`}>
+            ▼
+          </span>
         </div>
-      )}
 
-      {child.campaigns?.length === 0 && (
-        <p className="text-gray-500 italic">
-          No campaigns yet.</p>
-      )}
-    </div>
+        <AnimatePresence initial={false}>
+          {expanded && (
+            <motion.div
+              className="flex flex-col gap-3 mt-2"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {child.campaigns?.length > 0 ? (
+                child.campaigns.map((c) => (
+                  <ChildCampaignCard
+                    key={c.id}
+                    campaign={c}
+                    childId={child.id}
+                    setChildren={setChildren}
+                  />
+                ))
+              ) : (
+                <p className="text-gray-500 italic">No campaigns yet.</p>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
   );
 }
-
-export default ChildCard;
