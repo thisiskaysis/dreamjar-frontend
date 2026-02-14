@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAuth } from "../../hooks/use-auth";
 import { useUserActions } from "../../hooks/useUserActions";
 
 export default function SettingsTab({ user, onUserUpdate }) {
-  const { setAuth } = useAuth();
   const { editUser, removeUser } = useUserActions();
 
   const [formData, setFormData] = useState({});
@@ -44,13 +42,6 @@ export default function SettingsTab({ user, onUserUpdate }) {
       setErrors(err);
     }
   };
-
-  useEffect(() => {
-  if (successMessage) {
-    const timer = setTimeout(() => setSuccessMessage(""), 3000);
-    return () => clearTimeout(timer);
-  }
-}, [successMessage]);
 
   const confirmDelete = async () => {
     try {

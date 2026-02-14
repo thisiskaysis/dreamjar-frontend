@@ -15,6 +15,7 @@ function Dashboard({ user, setUser }) {
   const [showCreateChildModal, setShowCreateChildModal] = useState(false);
   const [activePage, setActivePage] = useState("children");
   const [donations, setDonations] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { fetchMyDonations } = useMyDonations();
 
@@ -25,7 +26,7 @@ function Dashboard({ user, setUser }) {
   const closeCampaignModal = () => setShowCampaignModal(false);
 
   useEffect(() => {
-    if(user?.children) {
+    if (user?.children) {
       setChildren(user.children);
     }
   }, [user]);
@@ -104,12 +105,14 @@ function Dashboard({ user, setUser }) {
       )}
 
       {activePage === "settings" && (
-        <section>
-          <SettingsTab 
+        <SettingsTab
           user={user}
-          onUserUpdate={(updatedUser) => setUser(updatedUser)}
-          />
-        </section>
+          onUserUpdate={(updatedUser) => {
+            setUser(updatedUser);
+            setSuccessMessage("Details updated successfully");
+          }}
+          successMessage={successMessage}
+        />
       )}
 
       {/* Campaign Modal */}
