@@ -17,7 +17,7 @@ function Modal({ isOpen, onClose, children }) {
 
                     {/* Modal Content */}
                     <motion.div
-                    className="modal-content"
+                    className="glass-panel"
                     initial={{ scale: 0.8, opacity: 0, y: 40 }}
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     exit={{ scale: 0.8, opacity: 0, y: 40 }}
