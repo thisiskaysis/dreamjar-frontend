@@ -49,7 +49,7 @@ function Dashboard({ user, setUser }) {
     (sum, c) =>
       sum +
       (c.campaigns?.reduce(
-        (csum, camp) => csum + (camp.amount_raised || 0),
+        (csum, camp) => csum + (camp.total_raised || 0),
         0,
       ) || 0),
     0,

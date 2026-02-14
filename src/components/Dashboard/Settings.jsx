@@ -148,7 +148,7 @@ export default function SettingsTab({ user, onUserUpdate }) {
             <button
               type="button"
               onClick={() => setShowDeleteModal(true)}
-              className="w-full py-3 rounded-xl bg-red-100 text-red-600 hover:bg-red-200 transition"
+              className="w-full py-3 rounded-xl cursor-pointer bg-red-100 text-red-600 hover:bg-red-200 transition"
             >
               Delete Account
             </button>
@@ -179,13 +179,13 @@ export default function SettingsTab({ user, onUserUpdate }) {
               <div className="flex justify-between gap-4">
                 <button
                   onClick={() => setShowDeleteModal(false)}
-                  className="flex-1 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+                  className="flex-1 py-3 cursor-pointer rounded-xl border border-gray-300 hover:bg-gray-100 transition"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDelete}
-                  className="flex-1 py-3 rounded-xl bg-red-600 text-white hover:bg-red-700 transition"
+                  className="flex-1 py-3 cursor-pointer rounded-xl bg-red-600 text-white hover:bg-red-700 transition"
                 >
                   Delete
                 </button>

@@ -6,12 +6,14 @@
 }
 
 /* Global */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: 'Lilita One', cursive;
   font-size: 10vmin;
   letter-spacing: 0.2rem;
@@ -19,12 +21,10 @@ h1, h2 {
 }
 
 body {
-  background: linear-gradient(
-  to bottom right,
-  #c9b3e0,
-  #fbcdd7,
-  #ffe7a1
-);
+  background: linear-gradient(to bottom right,
+      #c9b3e0,
+      #fbcdd7,
+      #ffe7a1);
 
   min-height: 100vh;
   margin: 0;
@@ -48,7 +48,6 @@ body {
   border-radius: 25px;
   padding: 0.75rem 1.5rem;
   border: 4px solid #8B7BA8;
-  box-shadow: 4px 4px 0 #8B7BA8;
   background: rgba(108, 99, 255, 0.9);
   color: #fff;
   font-size: 1rem;
@@ -66,38 +65,29 @@ body {
   transform: translateY(-3px);
 }
 
-.delete-variant {
-  background: #fca5a5;
-}
-
-.delete-variant:hover {
-  background: #f57777;
-  color: #fff;
-}
-
 .tab-variant {
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    color: white;
-    font-weight: 600;
-    background: rgba(108, 99, 255, 0.8);
-    transition: all 0.25s ease;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  color: white;
+  font-weight: 600;
+  background: rgba(108, 99, 255, 0.7);
+  transition: all 0.25s ease;
 }
 
 /* Hover effect */
 .tab-variant:hover {
-    background: rgba(108, 99, 255, 0.2);
-    transform: translateY(-2px);
-    cursor: pointer;
+  background: rgba(108, 99, 255, 1);
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 /* Currently active tab */
 .tab-variant.active {
-    background-color: #ffde7d;
-    color: #6c63ff;
-    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.2);
-    transform: translateY(0);
+  background-color: #ffde7d;
+  color: #6c63ff;
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
 }
 
 /* Forms */

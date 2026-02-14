@@ -40,7 +40,7 @@ function ChildrenTab({
         {/* Add Child Button */}
         <div className="flex items-center justify-center mb-6">
           <button
-            className="dj-button w-90"
+            className="tab-variant w-90"
             onClick={() => setShowCreateChildModal(true)}
           >
             Add Child

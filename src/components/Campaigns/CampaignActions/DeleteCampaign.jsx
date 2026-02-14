@@ -33,7 +33,7 @@ function DeleteCampaign({ campaignId, setChildren }) {
   return (
     <button 
      onClick={handleRemoveCampaign}
-     className="dj-button delete-variant w-90">
+     className="w-full py-3 px-3 rounded-xl cursor-pointer bg-red-200 text-red-600 hover:bg-red-300 transition">
       Delete Campaign
     </button>
   );
