@@ -9,7 +9,7 @@
 .donation-card {
   width: 100%;
   max-width: 700px;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 20px;
   border: 3px solid #8b7ba8;
   box-shadow: 8px 8px 0 #8b7ba8;

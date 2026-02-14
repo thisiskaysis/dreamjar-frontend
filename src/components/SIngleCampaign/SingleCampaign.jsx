@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import DonateButtonWithModal from "../Donations/DonateButtonWithModal";
 import "./SingleCampaign.css";
 
@@ -25,7 +24,7 @@ function SingleCampaign({ campaign, onDonateSuccess }) {
         className="campaign-card"
       >
         {/* Image */}
-        <div className="campaign-image">
+        <div className="glass-panel campaign-image">
           <img
             src={image || "/dreamjar-banner.svg"}
             alt={title}
