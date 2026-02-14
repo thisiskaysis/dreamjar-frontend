@@ -11,7 +11,6 @@ export function useMyDonations() {
 
     try {
       const data = await getMyDonations(token);
-      console.log("Fetched donations from hook:", data);
       return data;
     } catch (err) {
       console.error("Error fetching donations:", err);

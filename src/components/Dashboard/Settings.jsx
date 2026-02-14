@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../hooks/use-auth";
 import { useUserActions } from "../../hooks/useUserActions";
 
-export default function SettingsTab({ user }) {
+export default function SettingsTab({ user, onUserUpdate }) {
   const { setAuth } = useAuth();
   const { editUser, removeUser } = useUserActions();
 
@@ -12,16 +12,18 @@ export default function SettingsTab({ user }) {
   const [successMessage, setSuccessMessage] = useState("");
   const [notifications, setNotifications] = useState(true);
   const [privateProfile, setPrivateProfile] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // modal state
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const initialized = useRef(false);
 
   useEffect(() => {
-    if (user) {
+    if (user && !initialized.current) {
       setFormData({
         first_name: user.first_name || "",
         last_name: user.last_name || "",
         username: user.username || "",
         email: user.email || "",
       });
+      initialized.current = true;
     }
   }, [user]);
 
@@ -33,16 +35,22 @@ export default function SettingsTab({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    setSuccessMessage("");
 
     try {
       const updatedUser = await editUser(user.id, formData);
-      setAuth((prev) => ({ ...prev, user: updatedUser }));
-      setSuccessMessage("Details updated successfully");
+      onUserUpdate?.(updatedUser);
+          setSuccessMessage("Details updated successfully");
     } catch (err) {
       setErrors(err);
     }
   };
+
+  useEffect(() => {
+  if (successMessage) {
+    const timer = setTimeout(() => setSuccessMessage(""), 3000);
+    return () => clearTimeout(timer);
+  }
+}, [successMessage]);
 
   const confirmDelete = async () => {
     try {

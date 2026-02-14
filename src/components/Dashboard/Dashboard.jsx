@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../../hooks/use-auth";
 import { useMyDonations } from "../../hooks/use-myDonations";
 import "./Dashboard.css";
 import CreateChild from "./ChildActions/CreateChild";
@@ -9,10 +8,7 @@ import DonationsList from "./DonationsList";
 import Modal from "../UI/Modal";
 import SettingsTab from "./Settings";
 
-function Dashboard() {
-  const { auth } = useAuth();
-  const user = auth?.user;
-
+function Dashboard({ user, setUser }) {
   const [children, setChildren] = useState([]);
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [showCampaignModal, setShowCampaignModal] = useState(false);
@@ -57,8 +53,6 @@ function Dashboard() {
       ) || 0),
     0,
   );
-
-  console.log("AUTH:", auth);
 
   return (
     <div className="flex flex-col gap-8 p-6 min-h-screen">
@@ -111,7 +105,10 @@ function Dashboard() {
 
       {activePage === "settings" && (
         <section>
-          <SettingsTab user={user} />
+          <SettingsTab 
+          user={user}
+          onUserUpdate={(updatedUser) => setUser(updatedUser)}
+          />
         </section>
       )}
 

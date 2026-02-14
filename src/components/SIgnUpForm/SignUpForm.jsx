@@ -39,10 +39,6 @@ export function SignUpForm() {
       });
   };
 
-  const handleLogIn = () => {
-    console.log("User exists Log In")
-  };
-
   return (
     <div className="flex items-center justify-center relative overflow-hidden">
       {/* Main container */}
