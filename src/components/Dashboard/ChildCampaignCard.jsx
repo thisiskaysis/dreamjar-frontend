@@ -40,9 +40,9 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
         prev.map((child) => ({
           ...child,
           campaigns: child.campaigns.map((c) =>
-            c.id === campaign.id ? { ...c, ...updatedCampaign } : c
+            c.id === campaign.id ? { ...c, ...updatedCampaign } : c,
           ),
-        }))
+        })),
       );
 
       setSuccessMessage("Campaign updated successfully!");
@@ -67,15 +67,15 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
         prev.map((child) => ({
           ...child,
           campaigns: child.campaigns.map((c) =>
-            c.id === campaign.id ? { ...c, ...updatedCampaign } : c
+            c.id === campaign.id ? { ...c, ...updatedCampaign } : c,
           ),
-        }))
+        })),
       );
 
       setShowCloseModal(false);
       setEditing(false);
       setSuccessMessage(
-        isOpenValue ? "Campaign reopened!" : "Campaign closed!"
+        isOpenValue ? "Campaign reopened!" : "Campaign closed!",
       );
 
       setTimeout(() => setSuccessMessage(""), 3000);
@@ -151,6 +151,9 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
                   initial={{ width: 0 }}
                   animate={{ width: `${percentage}%` }}
                   transition={{ duration: 0.8 }}
+                  style={{
+                    background: "linear-gradient(90deg, #f472b6, #6366f1)", // pink → indigo
+                  }}
                 />
               </div>
 

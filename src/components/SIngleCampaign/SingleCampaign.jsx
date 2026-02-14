@@ -56,6 +56,9 @@ function SingleCampaign({ campaign, onDonateSuccess }) {
               initial={{ width: 0 }}
               animate={{ width: `${percentage}%` }}
               transition={{ duration: 0.8 }}
+              style={{
+              background: 'linear-gradient(90deg, #f472b6, #6366f1)', // pink → indigo
+            }}
             />
           </div>
           <div className="campaign-header mb-8">
