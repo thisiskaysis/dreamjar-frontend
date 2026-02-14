@@ -7,36 +7,47 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function ChildCard({ child, setChildren, onOpenCampaignModal }) {
   const [expanded, setExpanded] = useState(true);
+  const [successMessage, setSuccessMessage] = useState(""); // NEW
 
   const totalRaised = child.campaigns?.reduce(
-    (sum, c) => sum + (c.amount_raised || 0),
+    (sum, c) => sum + (c.total_raised || 0),
     0
   ) || 0;
 
   return (
-    <motion.div
-      className="glass-no-hover p-6 rounded-3xl shadow-md border border-sky-100 flex flex-col gap-4"
-    >
+    <motion.div className="glass-no-hover p-6 rounded-3xl shadow-md border border-sky-100 flex flex-col gap-4">
+      
+      {successMessage && (
+        <div className="bg-green-100 text-green-700 px-4 py-3 rounded-xl mb-4">
+          {successMessage}
+        </div>
+      )}
+
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-4">
         <div className="flex items-center gap-4">
           <img
             src={getChildAvatar(child)}
             alt={child?.name || "Child"}
-            className="w-20 h-20 rounded-full object-cover shadow-sm"
+            className="w-40 h-40 rounded-full object-cover shadow-sm"
           />
           <div>
-            <h2 className="text-xl font-semibold">{child?.name || "Unnamed"}</h2>
-            <p className="text-gray-500">Age: {child?.age || "?"}</p>
-            <p className="text-gray-700 font-medium mt-1">
+            <h3 className="text-5xl font-semibold">{child?.name || "Unnamed"}</h3>
+            <p className="text-gray-500 text-xl pt-2">Age: {child?.age || "?"}</p>
+            <p className="text-gray-700 text-md font-medium mt-1">
               {child.campaigns?.length || 0} DreamJars, ${totalRaised} Raised
             </p>
           </div>
         </div>
 
-        <div className="flex gap-2">
-          <EditChild childId={child.id} setChildren={setChildren} />
-          <DeleteChild childId={child.id} setChildren={setChildren} />
+        <div className="flex flex-col md:flex-row gap-2">
+          {/* EDIT CHILD */}
+          <EditChild
+            childId={child.id}
+            childData={child}
+            setChildren={setChildren}
+            setSuccessMessageParent={setSuccessMessage}
+          />
         </div>
       </div>
 
