@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import ChildCard from "./ChildCard";
 import CreateChild from "./ChildActions/CreateChild";
 import Modal from "../UI/Modal";
@@ -13,6 +14,10 @@ function ChildrenTab({
 }) {
   return (
     <>
+    <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}>
       {/* Stats Panel */}
       <div className="flex flex-col md:flex-row gap-6 mb-6">
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -65,6 +70,7 @@ function ChildrenTab({
           closeModal={() => setShowCreateChildModal(false)}
         />
       </Modal>
+      </motion.div>
     </>
   );
 }

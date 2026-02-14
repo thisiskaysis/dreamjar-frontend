@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function DonationsList({ donations }) {
   const sortedDonations = [...donations].sort(
@@ -12,7 +13,11 @@ function DonationsList({ donations }) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex flex-col items-center gap-6">
       {/* Stats Panel */}
       <div className="flex justify-center gap-6 mb-4">
         <div className="stat-panel">
@@ -44,7 +49,7 @@ function DonationsList({ donations }) {
           </Link>
         ))}
       </section>
-    </div>
+    </motion.div>
   );
 }
 
