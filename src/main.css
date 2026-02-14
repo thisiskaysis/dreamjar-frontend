@@ -102,6 +102,16 @@ body {
   padding: 0 6px;
 }
 
+.dream-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 1px rgba(0,0,0,0.1);
+}
+
 .dream-input,
 .dream-textarea {
   width: 100%;

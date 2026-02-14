@@ -33,9 +33,9 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
       prev.map((child) => ({
         ...child,
         campaigns: child.campaigns.map((c) =>
-          c.id === campaign.id ? { ...c, ...form } : c
+          c.id === campaign.id ? { ...c, ...form } : c,
         ),
-      }))
+      })),
     );
 
     setEditing(false);
@@ -48,9 +48,9 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
       prev.map((child) => ({
         ...child,
         campaigns: child.campaigns.map((c) =>
-          c.id === campaign.id ? { ...c, is_open: isOpenValue } : c
+          c.id === campaign.id ? { ...c, is_open: isOpenValue } : c,
         ),
-      }))
+      })),
     );
 
     setShowCloseModal(false);
@@ -77,10 +77,10 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
           <div className="flex gap-4">
             {/* IMAGE */}
             <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-                <img
-                  src={campaign.image || "/dreamjar-banner.svg"}
-                  className="w-full h-full object-cover"
-                />
+              <img
+                src={campaign.image || "/dreamjar-banner.svg"}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* CONTENT */}
@@ -125,46 +125,65 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
             </div>
           </div>
         ) : (
-          
           /* ================= EDIT VIEW ================= */
-          <div className="flex flex-col gap-3">
-            <input
-              type="text"
-              name="title"
-              value={form.title}
-              onChange={handleChange}
-              className="w-full p-2 rounded-md border border-gray-300"
-              placeholder="Title"
-            />
+          <form className="flex flex-col gap-3">
+            <div className="relative">
+              <label className="dream-label" htmlFor="title">
+                TITLE
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+                placeholder="Title"
+              />
+            </div>
 
-            <input
-              type="number"
-              name="goal"
-              value={form.goal}
-              onChange={handleChange}
-              className="w-full p-2 rounded-md border border-gray-300"
-              placeholder="Goal"
-            />
+            <div className="relative">
+              <label className="dream-label" htmlFor="goal">
+                GOAL
+              </label>
+              <input
+                type="number"
+                name="goal"
+                value={form.goal}
+                onChange={handleChange}
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+                placeholder="Goal"
+              />
+            </div>
 
+            <div className="relative my-2">
+              <label className="dream-label" htmlFor="description">
+                DESCRIPTION
+              </label>
             <textarea
               name="description"
               value={form.description}
               onChange={handleChange}
-              className="w-full p-2 rounded-md border border-gray-300"
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
               placeholder="Description"
             />
+            </div>
 
+            <div className="relative my-2">
+              <label className="dream-label" htmlFor="image">
+                IMAGE
+              </label>
             <input
-              type="text"
+              type="url"
               name="image"
               value={form.image}
               onChange={handleChange}
-              className="w-full p-2 rounded-md border border-gray-300"
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
               placeholder="Image URL"
             />
+            </div>
 
             {/* DEADLINE TOGGLE */}
-            <label className="flex items-center gap-2 text-sm">
+            <label className="flex items-center gap-2 text-md">
               <input
                 type="checkbox"
                 name="has_deadline"
@@ -180,21 +199,23 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
                 name="deadline"
                 value={form.deadline?.split("T")[0] || ""}
                 onChange={handleChange}
-                className="w-full p-2 rounded-md border border-gray-300"
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
               />
             )}
 
             {/* BUTTONS */}
             <div className="flex flex-col gap-2 mt-2">
               <button
-              type="submit"
-              className="w-full py-2 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition" 
-              onClick={handleSave}>
+                type="submit"
+                className="w-full py-2 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition"
+                onClick={handleSave}
+              >
                 Save Changes
               </button>
 
               {campaign.is_open ? (
                 <button
+                  type="button"
                   className="w-full py-2 cursor-pointer rounded-xl bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
                   onClick={() => setShowCloseModal(true)}
                 >
@@ -202,6 +223,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
                 </button>
               ) : (
                 <button
+                  type="button"
                   className="w-full py-2 rounded-xl bg-green-100 text-green-700 hover:bg-green-200 transition"
                   onClick={() => handleToggleCampaignStatus(true)}
                 >
@@ -216,13 +238,14 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
               />
 
               <button
+                type="button"
                 className="w-full py-2 cursor-pointer rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
                 onClick={() => setEditing(false)}
               >
                 Cancel
               </button>
             </div>
-          </div>
+          </form>
         )}
       </motion.div>
 
