@@ -2,18 +2,13 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useUserActions } from "../../hooks/useUserActions";
 
-export default function SettingsTab({ user, onSuccess }) {
+export default function SettingsTab({ user }) {
   const [notifications, setNotifications] = useState(true);
   const [privateProfile, setPrivateProfile] = useState(false);
   const { editUser } = useUserActions();
 
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    username: "",
-    email: "",
-  });
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     if (user) {
@@ -40,8 +35,12 @@ export default function SettingsTab({ user, onSuccess }) {
     setErrors({});
 
     try {
-      const newUserDetails = await editUser(user.id, formData);
-      onSuccess(newUserDetails);
+      const updatedUser = await editUser(user.id, formData);
+
+      setAuth((prev) => ({
+        ...prev,
+        user: updatedUser,
+      }));
     } catch (error) {
       setErrors(error);
     }
@@ -64,60 +63,62 @@ export default function SettingsTab({ user, onSuccess }) {
         </div>
 
         {/* Account Section */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* First Name */}
-          <div>
-            <label className="dream-label">First Name</label>
-            <input
-              type="text"
-              name="first_name"
-              value={formData.first_name}
-              onChange={handleChange}
-              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-            />
-          </div>
+        <form className="space-y-6">
+          <div className="space-y-6" onSubmit={handleSubmit}>
+            {/* First Name */}
+            <div>
+              <label className="dream-label">First Name</label>
+              <input
+                type="text"
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+              />
+            </div>
 
-          {/* Last Name */}
-          <div>
-            <label className="dream-label">Last Name</label>
-            <input
-              type="text"
-              name="last_name"
-              value={formData.last_name}
-              onChange={handleChange}
-              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-            />
-          </div>
+            {/* Last Name */}
+            <div>
+              <label className="dream-label">Last Name</label>
+              <input
+                type="text"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+              />
+            </div>
 
-          {/* Username */}
-          <div>
-            <label className="dream-label">Username</label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-            />
-          </div>
+            {/* Username */}
+            <div>
+              <label className="dream-label">Username</label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+              />
+            </div>
 
-          {/* Email */}
-          <div>
-            <label className="dream-label">Email Address</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-            />
-          </div>
+            {/* Email */}
+            <div>
+              <label className="dream-label">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+              />
+            </div>
 
-          {/* Change Password */}
-          <div>
-            <button className="tab-variant w-full flex justify-center">
-              Save Changes
-            </button>
+            {/* Change Password */}
+            <div>
+              <button className="tab-variant w-full flex justify-center">
+                Save Changes
+              </button>
+            </div>
           </div>
 
           {/* Divider */}
@@ -135,6 +136,7 @@ export default function SettingsTab({ user, onSuccess }) {
             </div>
 
             <button
+              type="button"
               onClick={() => setNotifications(!notifications)}
               className={`w-14 h-8 flex items-center rounded-full p-1 transition ${
                 notifications ? "bg-sky-400" : "bg-gray-300"
@@ -158,6 +160,7 @@ export default function SettingsTab({ user, onSuccess }) {
             </div>
 
             <button
+              type="button"
               onClick={() => setPrivateProfile(!privateProfile)}
               className={`w-14 h-8 flex items-center rounded-full p-1 transition ${
                 privateProfile ? "bg-sky-400" : "bg-gray-300"
