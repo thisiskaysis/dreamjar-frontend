@@ -14,7 +14,7 @@ function NavBar() {
     };
 
     return (
-        <div className="fixed top-0 left-0 w-full z-50">
+        <div className="fixed top-0 left-0 w-full z-20">
             <nav className="navbar">
                 <div className="nav-left">
                     <NavLink to="/" className="logo">
