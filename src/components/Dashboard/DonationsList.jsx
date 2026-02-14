@@ -20,12 +20,12 @@ function DonationsList({ donations }) {
         className="flex flex-col items-center gap-6">
       {/* Stats Panel */}
       <div className="flex justify-center gap-6 mb-4">
-        <div className="stat-panel">
-          <p className="stat-text">Total Donations</p>
+        <div className="glass-panel p-4 rounded-3xl shadow-md border border-sky-100 text-center">
+          <p className="text-gray-500">Total Donations</p>
           <p className="text-2xl font-bold">{totalDonations}</p>
         </div>
-        <div className="stat-panel">
-          <p className="stat-text">Total Donated</p>
+        <div className="glass-panel p-4 rounded-3xl shadow-md border border-sky-100 text-center">
+          <p className="text-gray-500">Total Donated</p>
           <p className="text-2xl font-bold">${totalDonated}</p>
         </div>
       </div>

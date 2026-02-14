@@ -15,12 +15,6 @@
   transform: scale(1.03);
 }
 
-.stat-text {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 8px;
-}
-
 /* Child card styles */
 /* .child-card {
   border-radius: 20px;
