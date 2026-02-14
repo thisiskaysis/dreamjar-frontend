@@ -3,12 +3,15 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Modal from "../UI/Modal";
 import DeleteCampaign from "../Campaigns/CampaignActions/DeleteCampaign";
+import { useCampaignActions } from "../../hooks/useCampaignActions";
 
 export default function ChildCampaignCard({ campaign, childId, setChildren }) {
   const navigate = useNavigate();
+  const { editCampaign } = useCampaignActions();
 
   const [editing, setEditing] = useState(false);
   const [showCloseModal, setShowCloseModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const [form, setForm] = useState({
     title: campaign.title,
@@ -27,34 +30,59 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
     }));
   };
 
-  const handleSave = () => {
-    // TODO: Replace with real PUT request
-    setChildren((prev) =>
-      prev.map((child) => ({
-        ...child,
-        campaigns: child.campaigns.map((c) =>
-          c.id === campaign.id ? { ...c, ...form } : c,
-        ),
-      })),
-    );
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      const updatedCampaign = await editCampaign(campaign.id, form);
 
-    setEditing(false);
+      // Update local state
+      setChildren((prev) =>
+        prev.map((child) => ({
+          ...child,
+          campaigns: child.campaigns.map((c) =>
+            c.id === campaign.id ? { ...c, ...updatedCampaign } : c
+          ),
+        }))
+      );
+
+      setSuccessMessage("Campaign updated successfully!");
+      setEditing(false);
+
+      // Optional: hide message after a few seconds
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (err) {
+      console.error("Failed to update campaign:", err);
+      alert(err.message || "Failed to update campaign");
+    }
   };
 
-  const handleToggleCampaignStatus = (isOpenValue) => {
-    // TODO: Replace with real PUT request
+  const handleToggleCampaignStatus = async (isOpenValue) => {
+    try {
+      const updatedCampaign = await editCampaign(campaign.id, {
+        ...form,
+        is_open: isOpenValue,
+      });
 
-    setChildren((prev) =>
-      prev.map((child) => ({
-        ...child,
-        campaigns: child.campaigns.map((c) =>
-          c.id === campaign.id ? { ...c, is_open: isOpenValue } : c,
-        ),
-      })),
-    );
+      setChildren((prev) =>
+        prev.map((child) => ({
+          ...child,
+          campaigns: child.campaigns.map((c) =>
+            c.id === campaign.id ? { ...c, ...updatedCampaign } : c
+          ),
+        }))
+      );
 
-    setShowCloseModal(false);
-    setEditing(false);
+      setShowCloseModal(false);
+      setEditing(false);
+      setSuccessMessage(
+        isOpenValue ? "Campaign reopened!" : "Campaign closed!"
+      );
+
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (err) {
+      console.error("Failed to update campaign status:", err);
+      alert(err.message || "Failed to update campaign status");
+    }
   };
 
   const percentage =
@@ -72,6 +100,13 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
             : "bg-gray-100 border-gray-300 opacity-80"
         }`}
       >
+        {/* Success Message */}
+        {successMessage && (
+          <div className="bg-green-100 text-green-700 px-4 py-3 rounded-xl mb-4">
+            {successMessage}
+          </div>
+        )}
+
         {!editing ? (
           /* ================= SMALL VIEW ================= */
           <div className="flex gap-4">
@@ -126,7 +161,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
           </div>
         ) : (
           /* ================= EDIT VIEW ================= */
-          <form className="flex flex-col gap-3">
+          <form className="flex flex-col gap-3" onSubmit={handleSave}>
             <div className="relative">
               <label className="dream-label" htmlFor="title">
                 TITLE
@@ -159,27 +194,27 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
               <label className="dream-label" htmlFor="description">
                 DESCRIPTION
               </label>
-            <textarea
-              name="description"
-              value={form.description}
-              onChange={handleChange}
-              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-              placeholder="Description"
-            />
+              <textarea
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+                placeholder="Description"
+              />
             </div>
 
             <div className="relative my-2">
               <label className="dream-label" htmlFor="image">
                 IMAGE
               </label>
-            <input
-              type="url"
-              name="image"
-              value={form.image}
-              onChange={handleChange}
-              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-              placeholder="Image URL"
-            />
+              <input
+                type="url"
+                name="image"
+                value={form.image}
+                onChange={handleChange}
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+                placeholder="Image URL"
+              />
             </div>
 
             {/* DEADLINE TOGGLE */}
@@ -208,7 +243,6 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
               <button
                 type="submit"
                 className="w-full py-2 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition"
-                onClick={handleSave}
               >
                 Save Changes
               </button>
