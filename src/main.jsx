@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import Layout from "./layout.jsx";
 import HomePage from "./pages/HomePage/Homepage.jsx";
@@ -9,26 +8,28 @@ import BrowseCampaignPage from "./pages/BrowseCampaign/BrowseCampaignPage.jsx";
 import CampaignPage from "./pages/CampaignPage/CampaignPage.jsx";
 import AccountPage from "./pages/AccountPage/AccountPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
 import OAuthSuccess from "./components/OAuthSuccess.jsx";
-import "./main.css"
+import "./main.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-    <>
-    <Layout />
-    </>
+      <>
+        <Layout />
+      </>
     ),
     children: [
       { index: true, element: <HomePage /> },
       { path: "/dreamjars", element: <BrowseCampaignPage /> },
       { path: "/dreamjars/:id", element: <CampaignPage /> },
-      { path: "/account/", element: <AccountPage />},
-      { path: "/login", element: <LoginPage />},
+      { path: "/account/", element: <AccountPage /> },
+      { path: "/login", element: <LoginPage /> },
       { path: "/oauth-success", element: <OAuthSuccess /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </AuthProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
