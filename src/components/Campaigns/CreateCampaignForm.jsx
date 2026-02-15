@@ -1,55 +1,61 @@
 import { useState } from "react";
 import { useCampaignActions } from "../../hooks/useCampaignActions"; // Keep your original import
 
-function CreateCampaignForm({ childId, setCampaigns, closeModal }) {
-  const { createCampaign } = useCampaignActions(); // Keep your original hook
+function CreateCampaignForm({ childId, onSuccess, closeCampaignModal }) {
+  const { createCampaign } = useCampaignActions();
+
   const [errors, setErrors] = useState({});
-  const [credentials, setCredentials] = useState({
+  const [formData, setFormData] = useState({
     title: "",
     description: "",
     goal: "",
-    image_url: "",
-    category: "Dreams",
+    image: "",
+    category: "dreams",
+    has_deadline: false,
+    deadline: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setErrors({});
+
+    const payload = {
+      ...formData,
+      goal: Number(formData.goal),
+      deadline: formData.has_deadline ? formData.deadline : null,
+    };
+
     try {
-      const newCampaign = await createCampaign(childId, credentials);
-      setCampaigns((prev) => [...prev, newCampaign]);
-      setCredentials({
-        title: "",
-        description: "",
-        goal: "",
-        image_url: "",
-        category: "Dreams",
-      });
-      closeModal();
-    } catch (errorData) {
-      setErrors(errorData);
+      const newCampaign = await createCampaign(childId, payload);
+      onSuccess(newCampaign);
+    } catch (error) {
+      setErrors(error);
     }
   };
 
   const renderFieldError = (field) => {
     if (!errors[field]) return null;
     if (Array.isArray(errors[field])) {
-      return <p className="text-red-500 text-sm mt-1">{errors[field].join(" ")}</p>;
+      return (
+        <p className="text-red-500 text-sm mt-1">{errors[field].join(" ")}</p>
+      );
     }
     return <p className="text-red-500 text-sm mt-1">{errors[field]}</p>;
   };
 
   return (
     <div className="text-center">
-      <h3 className="text-2xl font-bold text-gray-700 mb-4">
-        Create Campaign
-      </h3>
+      <h3 className="text-2xl font-bold text-gray-700 mb-4">Create DreamJar</h3>
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title */}
         <div>
           <label htmlFor="title" className="dream-label">
@@ -59,9 +65,9 @@ function CreateCampaignForm({ childId, setCampaigns, closeModal }) {
             id="title"
             name="title"
             type="text"
-            value={credentials.title}
+            value={formData.title}
             onChange={handleChange}
-            placeholder="Campaign Title"
+            placeholder="DreamJar Title"
             className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
             required
           />
@@ -76,8 +82,9 @@ function CreateCampaignForm({ childId, setCampaigns, closeModal }) {
           <textarea
             id="description"
             name="description"
-            value={credentials.description}
+            value={formData.description}
             onChange={handleChange}
+            rows={4}
             placeholder="Campaign Description"
             className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600 min-h-[100px]"
             required
@@ -94,9 +101,9 @@ function CreateCampaignForm({ childId, setCampaigns, closeModal }) {
             id="goal"
             name="goal"
             type="number"
-            value={credentials.goal}
+            value={formData.goal}
             onChange={handleChange}
-            placeholder="Goal Amount"
+            placeholder="Goal ($)"
             className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
             required
           />
@@ -109,15 +116,14 @@ function CreateCampaignForm({ childId, setCampaigns, closeModal }) {
             IMAGE URL (OPTIONAL)
           </label>
           <input
-            id="image_url"
-            name="image_url"
+            id="image"
+            name="image"
             type="url"
-            value={credentials.image_url}
+            value={formData.image}
             onChange={handleChange}
             placeholder="Image URL"
             className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
           />
-          {renderFieldError("image_url")}
         </div>
 
         {/* Category */}
@@ -128,19 +134,43 @@ function CreateCampaignForm({ childId, setCampaigns, closeModal }) {
           <select
             id="category"
             name="category"
-            value={credentials.category}
+            value={formData.category}
             onChange={handleChange}
             className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
             required
           >
-            <option value="Dreams">Dreams</option>
-            <option value="Education">Education</option>
-            <option value="Sports">Sports</option>
-            <option value="Arts">Arts</option>
-            <option value="Other">Other</option>
+            <option value="dreams">Dreams</option>
+            <option value="education">Education</option>
+            <option value="hobbies">Hobbies</option>
+            <option value="health">Health</option>
+            <option value="sports">Sports</option>
           </select>
-          {renderFieldError("category")}
         </div>
+
+        {/* Deadline Toggle */}
+        <div className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            name="has_deadline"
+            checked={formData.has_deadline}
+            onChange={handleChange}
+          />
+          <label className="text-gray-600">Add Deadline?</label>
+        </div>
+
+        {/* Deadline Input */}
+        {formData.has_deadline && (
+          <div className="relative">
+            <label className="dream-label">DEADLINE</label>
+            <input
+              type="date"
+              name="deadline"
+              value={formData.deadline}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+            />
+          </div>
+        )}
 
         {/* Non-field errors */}
         {errors.non_field_errors && (
@@ -154,19 +184,10 @@ function CreateCampaignForm({ childId, setCampaigns, closeModal }) {
         {/* Buttons */}
         <div className="flex flex-col gap-2 mt-4">
           <button
-            type="button"
+            type="submit"
             className="w-full py-3 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition"
-            onClick={handleSubmit}
           >
-            Create Campaign
-          </button>
-
-          <button
-            type="button"
-            className="w-full py-3 cursor-pointer rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
-            onClick={closeModal}
-          >
-            Cancel
+            Create DreamJar
           </button>
         </div>
       </form>

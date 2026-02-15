@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useUserActions } from "../../hooks/useUserActions";
 
 export default function SettingsTab({ user, onUserUpdate }) {
   const { editUser, removeUser } = useUserActions();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
@@ -47,7 +49,7 @@ export default function SettingsTab({ user, onUserUpdate }) {
     try {
       await removeUser(user.id);
       setAuth({ access: null, user: null });
-      window.location.href = "/";
+      navigate("/");
     } catch (err) {
       console.error("Failed to delete account:", err);
       alert("Failed to delete account. Please try again.");

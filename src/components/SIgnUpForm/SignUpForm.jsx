@@ -178,6 +178,7 @@ export function SignUpForm() {
             {/* Submit Button */}
             <button
               type="submit"
+              onClick={handleSubmit}
               className="w-full py-3 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition mt-4"
             >
               Sign Up

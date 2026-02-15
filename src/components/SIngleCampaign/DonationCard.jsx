@@ -37,13 +37,6 @@ function DonationCard({ campaignId, donations = [], onDonateSuccess }) {
               </div>
             ))
           )}
-
-          <DonateButtonWithModal
-            campaignId={campaignId}
-            onSuccess={onDonateSuccess}
-          >
-            Donate Now
-          </DonateButtonWithModal>
         </div>
       </div>
     </div>
