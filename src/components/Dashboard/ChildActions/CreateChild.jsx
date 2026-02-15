@@ -17,6 +17,8 @@ function CreateChild({ user, setChildren, closeModal }) {
 
   const handleSubmit = async () => {
     setErrors({});
+      console.log("Submitting child for parent", user.id, "with data:", credentials);
+
     try {
       const newChild = await createChild(user.id, credentials);
       setChildren((prev) => [...prev, newChild]);

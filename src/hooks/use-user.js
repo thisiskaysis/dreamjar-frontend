@@ -9,27 +9,32 @@ export default function useUser() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const token = auth.access || window.localStorage.getItem("access");
+    const fetchUser = async () => {
+        const token = auth.access || window.localStorage.getItem("access");
 
-            if (!token) {
-                setIsLoading(false);
-                setError(new Error("Not logged in"));
-                return;
+        if (!token) {
+            setIsLoading(false);
+            setError(new Error("Not logged in"));
+            return;
+        }
+
+        try {
+            const userData = await getUser(token);
+            setUser(userData);
+        } catch (err) {
+            // Clear token if invalid to avoid repeated 401s
+            if (err.message.includes("401")) {
+                window.localStorage.removeItem("access");
             }
+            setError(err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-            try {
-                const userData = await getUser(token);
-                setUser(userData);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+    fetchUser();
+}, [auth.access]);
 
-            fetchUser();
-    }, [auth.access]);
 
     return { user, isLoading, error };
 }
