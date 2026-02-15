@@ -26,7 +26,6 @@ export const AuthProvider = (props) => {
                 // token invalid or expired
                 window.localStorage.removeItem("access");
                 setAuth({ access: null, user: null });
-                navigate("/login");
             } else {
                 setAuth({ access: token, user: true });
             }
@@ -40,5 +39,5 @@ export const AuthProvider = (props) => {
         <AuthContext.Provider value={{ auth, setAuth }}>
             {props.children}
         </AuthContext.Provider>
-    )
+    );
 }
