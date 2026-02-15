@@ -8,7 +8,7 @@ export function useChildActions() {
     const { auth } = useAuth();
     const token = auth?.access;
 
-    const createChild = async (data) => {
+    const createChild = async (childId, data) => {
         if (!token) throw new Error("User not logged in");
 
         // Fetch the current parent using the token
@@ -16,7 +16,7 @@ export function useChildActions() {
         if (!parent?.id) throw new Error("Parent not found");
 
         // Post the child using the parent ID
-        return postChild(parent.id, data, token);
+        return postChild(childId, data, token);
     };
 
     const removeChild = async (childId) => deleteChild(childId, token);
