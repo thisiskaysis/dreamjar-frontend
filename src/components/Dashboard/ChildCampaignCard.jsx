@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useCampaignActions } from "../../hooks/useCampaignActions";
 import Modal from "../UI/Modal";
 
-export default function ChildCampaignCard({ campaign, childId, setChildren, onRequestDelete }) {
+export default function ChildCampaignCard({ campaign, childId, setChildren, onRequestCampaignDelete }) {
   const navigate = useNavigate();
   const { editCampaign } = useCampaignActions();
 
@@ -18,7 +18,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren, onRe
     description: campaign.description || "",
     image: campaign.image || "",
     has_deadline: campaign.has_deadline || false,
-    deadline: campaign.deadline || "",
+    deadline: campaign.deadline || null,
   });
 
   const handleChange = (e) => {
@@ -47,7 +47,6 @@ export default function ChildCampaignCard({ campaign, childId, setChildren, onRe
       setEditing(false);
       setTimeout(() => setSuccessMessage(""), 3000);
     } catch (err) {
-      console.error("Failed to update campaign:", err);
       alert(err.message || "Failed to update campaign");
     }
   };
@@ -230,7 +229,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren, onRe
                 type="button"
                 className="w-full py-2 cursor-pointer rounded-xl bg-red-200 text-red-600 hover:bg-red-300 transition"
                 onClick={() =>
-                  onRequestDelete({ campaignId: campaign.id, childId })
+                  onRequestCampaignDelete({ campaignId: campaign.id, childId })
                 }
               >
                 Delete

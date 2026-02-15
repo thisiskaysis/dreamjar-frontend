@@ -15,13 +15,12 @@ function ChildrenTab({
   totalCampaigns,
   totalRaised,
 }) {
-  
   const [childToDelete, setChildToDelete] = useState(null);
   const [campaignToDelete, setCampaignToDelete] = useState(null);
   const { removeChild } = useChildActions();
   const { removeCampaign } = useCampaignActions();
 
-  const handleConfirmDelete = async () => {
+  const handleConfirmChildDelete = async () => {
     if (!childToDelete) return;
     try {
       await removeChild(childToDelete.id);
@@ -33,20 +32,25 @@ function ChildrenTab({
   };
 
   const handleConfirmCampaignDelete = async () => {
-  if (!campaignToDelete) return;
-  try {
-    await removeCampaign(campaignToDelete.campaignId, campaignToDelete.childId);
-    setChildren(prev =>
-      prev.map(child => ({
-        ...child,
-        campaigns: child.campaigns.filter(c => c.id !== campaignToDelete.campaignId)
-      }))
-    );
-    setCampaignToDelete(null);
-  } catch (err) {
-    alert(err.message || "Failed to delete campaign");
-  }
-};
+    if (!campaignToDelete) return;
+    try {
+      await removeCampaign(
+        campaignToDelete.campaignId,
+        campaignToDelete.childId,
+      );
+      setChildren((prev) =>
+        prev.map((child) => ({
+          ...child,
+          campaigns: child.campaigns.filter(
+            (c) => c.id !== campaignToDelete.campaignId,
+          ),
+        })),
+      );
+      setCampaignToDelete(null);
+    } catch (err) {
+      alert(err.message || "Failed to delete campaign");
+    }
+  };
 
   return (
     <>
@@ -77,7 +81,7 @@ function ChildrenTab({
         {/* Add Child Button */}
         <div className="flex items-center justify-center mb-6">
           <button
-            className="w-full max-w-64 py-3 rounded-xl cursor-pointer bg-indigo-600 text-white hover:bg-indigo-500 transition" 
+            className="w-full max-w-64 py-3 rounded-xl cursor-pointer bg-indigo-600 text-white hover:bg-indigo-500 transition"
             onClick={() => setShowCreateChildModal(true)}
           >
             Add Child
@@ -99,6 +103,7 @@ function ChildrenTab({
                 setChildren={setChildren}
                 onOpenCampaignModal={openCampaignModal}
                 onRequestDelete={setChildToDelete}
+                onRequestCampaignDelete={setCampaignToDelete}
               />
             ))}
           </div>
@@ -138,7 +143,8 @@ function ChildrenTab({
                 Confirm Delete
               </h3>
               <p className="mb-6">
-                Are you sure you want to delete {childToDelete.name}? This action cannot be undone.
+                Are you sure you want to delete {childToDelete.name}? This
+                action cannot be undone.
               </p>
               <div className="flex justify-between gap-4">
                 <button
@@ -149,7 +155,7 @@ function ChildrenTab({
                 </button>
                 <button
                   className="flex-1 py-3 cursor-pointer rounded-xl bg-red-600 text-white hover:bg-red-700 transition"
-                  onClick={handleConfirmDelete}
+                  onClick={handleConfirmChildDelete}
                 >
                   Delete
                 </button>
@@ -159,47 +165,51 @@ function ChildrenTab({
         )}
       </AnimatePresence>
 
-{/* DELETE CAMPAIGN CONFIRMATION MODAL */}
+      {/* DELETE CAMPAIGN CONFIRMATION MODAL */}
       <AnimatePresence>
-  {campaignToDelete && (
-    <motion.div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={() => setCampaignToDelete(null)}
-    >
-      <motion.div
-        onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-2xl p-8 w-full max-w-md text-center"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      >
-        <h3 className="text-xl font-bold mb-4 text-red-600">Confirm Delete</h3>
-        <p className="mb-6">
-          Are you sure you want to delete this DreamJar? This action cannot be undone.
-        </p>
-        <div className="flex justify-between gap-4">
-          <button
-            className="flex-1 py-3 rounded-xl border border-gray-300 hover:bg-gray-100"
+        {campaignToDelete && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             onClick={() => setCampaignToDelete(null)}
           >
-            Cancel
-          </button>
-          <button
-            className="flex-1 py-3 rounded-xl bg-red-600 text-white hover:bg-red-700"
-            onClick={handleConfirmCampaignDelete}
-          >
-            Delete
-          </button>
-        </div>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl p-8 w-full max-w-md text-center"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
+              <h3 className="text-xl font-bold mb-4 text-red-600">
+                Confirm Delete
+              </h3>
+              <p className="mb-6">
+                Are you sure you want to delete this DreamJar? This action
+                cannot be undone.
+              </p>
+              <div className="flex justify-between gap-4">
+                <button
+                  type="button"
+                  className="flex-1 py-3 rounded-xl border border-gray-300 hover:bg-gray-100"
+                  onClick={() => setCampaignToDelete(null)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="flex-1 py-3 rounded-xl bg-red-600 text-white hover:bg-red-700"
+                  onClick={handleConfirmCampaignDelete}
+                >
+                  Delete
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

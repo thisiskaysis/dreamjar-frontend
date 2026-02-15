@@ -4,9 +4,9 @@ import EditChild from "./ChildActions/EditChild";
 import getChildAvatar from "./ChildActions/getChildAvatar";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function ChildCard({ child, setChildren, onOpenCampaignModal, onRequestDelete, setCampaignToDelete }) {
+export default function ChildCard({ child, setChildren, onOpenCampaignModal, onRequestDelete, onRequestCampaignDelete }) {
   const [expanded, setExpanded] = useState(true);
-  const [successMessage, setSuccessMessage] = useState(""); // NEW
+  const [successMessage, setSuccessMessage] = useState("");
 
   const totalRaised =
     child.campaigns?.reduce((sum, c) => sum + (c.total_raised || 0), 0) || 0;
@@ -90,7 +90,7 @@ export default function ChildCard({ child, setChildren, onOpenCampaignModal, onR
                     campaign={c}
                     childId={child.id}
                     setChildren={setChildren}
-                    onRequestDelete={onRequestDelete}
+                    onRequestCampaignDelete={onRequestCampaignDelete}
                   />
                 ))
               ) : (
