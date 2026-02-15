@@ -6,6 +6,8 @@
 ![Auth](https://img.shields.io/badge/Auth-Token%20Authentication-blue)
 ![Status](https://img.shields.io/badge/Status-Complete-success)
 
+<img src="./public/screenshots/homescreen.png" width="600px" height="300px"/>
+
 ### A Magical Crowdfunding Platform for Kids with Big Dreams
 
 > Where imagination meets action — and every dream has a jar to fill.
@@ -155,27 +157,39 @@ Key considerations:
 ## 🖼 Screenshots
 
 ### 🏠 Homepage  
-![Homepage Screenshot](./screenshots/homepage.png)
+
+<img src="./public/screenshots/homepage.gif" width="600px" height="350px" />
+
 
 ---
 
-### ➕ Campaign Creation Page  
-![Campaign Creation Page](./screenshots/create-page.png)
+### ➕ Campaign Browse Page  
+<img src="./public/screenshots/browse.gif" width="600px" height="350px" />
 
 ---
 
-### 📝 Campaign Creation Form  
-![Campaign Form Screenshot](./screenshots/form.png)
+### 📝 Campaign Page
+<img src="./public/screenshots/campaign.gif" width="600px" height="350px" />
 
 ---
 
-### 🌟 Campaign With Pledges  
-![Campaign With Pledges](./screenshots/campaign-with-pledges.png)
+### 🌟 Campaign Donations 
+<img src="./public/screenshots/donate.gif" width="600px" height="350px" />
 
 ---
 
-### 🚫 Unauthorized Edit Attempt  
-![Unauthorized Edit](./screenshots/unauthorized.png)
+### 🎛️ User Dashboard
+<img src="./public/screenshots/dashboard.gif" width="600px" height="350px" />
+
+---
+
+### 🪪 Dashboard Tabs
+<img src="./public/screenshots/tabs.gif" width="600px" height="350px" />
+
+---
+
+### 🚫 Custom 404
+<img src="./public/screenshots/404.gif" width="600px" height="350px" />
 
 ---
 
@@ -201,8 +215,7 @@ npm install
 npm run dev
 ```
 
-The app will run locally at
-> http://localhost:5173
+The app will run locally at _[http://localhost:5173]_
 
 🔗 **Backend repo:** _[https://github.com/thisiskaysis/DreamJar_backend]_  
 
