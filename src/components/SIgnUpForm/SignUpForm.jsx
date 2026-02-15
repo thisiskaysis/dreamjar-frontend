@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import postSignUp from "../../api/post-signup"
+import postSignUp from "../../api/post-signup";
 import GoogleLogin from "../GoogleLogin.jsx";
 
 export function SignUpForm() {
@@ -10,11 +10,11 @@ export function SignUpForm() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [credentials, setCredentials] = useState({
-    first_name:"",
-    last_name:"",
-    username:"",
-    email:"",
-    password:"",
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (event) => {
@@ -30,13 +30,21 @@ export function SignUpForm() {
     setErrors({}); // clear previous errors
 
     postSignUp(credentials)
-    .then((response) => {
-      window.localStorage.setItem("access", response.access);
-      navigate("/");
-    }) 
-    .catch ((error) => {
-          setErrors(error);
+      .then((response) => {
+        window.localStorage.setItem("access", response.access);
+        navigate("/");
+      })
+      .catch((error) => {
+        setErrors(error);
       });
+  };
+
+  const renderFieldError = (field) => {
+    if (!errors[field]) return null;
+    if (Array.isArray(errors[field])) {
+      return <p className="text-red-500 text-sm mt-1">{errors[field].join(" ")}</p>;
+    }
+    return <p className="text-red-500 text-sm mt-1">{errors[field]}</p>;
   };
 
   return (
@@ -45,123 +53,93 @@ export function SignUpForm() {
       <div className="flex items-center gap-8 w-full px-8">
         {/* Form section */}
         <div className="flex-1 relative">
-
           {/* Form */}
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-4" onSubmit={handleSubmit}>
             {/* Title */}
-            <h1
-              className="text-m font-bold text-[#8B7BA8] text-center mb-8 mt-10 mb-10"
-            >
+            <h1 className="text-2xl font-bold text-gray-700 text-center mb-6 mt-10">
               Sign Up
             </h1>
 
-            <div className="relative">
-              <label
-                htmlFor="first_name"
-                className="form-label"
-              >
+            <div>
+              <label htmlFor="first_name" className="dream-label">
                 FIRST NAME
               </label>
               <input
                 id="first_name"
                 type="text"
-                className="dream-input"
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
                 placeholder="First Name"
                 required
                 onChange={handleChange}
               />
-              {errors.first_name && (
-                <p className="text-red-500 text-sm mt-1 ml-10">{errors.first_name.join(" ")}</p>
-                )}
+              {renderFieldError("first_name")}
             </div>
 
-            <div className="relative">
-              <label
-                htmlFor="last_name"
-                className="form-label"
-              >
+            <div>
+              <label htmlFor="last_name" className="dream-label">
                 LAST NAME
               </label>
               <input
                 id="last_name"
                 type="text"
-                className="dream-input"
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
                 placeholder="Last Name"
                 required
                 onChange={handleChange}
               />
-              {errors.last_name && (
-                <p className="text-red-500 text-sm mt-1 ml-10">{errors.last_name.join(" ")}</p>
-                )}
+              {renderFieldError("last_name")}
             </div>
 
-            <div className="relative">
-              <label
-                htmlFor="username"
-                className="form-label"
-              >
+            <div>
+              <label htmlFor="username" className="dream-label">
                 USERNAME
               </label>
               <input
                 id="username"
                 type="text"
-                className="dream-input"
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
                 placeholder="Username"
                 required
                 onChange={handleChange}
               />
-              {errors.username && (
-                <p className="text-red-500 text-sm mt-1 ml-10">{errors.username.join(" ")}</p>
-                )}
+              {renderFieldError("username")}
             </div>
 
-            <div className="relative">
-              <label
-                htmlFor="email"
-                className="form-label"
-              >
+            <div>
+              <label htmlFor="email" className="dream-label">
                 EMAIL
               </label>
               <input
                 id="email"
                 type="text"
-                className="dream-input"
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
                 placeholder="Email"
                 required
                 onChange={handleChange}
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1 ml-10">{errors.email.join(" ")}</p>
-                )}
+              {renderFieldError("email")}
             </div>
 
             {/* Password Input */}
             <div className="relative">
-              <label
-                htmlFor="password"
-                className="form-label"
-              >
+              <label htmlFor="password" className="dream-label">
                 PASSWORD
               </label>
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                className="dream-input"
+                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600 pr-12"
                 placeholder="Password"
                 required
                 onChange={handleChange}
               />
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1 ml-10">{errors.password.join(" ")}</p>
-                )}
+              {renderFieldError("password")}
 
-
-
-              {/* Button */}
+              {/* Toggle Password Visibility Button */}
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-[#8B7BA8] hover:text-[#fbcdd7] transition-colors"
+                className="absolute right-4 top-9 w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors"
                 disabled={isDisabled}
               >
                 <svg
@@ -190,29 +168,26 @@ export function SignUpForm() {
             </div>
 
             {errors.non_field_errors && (
-              <p className="text-red-500 text-sm mb-4 text-center">{errors.non_field_errors.join(" ")}
+              <p className="text-red-500 text-sm text-center">
+                {Array.isArray(errors.non_field_errors)
+                  ? errors.non_field_errors.join(" ")
+                  : errors.non_field_errors}
               </p>
             )}
 
-
             {/* Submit Button */}
             <button
-              type="button"
-              className="dj-button w-full"
-              onClick={handleSubmit}
+              type="submit"
+              className="w-full py-3 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition mt-4"
             >
               Sign Up
             </button>
 
             {/* Divider */}
             <div className="flex items-center gap-4 my-6">
-              <div className="flex-1 h-1 bg-[#8B7BA8] rounded-full opacity-20" />
-              <span
-                className="text-sm font-bold text-[#8B7BA8]"
-              >
-                OR
-              </span>
-              <div className="flex-1 h-1 bg-[#8B7BA8] rounded-full opacity-20" />
+              <div className="flex-1 h-1 bg-gray-300 rounded-full" />
+              <span className="text-sm font-bold text-gray-500">OR</span>
+              <div className="flex-1 h-1 bg-gray-300 rounded-full" />
             </div>
 
             {/* Google Login Button */}

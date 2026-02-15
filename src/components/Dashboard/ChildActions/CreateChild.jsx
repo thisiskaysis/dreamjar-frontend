@@ -16,44 +16,39 @@ function CreateChild({ user, setChildren, closeModal }) {
   };
 
   const handleSubmit = async () => {
-  setErrors({}); // clear previous errors
-  try {
-    const newChild = await createChild(user.id, credentials);
-    setChildren((prev) => [...prev, newChild]);
-    setCredentials({
-      name: "",
-      date_of_birth: "",
-      gender: "",
-    });
-
-    closeModal();
-  } catch (errorData) {
+    setErrors({});
+    try {
+      const newChild = await createChild(user.id, credentials);
+      setChildren((prev) => [...prev, newChild]);
+      setCredentials({
+        name: "",
+        date_of_birth: "",
+        gender: "",
+      });
+      closeModal();
+    } catch (errorData) {
       setErrors(errorData);
-  }
-};
-
+    }
+  };
 
   const renderFieldError = (field) => {
     if (!errors[field]) return null;
     if (Array.isArray(errors[field])) {
-      return <p className="text-red-500 text-sm mt-1 ml-2">{errors[field].join(" ")}</p>;
+      return <p className="text-red-500 text-sm mt-1">{errors[field].join(" ")}</p>;
     }
-    return <p className="text-red-500 text-sm mt-1 ml-2">{errors[field]}</p>;
+    return <p className="text-red-500 text-sm mt-1">{errors[field]}</p>;
   };
 
   return (
-    <div className="child-form-modal">
-      <h1 className="text-lg font-bold text-center text-[#8B7BA8] mb-3">
+    <div className="text-center">
+      <h3 className="text-2xl font-bold text-gray-700 mb-4">
         Add a Child
-      </h1>
+      </h3>
 
       <form className="space-y-4">
         {/* Name */}
-        <div className="relative">
-          <label
-            htmlFor="name"
-            className="form-label"
-          >
+        <div>
+          <label htmlFor="name" className="dream-label">
             NAME
           </label>
           <input
@@ -63,18 +58,15 @@ function CreateChild({ user, setChildren, closeModal }) {
             value={credentials.name}
             onChange={handleChange}
             placeholder="Child's Name"
-            className="dream-input"
+            className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
             required
           />
           {renderFieldError("name")}
         </div>
 
         {/* Date of Birth */}
-        <div className="relative">
-          <label
-            htmlFor="date_of_birth"
-            className="form-label"
-          >
+        <div>
+          <label htmlFor="date_of_birth" className="dream-label">
             DATE OF BIRTH
           </label>
           <input
@@ -83,18 +75,15 @@ function CreateChild({ user, setChildren, closeModal }) {
             type="date"
             value={credentials.date_of_birth}
             onChange={handleChange}
-            className="dream-input"
+            className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
             required
           />
           {renderFieldError("date_of_birth")}
         </div>
 
         {/* Gender */}
-        <div className="relative">
-          <label
-            htmlFor="gender"
-            className="form-label"
-          >
+        <div>
+          <label htmlFor="gender" className="dream-label">
             GENDER
           </label>
           <select
@@ -102,7 +91,7 @@ function CreateChild({ user, setChildren, closeModal }) {
             name="gender"
             value={credentials.gender}
             onChange={handleChange}
-            className="dream-input"
+            className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
             required
           >
             <option value="" disabled>
@@ -117,21 +106,31 @@ function CreateChild({ user, setChildren, closeModal }) {
 
         {/* Non-field errors */}
         {errors.non_field_errors && (
-          <p className="text-red-500 text-sm mb-4 text-center">
+          <p className="text-red-500 text-sm text-center">
             {Array.isArray(errors.non_field_errors)
               ? errors.non_field_errors.join(" ")
               : errors.non_field_errors}
           </p>
         )}
 
-        {/* Submit */}
-        <button
-          type="button"
-          className="dj-button w-full"
-          onClick={handleSubmit}
-        >
-          Create Child
-        </button>
+        {/* Buttons */}
+        <div className="flex flex-col gap-2 mt-4">
+          <button
+            type="button"
+            className="w-full py-3 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition"
+            onClick={handleSubmit}
+          >
+            Create Child
+          </button>
+
+          <button
+            type="button"
+            className="w-full py-3 cursor-pointer rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
+            onClick={closeModal}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

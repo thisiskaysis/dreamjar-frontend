@@ -1,165 +1,176 @@
 import { useState } from "react";
-import { useCampaignActions } from "../../hooks/useCampaignActions";
+import { useCampaignActions } from "../../hooks/useCampaignActions"; // Keep your original import
 
-function CreateCampaignForm({ childId, onSuccess }) {
-const { createCampaign } = useCampaignActions();
-
-const [errors, setErrors] = useState({});
-const [formData, setFormData] = useState ({
+function CreateCampaignForm({ childId, setCampaigns, closeModal }) {
+  const { createCampaign } = useCampaignActions(); // Keep your original hook
+  const [errors, setErrors] = useState({});
+  const [credentials, setCredentials] = useState({
     title: "",
     description: "",
     goal: "",
-    image: "",
-    category: "dreams",
-    has_deadline: false,
-    deadline: "",
-});
+    image_url: "",
+    category: "Dreams",
+  });
 
-const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials((prev) => ({ ...prev, [name]: value }));
+  };
 
-    setFormData((prev) => ({
-        ...prev,
-        [name]: type === "checkbox" ? checked : value,
-    }));
-};
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setErrors({});
-
-    const payload = {
-        ...formData,
-        goal: Number(formData.goal),
-        deadline: formData.has_deadline ? formData.deadline : null,
-    };
-
     try {
-        const newCampaign = await createCampaign(childId, payload);
-        onSuccess(newCampaign);
-    } catch (error) {
-        setErrors(error);
+      const newCampaign = await createCampaign(childId, credentials);
+      setCampaigns((prev) => [...prev, newCampaign]);
+      setCredentials({
+        title: "",
+        description: "",
+        goal: "",
+        image_url: "",
+        category: "Dreams",
+      });
+      closeModal();
+    } catch (errorData) {
+      setErrors(errorData);
     }
-};
+  };
 
-return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+  const renderFieldError = (field) => {
+    if (!errors[field]) return null;
+    if (Array.isArray(errors[field])) {
+      return <p className="text-red-500 text-sm mt-1">{errors[field].join(" ")}</p>;
+    }
+    return <p className="text-red-500 text-sm mt-1">{errors[field]}</p>;
+  };
 
-      <h2 className="text-3xl font-bold text-[#8B7BA8] text-center mb-4">
+  return (
+    <div className="text-center">
+      <h3 className="text-2xl font-bold text-gray-700 mb-4">
         Create Campaign
-      </h2>
+      </h3>
 
-      {/* Title */}
-      <div className="relative">
-        <label className="form-label">TITLE</label>
-        <input
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-          className="dream-input"
-        />
-        {errors.title && <p className="error">{errors.title}</p>}
-      </div>
-
-      {/* Description */}
-      <div className="relative">
-        <label className="form-label">DESCRIPTION</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-          rows={4}
-          className="dream-textarea"
-        />
-        {errors.description && <p className="error">{errors.description}</p>}
-      </div>
-
-      {/* Goal */}
-      <div className="relative">
-        <label className="form-label">GOAL ($)</label>
-        <input
-          name="goal"
-          type="number"
-          min="1"
-          value={formData.goal}
-          onChange={handleChange}
-          required
-          className="dream-input"
-        />
-        {errors.goal && <p className="error">{errors.goal}</p>}
-      </div>
-
-      {/* Image */}
-      <div className="relative">
-        <label className="form-label">IMAGE URL (OPTIONAL)</label>
-        <input
-          name="image"
-          value={formData.image}
-          onChange={handleChange}
-          className="dream-input"
-        />
-      </div>
-
-      {/* Category */}
-      <div className="relative">
-        <label className="form-label">CATEGORY</label>
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          className="dream-input"
-        >
-          <option value="dreams">Dreams</option>
-          <option value="education">Education</option>
-          <option value="hobbies">Hobbies</option>
-          <option value="health">Health</option>
-          <option value="sports">Sports</option>
-        </select>
-      </div>
-
-      {/* Deadline Toggle */}
-      <div className="flex items-center gap-3">
-        <input
-          type="checkbox"
-          name="has_deadline"
-          checked={formData.has_deadline}
-          onChange={handleChange}
-        />
-        <label className="text-[#8B7BA8] font-bold">
-          Add Deadline?
-        </label>
-      </div>
-
-      {/* Deadline Input */}
-      {formData.has_deadline && (
-        <div className="relative">
-          <label className="form-label">DEADLINE</label>
+      <form className="space-y-4">
+        {/* Title */}
+        <div>
+          <label htmlFor="title" className="dream-label">
+            TITLE
+          </label>
           <input
-            type="date"
-            name="deadline"
-            value={formData.deadline}
+            id="title"
+            name="title"
+            type="text"
+            value={credentials.title}
             onChange={handleChange}
-            className="dream-input"
+            placeholder="Campaign Title"
+            className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+            required
           />
+          {renderFieldError("title")}
         </div>
-      )}
 
-      {/* Submit */}
-      <button
-        type="submit"
-        className="dj-button w-full"
-      >
-        Create Campaign
-      </button>
+        {/* Description */}
+        <div>
+          <label htmlFor="description" className="dream-label">
+            DESCRIPTION
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            value={credentials.description}
+            onChange={handleChange}
+            placeholder="Campaign Description"
+            className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600 min-h-[100px]"
+            required
+          />
+          {renderFieldError("description")}
+        </div>
 
-      {errors.non_field_errors && (
-        <p className="error text-center">
-          {errors.non_field_errors}
-        </p>
-      )}
-    </form>
+        {/* Goal */}
+        <div>
+          <label htmlFor="goal" className="dream-label">
+            GOAL ($)
+          </label>
+          <input
+            id="goal"
+            name="goal"
+            type="number"
+            value={credentials.goal}
+            onChange={handleChange}
+            placeholder="Goal Amount"
+            className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+            required
+          />
+          {renderFieldError("goal")}
+        </div>
+
+        {/* Image URL */}
+        <div>
+          <label htmlFor="image_url" className="dream-label">
+            IMAGE URL (OPTIONAL)
+          </label>
+          <input
+            id="image_url"
+            name="image_url"
+            type="url"
+            value={credentials.image_url}
+            onChange={handleChange}
+            placeholder="Image URL"
+            className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+          />
+          {renderFieldError("image_url")}
+        </div>
+
+        {/* Category */}
+        <div>
+          <label htmlFor="category" className="dream-label">
+            CATEGORY
+          </label>
+          <select
+            id="category"
+            name="category"
+            value={credentials.category}
+            onChange={handleChange}
+            className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+            required
+          >
+            <option value="Dreams">Dreams</option>
+            <option value="Education">Education</option>
+            <option value="Sports">Sports</option>
+            <option value="Arts">Arts</option>
+            <option value="Other">Other</option>
+          </select>
+          {renderFieldError("category")}
+        </div>
+
+        {/* Non-field errors */}
+        {errors.non_field_errors && (
+          <p className="text-red-500 text-sm text-center">
+            {Array.isArray(errors.non_field_errors)
+              ? errors.non_field_errors.join(" ")
+              : errors.non_field_errors}
+          </p>
+        )}
+
+        {/* Buttons */}
+        <div className="flex flex-col gap-2 mt-4">
+          <button
+            type="button"
+            className="w-full py-3 cursor-pointer rounded-xl bg-indigo-200 text-indigo-700 hover:bg-indigo-300 transition"
+            onClick={handleSubmit}
+          >
+            Create Campaign
+          </button>
+
+          <button
+            type="button"
+            className="w-full py-3 cursor-pointer rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
+            onClick={closeModal}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
