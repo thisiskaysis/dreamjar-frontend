@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import Modal from "../UI/Modal";
-import DeleteCampaign from "../Campaigns/CampaignActions/DeleteCampaign";
 import { useCampaignActions } from "../../hooks/useCampaignActions";
+import Modal from "../UI/Modal";
 
-export default function ChildCampaignCard({ campaign, childId, setChildren }) {
+export default function ChildCampaignCard({ campaign, childId, setChildren, onRequestDelete }) {
   const navigate = useNavigate();
   const { editCampaign } = useCampaignActions();
 
@@ -35,20 +34,17 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
     try {
       const updatedCampaign = await editCampaign(campaign.id, form);
 
-      // Update local state
       setChildren((prev) =>
         prev.map((child) => ({
           ...child,
           campaigns: child.campaigns.map((c) =>
-            c.id === campaign.id ? { ...c, ...updatedCampaign } : c,
+            c.id === campaign.id ? { ...c, ...updatedCampaign } : c
           ),
-        })),
+        }))
       );
 
       setSuccessMessage("Campaign updated successfully!");
       setEditing(false);
-
-      // Optional: hide message after a few seconds
       setTimeout(() => setSuccessMessage(""), 3000);
     } catch (err) {
       console.error("Failed to update campaign:", err);
@@ -67,17 +63,14 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
         prev.map((child) => ({
           ...child,
           campaigns: child.campaigns.map((c) =>
-            c.id === campaign.id ? { ...c, ...updatedCampaign } : c,
+            c.id === campaign.id ? { ...c, ...updatedCampaign } : c
           ),
-        })),
+        }))
       );
 
       setShowCloseModal(false);
       setEditing(false);
-      setSuccessMessage(
-        isOpenValue ? "Campaign reopened!" : "Campaign closed!",
-      );
-
+      setSuccessMessage(isOpenValue ? "Campaign reopened!" : "Campaign closed!");
       setTimeout(() => setSuccessMessage(""), 3000);
     } catch (err) {
       console.error("Failed to update campaign status:", err);
@@ -86,9 +79,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
   };
 
   const percentage =
-    campaign.goal > 0
-      ? Math.min((campaign.total_raised / campaign.goal) * 100, 100)
-      : 0;
+    campaign.goal > 0 ? Math.min((campaign.total_raised / campaign.goal) * 100, 100) : 0;
 
   return (
     <>
@@ -100,7 +91,6 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
             : "bg-gray-100 border-gray-300 opacity-80"
         }`}
       >
-        {/* Success Message */}
         {successMessage && (
           <div className="bg-green-100 text-green-700 px-4 py-3 rounded-xl mb-4">
             {successMessage}
@@ -108,9 +98,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
         )}
 
         {!editing ? (
-          /* ================= SMALL VIEW ================= */
           <div className="flex gap-4">
-            {/* IMAGE */}
             <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
               <img
                 src={campaign.image || "/dreamjar-banner.svg"}
@@ -118,7 +106,6 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
               />
             </div>
 
-            {/* CONTENT */}
             <div className="flex-1">
               <div className="flex justify-between items-start mb-2">
                 <div>
@@ -144,7 +131,6 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
                 </button>
               </div>
 
-              {/* PROGRESS BAR */}
               <div className="w-full bg-gray-200 h-3 rounded-full mt-1">
                 <motion.div
                   className="bg-pink-400 h-3 rounded-full"
@@ -152,7 +138,7 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
                   animate={{ width: `${percentage}%` }}
                   transition={{ duration: 0.8 }}
                   style={{
-                    background: "linear-gradient(90deg, #f472b6, #6366f1)", // pink → indigo
+                    background: "linear-gradient(90deg, #f472b6, #6366f1)",
                   }}
                 />
               </div>
@@ -163,64 +149,38 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
             </div>
           </div>
         ) : (
-          /* ================= EDIT VIEW ================= */
           <form className="flex flex-col gap-3" onSubmit={handleSave}>
-            <div className="relative">
-              <label className="dream-label" htmlFor="title">
-                TITLE
-              </label>
-              <input
-                type="text"
-                name="title"
-                value={form.title}
-                onChange={handleChange}
-                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-                placeholder="Title"
-              />
-            </div>
-
-            <div className="relative">
-              <label className="dream-label" htmlFor="goal">
-                GOAL
-              </label>
-              <input
-                type="number"
-                name="goal"
-                value={form.goal}
-                onChange={handleChange}
-                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-                placeholder="Goal"
-              />
-            </div>
-
-            <div className="relative my-2">
-              <label className="dream-label" htmlFor="description">
-                DESCRIPTION
-              </label>
-              <textarea
-                name="description"
-                value={form.description}
-                onChange={handleChange}
-                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-                placeholder="Description"
-              />
-            </div>
-
-            <div className="relative my-2">
-              <label className="dream-label" htmlFor="image">
-                IMAGE
-              </label>
-              <input
-                type="url"
-                name="image"
-                value={form.image}
-                onChange={handleChange}
-                className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
-                placeholder="Image URL"
-              />
-            </div>
-
-            {/* DEADLINE TOGGLE */}
+            <input
+              type="text"
+              name="title"
+              value={form.title}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+              placeholder="Title"
+            />
+            <input
+              type="number"
+              name="goal"
+              value={form.goal}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+              placeholder="Goal"
+            />
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+              placeholder="Description"
+            />
+            <input
+              type="url"
+              name="image"
+              value={form.image}
+              onChange={handleChange}
+              className="w-full bg-gray-100 rounded-xl px-4 py-3 text-gray-600"
+              placeholder="Image URL"
+            />
             <label className="flex items-center gap-2 text-md">
               <input
                 type="checkbox"
@@ -230,7 +190,6 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
               />
               Add Deadline
             </label>
-
             {form.has_deadline && (
               <input
                 type="date"
@@ -241,7 +200,6 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
               />
             )}
 
-            {/* BUTTONS */}
             <div className="flex flex-col gap-2 mt-2">
               <button
                 type="submit"
@@ -268,11 +226,15 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
                 </button>
               )}
 
-              <DeleteCampaign
-                campaignId={campaign.id}
-                childId={childId}
-                setChildren={setChildren}
-              />
+              <button
+                type="button"
+                className="w-full py-2 cursor-pointer rounded-xl bg-red-200 text-red-600 hover:bg-red-300 transition"
+                onClick={() =>
+                  onRequestDelete({ campaignId: campaign.id, childId })
+                }
+              >
+                Delete
+              </button>
 
               <button
                 type="button"
@@ -286,18 +248,15 @@ export default function ChildCampaignCard({ campaign, childId, setChildren }) {
         )}
       </motion.div>
 
-      {/* CLOSE CONFIRMATION MODAL */}
       <Modal isOpen={showCloseModal} onClose={() => setShowCloseModal(false)}>
         <div className="flex flex-col gap-4 text-center">
           <p>Are you sure you want to close this campaign?</p>
-
           <button
             className="tab-variant"
             onClick={() => handleToggleCampaignStatus(false)}
           >
             Yes, Close Campaign
           </button>
-
           <button
             className="bg-gray-200 px-4 py-2 rounded-xl"
             onClick={() => setShowCloseModal(false)}

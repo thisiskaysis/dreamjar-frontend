@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useChildActions } from "../../../hooks/useChildActions"; 
-import DeleteChild from "./DeleteChild";
+import { useChildActions } from "../../../hooks/useChildActions";
 
-export default function EditChild({ childId, childData, setChildren, setSuccessMessageParent }) {
+export default function EditChild({
+  childId,
+  childData,
+  setChildren,
+  setSuccessMessageParent,
+  onRequestDelete,
+}) {
   const { editChild } = useChildActions();
   const [editing, setEditing] = useState(false);
 
@@ -39,7 +44,7 @@ export default function EditChild({ childId, childData, setChildren, setSuccessM
 
       // Update local state
       setChildren((prev) =>
-        prev.map((c) => (c.id === childId ? { ...c, ...updatedChild } : c))
+        prev.map((c) => (c.id === childId ? { ...c, ...updatedChild } : c)),
       );
 
       // Show success message at top of ChildCard
@@ -103,7 +108,15 @@ export default function EditChild({ childId, childData, setChildren, setSuccessM
               Save Changes
             </button>
 
-            <DeleteChild childId={childId} setChildren={setChildren} />
+            <button
+              type="button"
+              className="w-full py-2 cursor-pointer rounded-xl bg-red-200 text-red-600 hover:bg-red-300 transition"
+              onClick={() =>
+                onRequestDelete({ id: childId, name: childData.name })
+              }
+            >
+              Delete
+            </button>
 
             <button
               type="button"
