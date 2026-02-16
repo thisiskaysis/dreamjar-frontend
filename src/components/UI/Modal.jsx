@@ -12,13 +12,13 @@ function Modal({ isOpen, onClose, children }) {
         >
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-white/60 backdrop-blur-md"
+            className="absolute inset-0 bg-pink/60 backdrop-blur-md"
             onClick={onClose}
           />
 
           {/* Modal Content */}
           <motion.div
-            className="relative bg-white p-6 rounded-2xl shadow-xl border border-gray-200 w-full max-w-md max-h-[90vh] overflow-y-auto"
+            className="relative p-6 bg-indigo-100 rounded-2xl shadow-xl border border-gray-400 w-full max-w-md max-h-[90vh] overflow-y-auto"
             initial={{ scale: 0.8, opacity: 0, y: 40 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.8, opacity: 0, y: 40 }}

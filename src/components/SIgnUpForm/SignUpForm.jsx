@@ -139,7 +139,7 @@ export function SignUpForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-9 w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors"
+                className="absolute right-4 top-9 w-10 h-6 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors"
                 disabled={isDisabled}
               >
                 <svg
