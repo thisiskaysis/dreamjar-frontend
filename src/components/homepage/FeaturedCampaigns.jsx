@@ -16,7 +16,7 @@ function FeaturedCampaigns() {
   const slowDuration = 120;
 
   return (
-    <section className="featured-campaigns py-16 px-30">
+    <section className="featured-campaigns py-16 px-0 min-w-screen">
       <h2 className="text-4xl font-bold text-center mb-12">Featured Campaigns</h2>
 
       <div className="featured-carousel relative overflow-hidden cursor-grab"
@@ -52,12 +52,17 @@ function FeaturedCampaigns() {
               <p className="text-sm mb-2">
                 Goal: ${campaign.goal} • Raised: ${campaign.total_raised || 0}
               </p>
-              <div className="w-full bg-white h-2 rounded-full overflow-hidden mb-2">
-                <div
-                  className="bg-purple-700 h-2 rounded-full"
-                  style={{ width: `${campaign.percentage_raised}%` }}
-                />
-              </div>
+              <div className="w-full my-6 bg-gray-200 h-3 rounded-full mt-2 overflow-hidden">
+          <motion.div
+            className="h-3 rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: `${campaign.percentage_raised}%` }}
+            transition={{ duration: 0.8 }}
+            style={{
+              background: 'linear-gradient(90deg, #f472b6, #6366f1)', // pink → indigo
+            }}
+          />
+        </div>
               <a
                 href={`/dreamjars/${campaign.id}`}
                 className="my-3 text-center bg-purple-500 text-white py-2 px-4 rounded-xl hover:scale-105 transition-transform"
