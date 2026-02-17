@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { LoginJar } from "./LoginJar";
 import { useNavigate } from "react-router-dom";
@@ -17,24 +17,6 @@ export function LoginForm() {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-
-  useEffect(() => {
-    const handleMessage = (event) => {
-      if (
-        event.origin === import.meta.env.VITE_API_URL &&
-        event.data.type === "google-auth-success") {
-        login({
-          access: event.data.access,
-          refresh: event.data.refresh,
-        });
-
-        navigate("/account");
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
 
   const [credentials, setCredentials] = useState({
     email: "",

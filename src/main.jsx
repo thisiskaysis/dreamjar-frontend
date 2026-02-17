@@ -11,7 +11,7 @@ import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
-import OAuthSuccess from "./components/OAuthSuccess.jsx";
+import GoogleOAuthCallback from "./components/GoogleOAuthCallback.jsx";
 import "./main.css";
 
 const router = createBrowserRouter([
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       { path: "/dreamjars/:id", element: <CampaignPage /> },
       { path: "/account/", element: <AccountPage /> },
       { path: "/login", element: <LoginPage /> },
-      { path: "/oauth-success", element: <OAuthSuccess /> },
+      { path: "/oauth/google/callback", element: <GoogleOAuthCallback /> },
       { path: "*", element: <NotFound /> },
     ],
   },

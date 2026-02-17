@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useAuth } from "../../hooks/use-auth.js";
 import { useNavigate } from "react-router-dom";
 
 import postSignUp from "../../api/post-signup";
 import GoogleLogin from "../GoogleLogin.jsx";
 
 export function SignUpForm() {
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
