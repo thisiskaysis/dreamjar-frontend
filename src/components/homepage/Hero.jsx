@@ -1,6 +1,5 @@
 import React from "react";
 import { JarCharacter } from "./JarCharacter.jsx";
-import HeroText from "./HeroText.jsx";
 
 function Hero({ children }) {
   return (
