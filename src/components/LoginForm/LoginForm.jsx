@@ -42,7 +42,7 @@ export function LoginForm() {
           window.localStorage.setItem("access", access);
 
           const userResponse = await fetch(
-            `${import.meta.env.VITE_API_URL}/parents/me`,
+            `${import.meta.env.VITE_API_URL}/parents/me/`,
             {
               headers: {
                 Authorization: `Bearer ${access}`,

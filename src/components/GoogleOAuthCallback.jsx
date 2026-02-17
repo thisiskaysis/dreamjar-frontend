@@ -16,7 +16,7 @@ function GoogleOAuthCallback() {
       localStorage.setItem("refresh", refresh);
 
       // Optionally fetch user info from backend
-      fetch(`${import.meta.env.VITE_API_URL}/parents/me`, {
+      fetch(`${import.meta.env.VITE_API_URL}/parents/me/`, {
         headers: { Authorization: `Bearer ${access}` },
       })
         .then((res) => res.json())
